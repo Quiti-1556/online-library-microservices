@@ -1,0 +1,36 @@
+package com.library.authservice.service.impl;
+
+import com.library.authservice.dto.RegisterRequestDTO;
+import com.library.authservice.dto.UserResponseDTO;
+import com.library.authservice.entity.User;
+import com.library.authservice.repository.UserRepository;
+import com.library.authservice.service.UserService;
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+@Data @Service @RequiredArgsConstructor
+public class UserServiceImpl implements UserService {
+
+    private final UserRepository userRepository;
+
+
+    @Override
+    public UserResponseDTO registerUser(RegisterRequestDTO request) {
+        User user = new User();
+
+        user.setName(request.getName();
+        user.setEmail(request.getEmail());
+        user.setPassword(request.getPassword());
+
+        User savedUser = userRepository.save(user);
+
+        UserResponseDTO response = new UserResponseDTO();
+
+        response.setId(savedUser.getId());
+        response.setName(savedUser.getName());
+        response.setEmail(savedUser.getEmail());
+
+        return response;
+    }
+}
