@@ -1,4 +1,8 @@
 package com.library.cartservice.repository;
 
-public interface CartRepository {
+import com.library.cartservice.entity.Cart;
+import org.springframework.data.repository.CrudRepository;
+
+public interface CartRepository extends CrudRepository<Cart,Long> {
+
 }
