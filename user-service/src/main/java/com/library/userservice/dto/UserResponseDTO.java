@@ -3,7 +3,7 @@ package com.library.userservice.dto;
 import lombok.Data;
 
 @Data
-public class UserResponseDto {
+public class UserResponseDTO {
     private Long id;
 
     private String name;
