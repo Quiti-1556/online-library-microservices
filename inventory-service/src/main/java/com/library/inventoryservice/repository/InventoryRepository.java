@@ -1,7 +1,7 @@
 package com.library.inventoryservice.repository;
 
 import com.library.inventoryservice.entity.Inventory;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface InventoryRepository extends CrudRepository<Inventory,Long> {
+public interface InventoryRepository extends JpaRepository<Inventory,Long> {
 }
