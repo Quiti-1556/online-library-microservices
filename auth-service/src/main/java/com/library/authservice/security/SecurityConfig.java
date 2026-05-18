@@ -1,4 +1,4 @@
-package com.library.authservice.config;
+package com.library.authservice.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
