@@ -11,7 +11,7 @@ import java.util.Date;
 
 @Service
 public class JwtService {
-    private static final String SECRET_KEY = "bXlzZWNyZXRrZXlteXNlY3JldGtleW15c2VjcmV0a2V5MTIzNDU2";
+    private static final String SECRET_KEY = "mysecretkeymysecretkeymysecretkey123456";
 
     public String generateToken(String email) {
 

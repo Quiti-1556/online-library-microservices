@@ -25,6 +25,16 @@ public class JwtWebMvcFilter implements HandlerFilterFunction<ServerResponse, Se
     public ServerResponse filter(ServerRequest request,
                                  HandlerFunction<ServerResponse> next) throws Exception {
 
+
+        System.out.println("PATH: " + request.path());
+
+        String path = request.path();
+
+        if (path.contains("/auth/login") || path.contains("/auth/register")) {
+
+            return next.handle(request);
+        }
+
         String authHeader = request.headers().firstHeader("Authorization");
 
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
