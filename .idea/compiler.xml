@@ -3,7 +3,7 @@
   <component name="CompilerConfiguration">
     <annotationProcessing>
       <profile default="true" name="Default" enabled="true" />
-      <profile name="Annotation profile for inventory-service" enabled="true">
+      <profile name="Annotation profile for review-service" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
@@ -14,6 +14,7 @@
         <module name="auth-service" />
         <module name="inventory-service" />
         <module name="book-service" />
+        <module name="review-service" />
         <module name="api-gateway" />
         <module name="order-service" />
         <module name="eureka-server" />
@@ -29,6 +30,7 @@
       <module name="eureka-server" options="-parameters" />
       <module name="inventory-service" options="-parameters" />
       <module name="order-service" options="-parameters" />
+      <module name="review-service" options="-parameters" />
     </option>
   </component>
 </project>
