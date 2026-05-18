@@ -3,7 +3,7 @@ package com.library.bookservice.dto;
 import lombok.Data;
 
 @Data
-public class bookRequestDTO {
+public class BookRequestDTO {
     private String title;
 
     private String author;
