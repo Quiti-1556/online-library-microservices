@@ -5,11 +5,10 @@ import com.library.authservice.dto.UserResponseDTO;
 import com.library.authservice.entity.User;
 import com.library.authservice.repository.UserRepository;
 import com.library.authservice.service.UserService;
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-@Data @Service @RequiredArgsConstructor
+@Service @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
@@ -17,9 +16,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserResponseDTO registerUser(RegisterRequestDTO request) {
+
         User user = new User();
 
-        user.setName(request.getName();
+        user.setName(request.getName());
         user.setEmail(request.getEmail());
         user.setPassword(request.getPassword());
 
