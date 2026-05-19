@@ -11,7 +11,7 @@ spring:
             - id: auth-public
               uri: http://localhost:8081
               predicates:
-                - Path=/auth/login, /auth/register
+                - Path=/auth/login,/auth/register
 
             - id: book-service
               uri: http://localhost:8082

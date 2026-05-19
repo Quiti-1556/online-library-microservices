@@ -1,7 +1,6 @@
 package com.library.apigateway.filter;
 
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
@@ -29,8 +28,11 @@ public class JwtWebMvcFilter implements HandlerFilterFunction<ServerResponse, Se
         System.out.println("PATH: " + request.path());
 
         String path = request.path();
+        System.out.println("PATH DETECTADO: " + path);
 
-        if (path.contains("/auth/login") || path.contains("/auth/register")) {
+        if (path.equals("/auth/login") || path.equals("/auth/register")) {
+
+            System.out.println("RUTA PUBLICA");
 
             return next.handle(request);
         }

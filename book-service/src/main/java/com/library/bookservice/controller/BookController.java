@@ -4,10 +4,7 @@ import com.library.bookservice.dto.BookRequestDTO;
 import com.library.bookservice.dto.BookResponseDTO;
 import com.library.bookservice.service.BookService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/books")
@@ -20,5 +17,10 @@ public class BookController {
     public BookResponseDTO createBook(@RequestBody BookRequestDTO request) {
 
         return bookService.createBook(request);
+    }
+    @GetMapping("/books")
+    public String getBooks() {
+
+        return "Book Service funcionando correctamente";
     }
 }
