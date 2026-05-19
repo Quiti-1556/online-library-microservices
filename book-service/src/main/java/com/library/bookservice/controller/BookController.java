@@ -18,7 +18,7 @@ public class BookController {
 
         return bookService.createBook(request);
     }
-    @GetMapping("/books")
+    @GetMapping
     public String getBooks() {
 
         return "Book Service funcionando correctamente";
