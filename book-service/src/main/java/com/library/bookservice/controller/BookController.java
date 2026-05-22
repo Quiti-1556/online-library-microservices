@@ -23,4 +23,5 @@ public class BookController {
 
         return "Book Service funcionando correctamente";
     }
+    @GetMapping("error")
 }
