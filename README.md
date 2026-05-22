@@ -192,7 +192,7 @@ Bearer Token
 # Autor
 
 Proyecto desarrollado por:
-Brayan Stiven
+Brayan Quitian
 
 Asignatura:
-Arquitectura de Microservicios
+Desarollo Fullstack
