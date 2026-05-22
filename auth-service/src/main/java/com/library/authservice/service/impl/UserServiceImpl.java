@@ -1,5 +1,7 @@
 package com.library.authservice.service.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import com.library.authservice.dto.LoginRequestDTO;
 import com.library.authservice.dto.RegisterRequestDTO;
 import com.library.authservice.dto.UserResponseDTO;
@@ -14,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 @Service @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
+
 
     private final UserRepository userRepository;
     private final JwtService jwtService;

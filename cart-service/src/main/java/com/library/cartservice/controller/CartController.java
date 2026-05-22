@@ -21,7 +21,7 @@ public class CartController {
         return cartService.addToCart(request);
     }
     @GetMapping
-    public String getBooks() {
+    public String getCart() {
 
         return "Cart Service funcionando correctamente";
     }

@@ -8,6 +8,8 @@ import com.library.inventoryservice.service.InventoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class InventoryServiceImpl implements InventoryService {
@@ -32,4 +34,5 @@ public class InventoryServiceImpl implements InventoryService {
 
         return response;
     }
+
 }
