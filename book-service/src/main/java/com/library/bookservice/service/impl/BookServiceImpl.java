@@ -9,6 +9,8 @@ import com.library.bookservice.service.BookService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @Service
 @RequiredArgsConstructor
@@ -42,5 +44,40 @@ public class BookServiceImpl implements BookService {
         response.setStock(savedBook.getStock());
 
         return response;
+    }
+    @Override
+    public List<Book> getAllBooks() {
+
+        return bookRepository.findAll();
+    }
+
+    @Override
+    public Book getBookById(Long id) {
+
+        return bookRepository.findById(id)
+                .orElseThrow(() -> new BookNotFoundException("Libro no encontrado"));
+    }
+
+    @Override
+    public Book updateBook(Long id, BookRequestDTO request) {
+
+        Book book = bookRepository.findById(id)
+                .orElseThrow(() -> new BookNotFoundException("Libro no encontrado"));
+
+        book.setTitle(request.getTitle());
+        book.setAuthor(request.getAuthor());
+        book.setPrice(request.getPrice());
+        book.setStock(request.getStock());
+
+        return bookRepository.save(book);
+    }
+
+    @Override
+    public void deleteBook(Long id) {
+
+        Book book = bookRepository.findById(id)
+                .orElseThrow(() -> new BookNotFoundException("Libro no encontrado"));
+
+        bookRepository.delete(book);
     }
 }
