@@ -3,10 +3,12 @@ package com.library.bookservice.service.impl;
 import com.library.bookservice.dto.BookRequestDTO;
 import com.library.bookservice.dto.BookResponseDTO;
 import com.library.bookservice.entity.Book;
+import com.library.bookservice.exceptions.BookNotFoundException;
 import com.library.bookservice.repository.BookRepository;
 import com.library.bookservice.service.BookService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
 
 @Service
 @RequiredArgsConstructor
@@ -16,6 +18,11 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public BookResponseDTO createBook(BookRequestDTO request) {
+
+        if (request.getTitle() == null) {
+
+            throw new BookNotFoundException("Libro no encontrado");
+        }
 
         Book book = new Book();
 
