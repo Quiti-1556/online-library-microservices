@@ -8,6 +8,8 @@ import com.library.cartservice.service.CartService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class CartServiceImpl implements CartService {
@@ -32,5 +34,38 @@ public class CartServiceImpl implements CartService {
         response.setQuantity(savedCart.getQuantity());
 
         return response;
+    }
+    @Override
+    public List<Cart> getAllCart() {
+
+        return cartRepository.findAll();
+    }
+
+    @Override
+    public Cart getCartById(Long id) {
+
+        return cartRepository.findById(id)
+                .orElseThrow(() ->
+                        new RuntimeException("Registro no encontrado")
+                );
+    }
+
+    @Override
+    public Cart updateCart(Long id, CartRequestDTO request) {
+
+        Cart cart = cartRepository.findById(id)
+                .orElseThrow(() ->
+                        new RuntimeException("Registro no encontrado")
+                );
+        return cart;
+    }
+
+    @Override
+    public void deleteCart(Long id) {
+
+        Cart cart = cartRepository.findById(id)
+                .orElseThrow(() ->
+                        new RuntimeException("Registro no encontrado")
+                );
     }
 }
