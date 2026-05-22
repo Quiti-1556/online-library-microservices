@@ -23,5 +23,9 @@ public class BookController {
 
         return "Book Service funcionando correctamente";
     }
-    @GetMapping("error")
+    @GetMapping("/error")
+    public String error() {
+
+        throw new RuntimeException("Error de prueba");
+    }
 }
