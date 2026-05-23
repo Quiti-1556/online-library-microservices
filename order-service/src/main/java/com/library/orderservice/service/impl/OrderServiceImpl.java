@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.client.RestTemplate;
 
 @Service
 @RequiredArgsConstructor
@@ -21,10 +22,16 @@ public class OrderServiceImpl implements OrderService {
             LoggerFactory.getLogger(OrderServiceImpl.class);
 
     private final OrderRepository orderRepository;
-
+    private final RestTemplate restTemplate;
     @Override
     public OrderResponseDTO createOrder(OrderRequestDTO request) {
         logger.info("Creando orden");
+        String responseBook = restTemplate.getForObject(
+                "http://localhost:8082/books/1",
+                String.class
+        );
+
+        logger.info("Respuesta desde book-service: {}", responseBook);
 
         OrderEntity order = new OrderEntity();
 
