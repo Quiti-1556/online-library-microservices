@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="api-gateway" target="17" />
+      <module name="auth-service" target="17" />
+      <module name="book-service" target="17" />
+      <module name="cart-service" target="17" />
+      <module name="eureka-server" target="17" />
+      <module name="inventory-service" target="17" />
+      <module name="notification-service" target="17" />
+      <module name="order-service" target="17" />
+      <module name="payment-service" target="17" />
+      <module name="recommendation-service" target="17" />
+      <module name="review-service" target="17" />
+      <module name="user-service" target="17" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
