@@ -1,7 +1,6 @@
 package com.library.authservice.service.impl;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 import com.library.authservice.dto.LoginRequestDTO;
 import com.library.authservice.dto.RegisterRequestDTO;
 import com.library.authservice.dto.UserResponseDTO;
@@ -12,11 +11,14 @@ import com.library.authservice.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Service @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
+    private static final Logger logger =
+            LoggerFactory.getLogger(UserServiceImpl.class);
 
     private final UserRepository userRepository;
     private final JwtService jwtService;
@@ -24,6 +26,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserResponseDTO registerUser(RegisterRequestDTO request) {
+        logger.info("Creando Nuevo Usuario");
 
         User user = new User();
 

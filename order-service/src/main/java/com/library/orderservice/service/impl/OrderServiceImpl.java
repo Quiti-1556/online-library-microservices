@@ -6,15 +6,25 @@ import com.library.orderservice.entity.OrderEntity;
 import com.library.orderservice.repository.OrderRepository;
 import com.library.orderservice.service.OrderService;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Service
 @RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService {
+
+    private static final Logger logger =
+            LoggerFactory.getLogger(OrderServiceImpl.class);
+
     private final OrderRepository orderRepository;
 
     @Override
     public OrderResponseDTO createOrder(OrderRequestDTO request) {
+        logger.info("Creando orden");
 
         OrderEntity order = new OrderEntity();
 

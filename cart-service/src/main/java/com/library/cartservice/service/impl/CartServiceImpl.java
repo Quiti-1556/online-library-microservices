@@ -9,14 +9,20 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Service
 @RequiredArgsConstructor
 public class CartServiceImpl implements CartService {
     private final CartRepository cartRepository;
 
+    private static final Logger logger =
+            LoggerFactory.getLogger(CartServiceImpl.class);
+
     @Override
     public CartResponseDTO addToCart(CartRequestDTO request) {
+        logger.info("Creando Nueva carta");
 
         Cart cart = new Cart();
 
@@ -52,6 +58,7 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public Cart updateCart(Long id, CartRequestDTO request) {
+        logger.info("Actualizando regitro con ID: {}", id);
 
         Cart cart = cartRepository.findById(id)
                 .orElseThrow(() ->
@@ -62,7 +69,7 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public void deleteCart(Long id) {
-
+        logger.info("Eliminando registro con ID: {}", id);
         Cart cart = cartRepository.findById(id)
                 .orElseThrow(() ->
                         new RuntimeException("Registro no encontrado")

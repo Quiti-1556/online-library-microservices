@@ -6,16 +6,22 @@ import com.library.paymentservice.entity.Payment;
 import com.library.paymentservice.repository.PaymentRepository;
 import com.library.paymentservice.service.PaymentService;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+
 
 @Service
 @RequiredArgsConstructor
 public class PaymentServiceImp implements PaymentService {
+    private static final Logger logger =
+            LoggerFactory.getLogger(PaymentServiceImp.class);
 
     private final PaymentRepository paymentRepository;
 
     @Override
     public PaymentResponseDTO createPayment(PaymentRequestDTO request) {
+        logger.info("se pago");
 
         Payment payment = new Payment();
 

@@ -8,17 +8,22 @@ import com.library.inventoryservice.service.InventoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Service
 @RequiredArgsConstructor
 public class InventoryServiceImpl implements InventoryService {
 
+    private static final Logger logger =
+            LoggerFactory.getLogger(InventoryServiceImpl.class);
+
     private final InventoryRepository inventoryRepository;
+
 
     @Override
     public InventoryResponseDTO createInventory(InventoryRequestDTO request) {
-
+        logger.info("Creando inventario");
         Inventory inventory = new Inventory();
 
         inventory.setBookId(request.getBookId());

@@ -8,14 +8,21 @@ import com.library.reviewservice.service.ReviewService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @Service
 @RequiredArgsConstructor
 public class ReviewServiceImpl implements ReviewService {
+
+    private static final Logger logger =
+            LoggerFactory.getLogger(ReviewServiceImpl.class);
+
     private final ReviewRepository reviewRepository;
 
     @Override
     public ReviewResponseDTO createReview(ReviewRequestDTO request) {
-
+        logger.info("Creando vistas");
         Review review = new Review();
 
         review.setUserId(request.getUserId());

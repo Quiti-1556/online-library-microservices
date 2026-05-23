@@ -8,15 +8,20 @@ import com.library.recommendationservice.service.RecommendationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @Service
 @RequiredArgsConstructor
 public class RecommendationServiceImpl implements RecommendationService {
+    private static final Logger logger =
+            LoggerFactory.getLogger(RecommendationServiceImpl.class);
 
     private final RecommendationRepository recommendationRepository;
 
     @Override
     public RecommendationResponseDTO createRecommendation(RecommendationRequestDTO request) {
-
+        logger.info("Creando recomendacion");
         Recommendation recommendation = new Recommendation();
 
         recommendation.setUserId(request.getUserId());
