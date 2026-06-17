@@ -16,17 +16,32 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
+
     private static final Logger logger =
             LoggerFactory.getLogger(UserServiceImpl.class);
 
     private final UserRepository userRepository;
 
+    private UserResponseDTO mapToResponse(UserProfile user) {
+        UserResponseDTO response = new UserResponseDTO();
+        response.setId(user.getId());
+        response.setName(user.getName());
+        response.setEmail(user.getEmail());
+        response.setPhone(user.getPhone());
+        response.setAddress(user.getAddress());
+        return response;
+    }
+
     @Override
     public UserResponseDTO createUser(UserRequestDTO request) {
-        logger.info("Creando nuevo usuario");
+        logger.info("Creando nuevo usuario con email {}", request.getEmail());
+
+        if (userRepository.existsByEmail(request.getEmail())) {
+            logger.warn("Intento de registro con correo duplicado: {}", request.getEmail());
+            throw new RuntimeException("El correo ya está registrado");
+        }
 
         UserProfile user = new UserProfile();
-
         user.setName(request.getName());
         user.setEmail(request.getEmail());
         user.setPhone(request.getPhone());
@@ -34,37 +49,45 @@ public class UserServiceImpl implements UserService {
 
         UserProfile savedUser = userRepository.save(user);
 
-        UserResponseDTO response = new UserResponseDTO();
+        logger.info("Usuario creado correctamente con id {}", savedUser.getId());
 
-        response.setId(savedUser.getId());
-        response.setName(savedUser.getName());
-        response.setEmail(savedUser.getEmail());
-        response.setPhone(savedUser.getPhone());
-        response.setAddress(savedUser.getAddress());
-
-        return response;
-    }
-    @Override
-    public List<UserProfile> getAllUsers() {
-
-        return userRepository.findAll();
+        return mapToResponse(savedUser);
     }
 
     @Override
-    public UserProfile getUserById(Long id) {
+    public List<UserResponseDTO> getAllUsers() {
+        logger.info("Listando todos los usuarios");
+        return userRepository.findAll()
+                .stream()
+                .map(this::mapToResponse)
+                .toList();
+    }
 
-        return userRepository.findById(id)
-                .orElseThrow(() ->
-                        new RuntimeException("Usuario no encontrado"));
+    @Override
+    public UserResponseDTO getUserById(Long id) {
+        logger.info("Buscando usuario con id {}", id);
+
+        UserProfile user = userRepository.findById(id)
+                .orElseThrow(() -> {
+                    logger.warn("Usuario con id {} no encontrado", id);
+                    return new RuntimeException("Usuario no encontrado");
+                });
+
+        logger.info("Usuario con id {} encontrado", id);
+        return mapToResponse(user);
     }
 
     @Override
     public void deleteUser(Long id) {
+        logger.info("Intentando eliminar usuario con id {}", id);
 
         UserProfile user = userRepository.findById(id)
-                .orElseThrow(() ->
-                        new RuntimeException("Usuario no encontrado"));
+                .orElseThrow(() -> {
+                    logger.warn("Usuario con id {} no encontrado para eliminar", id);
+                    return new RuntimeException("Usuario no encontrado");
+                });
 
         userRepository.delete(user);
+        logger.info("Usuario con id {} eliminado correctamente", id);
     }
 }
