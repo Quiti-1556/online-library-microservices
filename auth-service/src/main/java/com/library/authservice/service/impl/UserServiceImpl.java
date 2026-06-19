@@ -1,9 +1,10 @@
 package com.library.authservice.service.impl;
 
-
 import com.library.authservice.dto.LoginRequestDTO;
+import com.library.authservice.dto.LoginResponseDTO;
 import com.library.authservice.dto.RegisterRequestDTO;
 import com.library.authservice.dto.UserResponseDTO;
+import com.library.authservice.entity.Role;
 import com.library.authservice.entity.User;
 import com.library.authservice.repository.UserRepository;
 import com.library.authservice.security.JwtService;
@@ -13,8 +14,10 @@ import org.springframework.stereotype.Service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
-@Service @RequiredArgsConstructor
+@Service
+@RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
     private static final Logger logger =
@@ -22,40 +25,54 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final JwtService jwtService;
-
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public UserResponseDTO registerUser(RegisterRequestDTO request) {
-        logger.info("Creando Nuevo Usuario");
+        logger.info("Creando nuevo usuario con email {}", request.getEmail());
+
+        if (userRepository.existsByEmail(request.getEmail())) {
+            logger.warn("Intento de registro con correo duplicado: {}", request.getEmail());
+            throw new RuntimeException("El correo ya está registrado");
+        }
 
         User user = new User();
-
         user.setName(request.getName());
         user.setEmail(request.getEmail());
-        user.setPassword(request.getPassword());
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
+        user.setRole(Role.CLIENT);
 
         User savedUser = userRepository.save(user);
 
         UserResponseDTO response = new UserResponseDTO();
-
         response.setId(savedUser.getId());
         response.setName(savedUser.getName());
         response.setEmail(savedUser.getEmail());
 
+        logger.info("Usuario registrado correctamente con id {}", savedUser.getId());
+
         return response;
     }
+
     @Override
-    public String login(LoginRequestDTO request) {
+    public LoginResponseDTO login(LoginRequestDTO request) {
+        logger.info("Intentando login para email {}", request.getEmail());
 
         User user = userRepository.findByEmail(request.getEmail())
-                .orElseThrow(() ->
-                        new RuntimeException("Usuario no encontrado"));
+                .orElseThrow(() -> {
+                    logger.warn("Usuario no encontrado para email {}", request.getEmail());
+                    return new RuntimeException("Usuario no encontrado");
+                });
 
-        if(!user.getPassword().equals(request.getPassword())) {
-
+        if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
+            logger.warn("Contraseña incorrecta para email {}", request.getEmail());
             throw new RuntimeException("Password incorrecta");
         }
 
-        return jwtService.generateToken(user.getEmail());
+        String token = jwtService.generateToken(user.getEmail());
+
+        logger.info("Login exitoso para email {}", request.getEmail());
+
+        return new LoginResponseDTO(token);
     }
 }
