@@ -8,12 +8,9 @@ import java.util.List;
 
 public interface CartService {
 
-    CartResponseDTO addToCart(CartRequestDTO request);
-    List<Cart> getAllCart();
+    CartResponseDTO addItem(CartRequestDTO request);
 
-    Cart getCartById(Long id);
-
-    Cart updateCart(Long id, CartRequestDTO request);
+    List<CartResponseDTO> getItemsByUser(Long userId);
 
     void deleteCart(Long id);
 }
