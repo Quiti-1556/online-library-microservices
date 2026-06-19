@@ -3,6 +3,7 @@ package com.library.reviewservice.service.impl;
 import com.library.reviewservice.dto.ReviewRequestDTO;
 import com.library.reviewservice.dto.ReviewResponseDTO;
 import com.library.reviewservice.entity.Review;
+import com.library.reviewservice.exceptions.ReviewNotFoundException;
 import com.library.reviewservice.repository.ReviewRepository;
 import com.library.reviewservice.service.ReviewService;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -20,26 +23,65 @@ public class ReviewServiceImpl implements ReviewService {
 
     private final ReviewRepository reviewRepository;
 
+    private ReviewResponseDTO mapToResponse(Review review) {
+        ReviewResponseDTO response = new ReviewResponseDTO();
+        response.setId(review.getId());
+        response.setUserId(review.getUserId());
+        response.setBookId(review.getBookId());
+        response.setComment(review.getComment());
+        response.setRating(review.getRating());
+        return response;
+    }
+
     @Override
     public ReviewResponseDTO createReview(ReviewRequestDTO request) {
-        logger.info("Creando vistas");
-        Review review = new Review();
+        logger.info("Creando review del userId {} para bookId {}", request.getUserId(), request.getBookId());
 
+        if (reviewRepository.existsByUserIdAndBookId(request.getUserId(), request.getBookId())) {
+            throw new RuntimeException("El usuario ya dejó una reseña para este libro");
+        }
+
+        Review review = new Review();
         review.setUserId(request.getUserId());
         review.setBookId(request.getBookId());
         review.setComment(request.getComment());
         review.setRating(request.getRating());
 
-        Review savedReview = reviewRepository.save(review);
+        Review saved = reviewRepository.save(review);
+        logger.info("Review creada correctamente con id {}", saved.getId());
 
-        ReviewResponseDTO response = new ReviewResponseDTO();
+        return mapToResponse(saved);
+    }
 
-        response.setId(savedReview.getId());
-        response.setUserId(savedReview.getUserId());
-        response.setBookId(savedReview.getBookId());
-        response.setComment(savedReview.getComment());
-        response.setRating(savedReview.getRating());
+    @Override
+    public List<ReviewResponseDTO> getReviewsByBook(Long bookId) {
+        logger.info("Listando reviews del bookId {}", bookId);
+        return reviewRepository.findByBookId(bookId)
+                .stream()
+                .map(this::mapToResponse)
+                .toList();
+    }
 
-        return response;
+    @Override
+    public List<ReviewResponseDTO> getReviewsByUser(Long userId) {
+        logger.info("Listando reviews del userId {}", userId);
+        return reviewRepository.findByUserId(userId)
+                .stream()
+                .map(this::mapToResponse)
+                .toList();
+    }
+
+    @Override
+    public void deleteReview(Long id) {
+        logger.info("Eliminando review con id {}", id);
+
+        Review review = reviewRepository.findById(id)
+                .orElseThrow(() -> {
+                    logger.warn("Review con id {} no encontrada", id);
+                    return new ReviewNotFoundException("Review no encontrada con id " + id);
+                });
+
+        reviewRepository.delete(review);
+        logger.info("Review con id {} eliminada correctamente", id);
     }
 }
