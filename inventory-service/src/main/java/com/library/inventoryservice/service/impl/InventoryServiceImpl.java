@@ -20,24 +20,30 @@ public class InventoryServiceImpl implements InventoryService {
 
     private final InventoryRepository inventoryRepository;
 
+    private InventoryResponseDTO mapToResponse(Inventory inventory) {
+        InventoryResponseDTO response = new InventoryResponseDTO();
+        response.setId(inventory.getId());
+        response.setBookId(inventory.getBookId());
+        response.setStock(inventory.getStock());
+        return response;
+    }
 
     @Override
     public InventoryResponseDTO createInventory(InventoryRequestDTO request) {
-        logger.info("Creando inventario");
-        Inventory inventory = new Inventory();
+        logger.info("Creando inventario para bookId {}", request.getBookId());
 
+        if (inventoryRepository.existsByBookId(request.getBookId())) {
+            throw new RuntimeException("Ya existe inventario para ese libro");
+        }
+
+        Inventory inventory = new Inventory();
         inventory.setBookId(request.getBookId());
         inventory.setStock(request.getStock());
 
         Inventory savedInventory = inventoryRepository.save(inventory);
 
-        InventoryResponseDTO response = new InventoryResponseDTO();
+        logger.info("Inventario creado correctamente con id {}", savedInventory.getId());
 
-        response.setId(savedInventory.getId());
-        response.setBookId(savedInventory.getBookId());
-        response.setStock(savedInventory.getStock());
-
-        return response;
+        return mapToResponse(savedInventory);
     }
-
 }
