@@ -9,9 +9,6 @@ import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.web.client.RestTemplate;
 
 @Service
@@ -23,31 +20,36 @@ public class OrderServiceImpl implements OrderService {
 
     private final OrderRepository orderRepository;
     private final RestTemplate restTemplate;
+
+    private OrderResponseDTO mapToResponse(OrderEntity order) {
+        OrderResponseDTO response = new OrderResponseDTO();
+        response.setId(order.getId());
+        response.setUserId(order.getUserId());
+        response.setTotal(order.getTotal());
+        response.setStatus(order.getStatus());
+        return response;
+    }
+
     @Override
     public OrderResponseDTO createOrder(OrderRequestDTO request) {
-        logger.info("Creando orden");
+        logger.info("Creando orden para userId {}", request.getUserId());
+
         String responseBook = restTemplate.getForObject(
-                "http://localhost:8082/books/1",
+                "http://localhost:8082/books/" + request.getBookId(),
                 String.class
         );
 
         logger.info("Respuesta desde book-service: {}", responseBook);
 
         OrderEntity order = new OrderEntity();
-
         order.setUserId(request.getUserId());
         order.setTotal(request.getTotal());
         order.setStatus(request.getStatus());
 
         OrderEntity savedOrder = orderRepository.save(order);
 
-        OrderResponseDTO response = new OrderResponseDTO();
+        logger.info("Orden creada correctamente con id {}", savedOrder.getId());
 
-        response.setId(savedOrder.getId());
-        response.setUserId(savedOrder.getUserId());
-        response.setTotal(savedOrder.getTotal());
-        response.setStatus(savedOrder.getStatus());
-
-        return response;
+        return mapToResponse(savedOrder);
     }
 }
