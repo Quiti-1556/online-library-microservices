@@ -3,6 +3,7 @@ package com.library.cartservice.service.impl;
 import com.library.cartservice.dto.CartRequestDTO;
 import com.library.cartservice.dto.CartResponseDTO;
 import com.library.cartservice.entity.Cart;
+import com.library.cartservice.exceptions.CartNotFoundException;
 import com.library.cartservice.repository.CartRepository;
 import com.library.cartservice.service.CartService;
 import lombok.RequiredArgsConstructor;
@@ -20,59 +21,54 @@ public class CartServiceImpl implements CartService {
     private static final Logger logger =
             LoggerFactory.getLogger(CartServiceImpl.class);
 
+    private CartResponseDTO mapToResponse(Cart cart) {
+        CartResponseDTO response = new CartResponseDTO();
+        response.setId(cart.getId());
+        response.setUserId(cart.getUserId());
+        response.setBookId(cart.getBookId());
+        response.setQuantity(cart.getQuantity());
+        return response;
+    }
+
     @Override
-    public CartResponseDTO addToCart(CartRequestDTO request) {
-        logger.info("Creando Nueva carta");
+    public CartResponseDTO addItem(CartRequestDTO request) {
+        logger.info("Agregando item al carrito para userId {}", request.getUserId());
+
+        if (cartRepository.existsByUserIdAndBookId(request.getUserId(), request.getBookId())) {
+            throw new RuntimeException("El libro ya está en el carrito de este usuario");
+        }
 
         Cart cart = new Cart();
-
         cart.setUserId(request.getUserId());
         cart.setBookId(request.getBookId());
         cart.setQuantity(request.getQuantity());
 
-        Cart savedCart = cartRepository.save(cart);
+        Cart saved = cartRepository.save(cart);
+        logger.info("agregado correctamente con id {}", saved.getId());
 
-        CartResponseDTO response = new CartResponseDTO();
-
-        response.setId(savedCart.getId());
-        response.setUserId(savedCart.getUserId());
-        response.setBookId(savedCart.getBookId());
-        response.setQuantity(savedCart.getQuantity());
-
-        return response;
-    }
-    @Override
-    public List<Cart> getAllCart() {
-
-        return cartRepository.findAll();
+        return mapToResponse(saved);
     }
 
     @Override
-    public Cart getCartById(Long id) {
-
-        return cartRepository.findById(id)
-                .orElseThrow(() ->
-                        new RuntimeException("Registro no encontrado")
-                );
-    }
-
-    @Override
-    public Cart updateCart(Long id, CartRequestDTO request) {
-        logger.info("Actualizando regitro con ID: {}", id);
-
-        Cart cart = cartRepository.findById(id)
-                .orElseThrow(() ->
-                        new RuntimeException("Registro no encontrado")
-                );
-        return cart;
+    public List<CartResponseDTO> getItemsByUser(Long userId) {
+        logger.info("Listando carrito del userId {}", userId);
+        return cartRepository.findByUserId(userId)
+                .stream()
+                .map(this::mapToResponse)
+                .toList();
     }
 
     @Override
     public void deleteCart(Long id) {
-        logger.info("Eliminando registro con ID: {}", id);
+        logger.info("Eliminando item del carrito con id {}", id);
+
         Cart cart = cartRepository.findById(id)
-                .orElseThrow(() ->
-                        new RuntimeException("Registro no encontrado")
-                );
+                .orElseThrow(() -> {
+                    logger.warn("Item con id {} no encontrado", id);
+                    return new CartNotFoundException("Item de carrito no encontrado con id " + id);
+                });
+
+        cartRepository.delete(cart);
+        logger.info("Item con id {} eliminado correctamente", id);
     }
 }
