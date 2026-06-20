@@ -34,12 +34,23 @@ public class OrderServiceImpl implements OrderService {
     public OrderResponseDTO createOrder(OrderRequestDTO request) {
         logger.info("Creando orden para userId {}", request.getUserId());
 
+        String responseUser = restTemplate.getForObject(
+                "http://localhost:8089/users/" + request.getUserId(),
+                String.class
+        );
+        logger.info("Respuesta desde user-service: {}", responseUser);
+
         String responseBook = restTemplate.getForObject(
                 "http://localhost:8082/books/" + request.getBookId(),
                 String.class
         );
-
         logger.info("Respuesta desde book-service: {}", responseBook);
+
+        String responseInventory = restTemplate.getForObject(
+                "http://localhost:8086/inventory/book/" + request.getBookId(),
+                String.class
+        );
+        logger.info("Respuesta desde inventory-service: {}", responseInventory);
 
         OrderEntity order = new OrderEntity();
         order.setUserId(request.getUserId());
@@ -47,8 +58,39 @@ public class OrderServiceImpl implements OrderService {
         order.setStatus(request.getStatus());
 
         OrderEntity savedOrder = orderRepository.save(order);
-
         logger.info("Orden creada correctamente con id {}", savedOrder.getId());
+
+        java.util.Map<String, Object> paymentRequest = new java.util.HashMap<>();
+        paymentRequest.put("orderId", savedOrder.getId());
+        paymentRequest.put("amount", request.getTotal());
+        paymentRequest.put("paymentMethod", "CARD");
+        paymentRequest.put("status", "PAID");
+
+        String responsePayment = restTemplate.postForObject(
+                "http://localhost:8088/payments",
+                paymentRequest,
+                String.class
+        );
+        logger.info("Respuesta desde payment-service: {}", responsePayment);
+
+        java.util.Map<String, Object> notificationRequest = new java.util.HashMap<>();
+        notificationRequest.put("userId", request.getUserId());
+        notificationRequest.put("message", "Tu orden " + savedOrder.getId() + " fue creada y pagada correctamente");
+        notificationRequest.put("type", "ORDER_CREATED");
+
+        org.springframework.http.HttpHeaders headers = new org.springframework.http.HttpHeaders();
+        headers.setContentType(org.springframework.http.MediaType.APPLICATION_JSON);
+
+        org.springframework.http.HttpEntity<java.util.Map<String, Object>> entity =
+                new org.springframework.http.HttpEntity<>(notificationRequest, headers);
+
+        org.springframework.http.ResponseEntity<String> responseNotification = restTemplate.postForEntity(
+                "http://localhost:9090/notifications",
+                entity,
+                String.class
+        );
+
+        logger.info("Respuesta desde notification-service: {}", responseNotification.getBody());
 
         return mapToResponse(savedOrder);
     }
