@@ -46,4 +46,14 @@ public class InventoryServiceImpl implements InventoryService {
 
         return mapToResponse(savedInventory);
     }
+
+    @Override
+    public InventoryResponseDTO getInventoryByBookId(Long bookId) {
+        logger.info("Buscando inventario para bookId {}", bookId);
+
+        Inventory inventory = inventoryRepository.findByBookId(bookId)
+                .orElseThrow(() -> new RuntimeException("Inventario no encontrado para el libro con id " + bookId));
+
+        return mapToResponse(inventory);
+    }
 }

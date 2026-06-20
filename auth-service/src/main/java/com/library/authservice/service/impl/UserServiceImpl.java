@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.client.RestTemplate;
 
 @Service
 @RequiredArgsConstructor
@@ -26,6 +27,7 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final JwtService jwtService;
     private final PasswordEncoder passwordEncoder;
+    private final RestTemplate restTemplate;
 
     @Override
     public UserResponseDTO registerUser(RegisterRequestDTO request) {
@@ -43,6 +45,20 @@ public class UserServiceImpl implements UserService {
         user.setRole(Role.CLIENT);
 
         User savedUser = userRepository.save(user);
+
+        java.util.Map<String, Object> userRequest = new java.util.HashMap<>();
+        userRequest.put("name", request.getName());
+        userRequest.put("email", request.getEmail());
+        userRequest.put("phone", "000000000");
+        userRequest.put("address", "Direccion temporal");
+
+        String responseUserService = restTemplate.postForObject(
+                "http://localhost:8089/users",
+                userRequest,
+                String.class
+        );
+
+        logger.info("Respuesta desde user-service: {}", responseUserService);
 
         UserResponseDTO response = new UserResponseDTO();
         response.setId(savedUser.getId());

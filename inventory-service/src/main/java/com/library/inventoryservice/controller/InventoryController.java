@@ -20,6 +20,13 @@ public class InventoryController {
 
     private final InventoryService inventoryService;
 
+    @GetMapping("/book/{bookId}")
+    public ResponseEntity<InventoryResponseDTO> getInventoryByBookId(@PathVariable Long bookId) {
+        log.info("Consultando inventario para bookId {}", bookId);
+        return ResponseEntity.ok(inventoryService.getInventoryByBookId(bookId));
+    }
+
+
     @PostMapping
     public ResponseEntity<InventoryResponseDTO> createInventory(@Valid @RequestBody InventoryRequestDTO request) {
         log.info("Creando inventario para bookId {}", request.getBookId());
