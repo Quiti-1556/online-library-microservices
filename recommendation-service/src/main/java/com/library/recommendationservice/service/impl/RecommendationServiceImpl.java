@@ -3,6 +3,7 @@ package com.library.recommendationservice.service.impl;
 import com.library.recommendationservice.dto.RecommendationRequestDTO;
 import com.library.recommendationservice.dto.RecommendationResponseDTO;
 import com.library.recommendationservice.entity.Recommendation;
+import com.library.recommendationservice.exceptions.RecommendationNotFoundException;
 import com.library.recommendationservice.repository.RecommendationRepository;
 import com.library.recommendationservice.service.RecommendationService;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -19,24 +22,63 @@ public class RecommendationServiceImpl implements RecommendationService {
 
     private final RecommendationRepository recommendationRepository;
 
+    private RecommendationResponseDTO mapToResponse(Recommendation recommendation) {
+        RecommendationResponseDTO response = new RecommendationResponseDTO();
+        response.setId(recommendation.getId());
+        response.setUserId(recommendation.getUserId());
+        response.setBookId(recommendation.getBookId());
+        response.setRecommendationText(recommendation.getRecommendationText());
+        return response;
+    }
+
     @Override
     public RecommendationResponseDTO createRecommendation(RecommendationRequestDTO request) {
-        logger.info("Creando recomendacion");
-        Recommendation recommendation = new Recommendation();
+        logger.info("Creando recomendación para userId {} sobre bookId {}", request.getUserId(), request.getBookId());
 
+        Recommendation recommendation = new Recommendation();
         recommendation.setUserId(request.getUserId());
         recommendation.setBookId(request.getBookId());
         recommendation.setRecommendationText(request.getRecommendationText());
 
-        Recommendation savedRecommendation = recommendationRepository.save(recommendation);
+        Recommendation saved = recommendationRepository.save(recommendation);
+        logger.info("Recomendación creada correctamente con id {}", saved.getId());
 
-        RecommendationResponseDTO response = new RecommendationResponseDTO();
+        return mapToResponse(saved);
+    }
 
-        response.setId(savedRecommendation.getId());
-        response.setUserId(savedRecommendation.getUserId());
-        response.setBookId(savedRecommendation.getBookId());
-        response.setRecommendationText(savedRecommendation.getRecommendationText());
+    @Override
+    public List<RecommendationResponseDTO> getRecommendationsByUser(Long userId) {
+        logger.info("Listando recomendaciones del userId {}", userId);
+        return recommendationRepository.findByUserId(userId)
+                .stream()
+                .map(this::mapToResponse)
+                .toList();
+    }
 
-        return response;
+    @Override
+    public RecommendationResponseDTO getRecommendationById(Long id) {
+        logger.info("Buscando recomendación con id {}", id);
+
+        Recommendation recommendation = recommendationRepository.findById(id)
+                .orElseThrow(() -> {
+                    logger.warn("Recomendación con id {} no encontrada", id);
+                    return new RecommendationNotFoundException("Recomendación no encontrada con id " + id);
+                });
+
+        return mapToResponse(recommendation);
+    }
+
+    @Override
+    public void deleteRecommendation(Long id) {
+        logger.info("Eliminando recomendación con id {}", id);
+
+        Recommendation recommendation = recommendationRepository.findById(id)
+                .orElseThrow(() -> {
+                    logger.warn("Recomendación con id {} no encontrada", id);
+                    return new RecommendationNotFoundException("Recomendación no encontrada con id " + id);
+                });
+
+        recommendationRepository.delete(recommendation);
+        logger.info("Recomendación con id {} eliminada correctamente", id);
     }
 }
