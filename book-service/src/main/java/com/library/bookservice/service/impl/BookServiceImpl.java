@@ -13,7 +13,6 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
 @Service
 @RequiredArgsConstructor
 public class BookServiceImpl implements BookService {
@@ -23,17 +22,21 @@ public class BookServiceImpl implements BookService {
 
     private final BookRepository bookRepository;
 
+    private BookResponseDTO mapToResponse(Book book) {
+        BookResponseDTO response = new BookResponseDTO();
+        response.setId(book.getId());
+        response.setTitle(book.getTitle());
+        response.setAuthor(book.getAuthor());
+        response.setPrice(book.getPrice());
+        response.setStock(book.getStock());
+        return response;
+    }
+
     @Override
     public BookResponseDTO createBook(BookRequestDTO request) {
-        logger.info("Creando libro");
-
-        if (request.getTitle() == null) {
-
-            throw new BookNotFoundException("Libro no encontrado");
-        }
+        logger.info("Creando libro con título {}", request.getTitle());
 
         Book book = new Book();
-
         book.setTitle(request.getTitle());
         book.setAuthor(request.getAuthor());
         book.setPrice(request.getPrice());
@@ -41,34 +44,33 @@ public class BookServiceImpl implements BookService {
 
         Book savedBook = bookRepository.save(book);
 
-        BookResponseDTO response = new BookResponseDTO();
-
-        response.setId(savedBook.getId());
-        response.setTitle(savedBook.getTitle());
-        response.setAuthor(savedBook.getAuthor());
-        response.setPrice(savedBook.getPrice());
-        response.setStock(savedBook.getStock());
-
-        return response;
-    }
-    @Override
-    public List<Book> getAllBooks() {
-
-        return bookRepository.findAll();
+        logger.info("Libro creado correctamente con id {}", savedBook.getId());
+        return mapToResponse(savedBook);
     }
 
     @Override
-    public Book getBookById(Long id) {
-
-        return bookRepository.findById(id)
-                .orElseThrow(() -> new BookNotFoundException("Libro no encontrado"));
+    public List<BookResponseDTO> getAllBooks() {
+        logger.info("Listando todos los libros");
+        return bookRepository.findAll()
+                .stream()
+                .map(this::mapToResponse)
+                .toList();
     }
 
     @Override
-    public Book updateBook(Long id, BookRequestDTO request) {
+    public BookResponseDTO getBookById(Long id) {
+        logger.info("Buscando libro con id {}", id);
 
         Book book = bookRepository.findById(id)
-                .orElseThrow(() -> new BookNotFoundException("Libro no encontrado"));
+                .orElseThrow(() -> new BookNotFoundException("Libro no encontrado con id " + id));
+
+        return mapToResponse(book);
+    }
+
+    @Override
+    public BookResponseDTO updateBook(Long id, BookRequestDTO request) {
+        Book book = bookRepository.findById(id)
+                .orElseThrow(() -> new BookNotFoundException("Libro no encontrado con id " + id));
 
         book.setTitle(request.getTitle());
         book.setAuthor(request.getAuthor());
@@ -77,14 +79,14 @@ public class BookServiceImpl implements BookService {
 
         logger.info("Actualizando libro con ID: {}", id);
 
-        return bookRepository.save(book);
+        Book updatedBook = bookRepository.save(book);
+        return mapToResponse(updatedBook);
     }
 
     @Override
     public void deleteBook(Long id) {
-
         Book book = bookRepository.findById(id)
-                .orElseThrow(() -> new BookNotFoundException("Libro no encontrado"));
+                .orElseThrow(() -> new BookNotFoundException("Libro no encontrado con id " + id));
 
         logger.info("Eliminando libro con ID: {}", id);
         bookRepository.delete(book);
