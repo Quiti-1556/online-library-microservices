@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.client.RestTemplate;
 
 @Service
 @RequiredArgsConstructor
@@ -19,6 +20,7 @@ public class InventoryServiceImpl implements InventoryService {
             LoggerFactory.getLogger(InventoryServiceImpl.class);
 
     private final InventoryRepository inventoryRepository;
+    private final RestTemplate restTemplate;
 
     private InventoryResponseDTO mapToResponse(Inventory inventory) {
         InventoryResponseDTO response = new InventoryResponseDTO();
@@ -31,6 +33,13 @@ public class InventoryServiceImpl implements InventoryService {
     @Override
     public InventoryResponseDTO createInventory(InventoryRequestDTO request) {
         logger.info("Creando inventario para bookId {}", request.getBookId());
+
+        String responseBook = restTemplate.getForObject(
+                "http://localhost:8082/books/" + request.getBookId(),
+                String.class
+        );
+
+        logger.info("Respuesta desde book-service: {}", responseBook);
 
         if (inventoryRepository.existsByBookId(request.getBookId())) {
             throw new RuntimeException("Ya existe inventario para ese libro");

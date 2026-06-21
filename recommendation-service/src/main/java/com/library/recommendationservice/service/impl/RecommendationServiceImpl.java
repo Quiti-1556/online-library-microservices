@@ -11,16 +11,19 @@ import org.springframework.stereotype.Service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class RecommendationServiceImpl implements RecommendationService {
+
     private static final Logger logger =
             LoggerFactory.getLogger(RecommendationServiceImpl.class);
 
     private final RecommendationRepository recommendationRepository;
+    private final RestTemplate restTemplate;
 
     private RecommendationResponseDTO mapToResponse(Recommendation recommendation) {
         RecommendationResponseDTO response = new RecommendationResponseDTO();
@@ -34,6 +37,13 @@ public class RecommendationServiceImpl implements RecommendationService {
     @Override
     public RecommendationResponseDTO createRecommendation(RecommendationRequestDTO request) {
         logger.info("Creando recomendación para userId {} sobre bookId {}", request.getUserId(), request.getBookId());
+
+        String responseBook = restTemplate.getForObject(
+                "http://localhost:8082/books/" + request.getBookId(),
+                String.class
+        );
+
+        logger.info("Respuesta desde book-service: {}", responseBook);
 
         Recommendation recommendation = new Recommendation();
         recommendation.setUserId(request.getUserId());
