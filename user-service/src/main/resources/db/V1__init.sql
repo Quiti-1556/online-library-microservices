@@ -1,6 +1,0 @@
-CREATE TABLE IF NOT EXISTS user_profiles (
-
-    id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(255),
-    address VARCHAR(255)
-);
