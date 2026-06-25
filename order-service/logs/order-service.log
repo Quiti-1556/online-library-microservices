@@ -1,0 +1,62 @@
+2026-06-19T03:06:33.195-04:00  INFO 26708 --- [order-service] [main] c.l.o.OrderServiceApplicationTests       : Starting OrderServiceApplicationTests using Java 17.0.19 with PID 26708 (started by VBUSTOSF in C:\Users\VBUSTOSF\IdeaProjects\online-library-microservices\order-service)
+2026-06-19T03:06:33.197-04:00 DEBUG 26708 --- [order-service] [main] c.l.o.OrderServiceApplicationTests       : Running with Spring Boot v4.0.6, Spring v7.0.7
+2026-06-19T03:06:33.198-04:00  INFO 26708 --- [order-service] [main] c.l.o.OrderServiceApplicationTests       : No active profile set, falling back to 1 default profile: "default"
+2026-06-19T03:06:34.012-04:00  INFO 26708 --- [order-service] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-06-19T03:06:34.180-04:00  INFO 26708 --- [order-service] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 151 ms. Found 1 JPA repository interface.
+2026-06-19T03:06:34.527-04:00  INFO 26708 --- [order-service] [main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=5005f753-ab72-33e7-beb8-b90b6295cfab
+2026-06-19T03:06:34.913-04:00  INFO 26708 --- [order-service] [main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-06-19T03:06:34.975-04:00  INFO 26708 --- [order-service] [main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.12.Final
+2026-06-19T03:06:35.458-04:00  INFO 26708 --- [order-service] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-06-19T03:06:35.481-04:00  INFO 26708 --- [order-service] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-06-19T03:06:35.762-04:00  INFO 26708 --- [order-service] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5773f83d
+2026-06-19T03:06:35.764-04:00  INFO 26708 --- [order-service] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-06-19T03:06:35.830-04:00  INFO 26708 --- [order-service] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://localhost:3306/order_db]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 8.4.3
+	Default catalog/schema: order_db/undefined
+	Autocommit mode: undefined/unknown
+	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-06-19T03:06:36.591-04:00  INFO 26708 --- [order-service] [main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-06-19T03:06:36.650-04:00  INFO 26708 --- [order-service] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-06-19T03:06:36.729-04:00  INFO 26708 --- [order-service] [main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-06-19T03:06:36.955-04:00  WARN 26708 --- [order-service] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-06-19T03:06:39.132-04:00  INFO 26708 --- [order-service] [main] o.s.cloud.commons.util.InetUtils         : Cannot determine local hostname
+2026-06-19T03:06:40.339-04:00  INFO 26708 --- [order-service] [main] o.s.cloud.commons.util.InetUtils         : Cannot determine local hostname
+2026-06-19T03:06:40.357-04:00  INFO 26708 --- [order-service] [main] DiscoveryClientOptionalArgsConfiguration : Eureka HTTP Client uses RestClient.
+2026-06-19T03:06:40.396-04:00  WARN 26708 --- [order-service] [main] iguration$LoadBalancerCaffeineWarnLogger : Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2026-06-19T03:06:40.416-04:00  INFO 26708 --- [order-service] [main] o.s.c.n.eureka.InstanceInfoFactory       : Setting initial instance status as: STARTING
+2026-06-19T03:06:40.441-04:00  INFO 26708 --- [order-service] [main] com.netflix.discovery.DiscoveryClient    : Initializing Eureka in region us-east-1
+2026-06-19T03:06:40.445-04:00  INFO 26708 --- [order-service] [main] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2026-06-19T03:06:40.455-04:00  INFO 26708 --- [order-service] [main] com.netflix.discovery.DiscoveryClient    : Disable delta property : false
+2026-06-19T03:06:40.455-04:00  INFO 26708 --- [order-service] [main] com.netflix.discovery.DiscoveryClient    : Single vip registry refresh property : null
+2026-06-19T03:06:40.455-04:00  INFO 26708 --- [order-service] [main] com.netflix.discovery.DiscoveryClient    : Force full registry fetch : false
+2026-06-19T03:06:40.455-04:00  INFO 26708 --- [order-service] [main] com.netflix.discovery.DiscoveryClient    : Application is null : false
+2026-06-19T03:06:40.455-04:00  INFO 26708 --- [order-service] [main] com.netflix.discovery.DiscoveryClient    : Registered Applications size is zero : true
+2026-06-19T03:06:40.455-04:00  INFO 26708 --- [order-service] [main] com.netflix.discovery.DiscoveryClient    : Application version is -1: true
+2026-06-19T03:06:40.455-04:00  INFO 26708 --- [order-service] [main] com.netflix.discovery.DiscoveryClient    : Getting all instance registry info from the eureka server
+2026-06-19T03:06:40.847-04:00  INFO 26708 --- [order-service] [main] com.netflix.discovery.DiscoveryClient    : The response status is 200
+2026-06-19T03:06:40.850-04:00  INFO 26708 --- [order-service] [main] com.netflix.discovery.DiscoveryClient    : Starting heartbeat executor: renew interval is: 30
+2026-06-19T03:06:40.851-04:00  INFO 26708 --- [order-service] [main] c.n.discovery.InstanceInfoReplicator     : InstanceInfoReplicator onDemand update allowed rate per min is 4
+2026-06-19T03:06:40.853-04:00  INFO 26708 --- [order-service] [main] com.netflix.discovery.DiscoveryClient    : Discovery Client initialized at timestamp 1781852800852 with initial instances count: 1
+2026-06-19T03:06:40.856-04:00  INFO 26708 --- [order-service] [main] o.s.c.n.e.s.EurekaServiceRegistry        : Registering application ORDER-SERVICE with eureka with status UP
+2026-06-19T03:06:40.857-04:00  INFO 26708 --- [order-service] [main] com.netflix.discovery.DiscoveryClient    : Saw local status change event StatusChangeEvent [timestamp=1781852800857, current=UP, previous=STARTING]
+2026-06-19T03:06:40.859-04:00  INFO 26708 --- [order-service] [DiscoveryClient-InstanceInfoReplicator-%d] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_ORDER-SERVICE/localhost:order-service:8085: registering service...
+2026-06-19T03:06:40.878-04:00  INFO 26708 --- [order-service] [main] c.l.o.OrderServiceApplicationTests       : Started OrderServiceApplicationTests in 9.26 seconds (process running for 11.075)
+2026-06-19T03:06:40.904-04:00  INFO 26708 --- [order-service] [DiscoveryClient-InstanceInfoReplicator-%d] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_ORDER-SERVICE/localhost:order-service:8085 - registration status: 204
+2026-06-19T03:06:41.339-04:00  INFO 26708 --- [order-service] [SpringApplicationShutdownHook] o.s.c.n.e.s.EurekaServiceRegistry        : Unregistering application ORDER-SERVICE with eureka with status DOWN
+2026-06-19T03:06:41.339-04:00  INFO 26708 --- [order-service] [SpringApplicationShutdownHook] com.netflix.discovery.DiscoveryClient    : Saw local status change event StatusChangeEvent [timestamp=1781852801339, current=DOWN, previous=UP]
+2026-06-19T03:06:41.339-04:00  INFO 26708 --- [order-service] [DiscoveryClient-InstanceInfoReplicator-%d] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_ORDER-SERVICE/localhost:order-service:8085: registering service...
+2026-06-19T03:06:41.343-04:00  INFO 26708 --- [order-service] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-06-19T03:06:41.346-04:00  INFO 26708 --- [order-service] [DiscoveryClient-InstanceInfoReplicator-%d] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_ORDER-SERVICE/localhost:order-service:8085 - registration status: 204
+2026-06-19T03:06:41.348-04:00  INFO 26708 --- [order-service] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-06-19T03:06:41.355-04:00  INFO 26708 --- [order-service] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-06-19T03:06:41.356-04:00  INFO 26708 --- [order-service] [SpringApplicationShutdownHook] com.netflix.discovery.DiscoveryClient    : Shutting down DiscoveryClient ...
+2026-06-19T03:06:44.367-04:00  INFO 26708 --- [order-service] [SpringApplicationShutdownHook] com.netflix.discovery.DiscoveryClient    : Unregistering ...
+2026-06-19T03:06:44.386-04:00  INFO 26708 --- [order-service] [SpringApplicationShutdownHook] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_ORDER-SERVICE/localhost:order-service:8085 - deregister  status: 200
+2026-06-19T03:06:44.386-04:00  INFO 26708 --- [order-service] [SpringApplicationShutdownHook] com.netflix.discovery.DiscoveryClient    : Completed shut down of DiscoveryClient
