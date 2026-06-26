@@ -1,0 +1,677 @@
+Index: recommendation-service/src/main/java/com/library/recommendationservice/config/FlywayConfig.java
+===================================================================
+diff --git a/recommendation-service/src/main/java/com/library/recommendationservice/config/FlywayConfig.java b/recommendation-service/src/main/java/com/library/recommendationservice/config/FlywayConfig.java
+deleted file mode 100644
+--- a/recommendation-service/src/main/java/com/library/recommendationservice/config/FlywayConfig.java	(revision 67e12434d99470104c3b3a73b070a1a24eea299d)
++++ /dev/null	(revision 67e12434d99470104c3b3a73b070a1a24eea299d)
+@@ -1,25 +0,0 @@
+-package com.library.recommendationservice.config;
+-
+-import org.flywaydb.core.Flyway;
+-import org.springframework.boot.CommandLineRunner;
+-import org.springframework.context.annotation.Bean;
+-import org.springframework.context.annotation.Configuration;
+-
+-import javax.sql.DataSource;
+-
+-@Configuration
+-public class FlywayConfig {
+-
+-    @Bean
+-    public CommandLineRunner migrateDatabase(DataSource dataSource) {
+-        return args -> {
+-            Flyway flyway = Flyway.configure()
+-                    .dataSource(dataSource)
+-                    .locations("classpath:db/migration")
+-                    .load();
+-
+-            flyway.migrate();
+-            System.out.println("Flyway ejecutado correctamente");
+-        };
+-    }
+-}
+\ No newline at end of file
+Index: cart-service/src/main/java/com/library/cartservice/config/FlywayConfig.java
+===================================================================
+diff --git a/cart-service/src/main/java/com/library/cartservice/config/FlywayConfig.java b/cart-service/src/main/java/com/library/cartservice/config/FlywayConfig.java
+deleted file mode 100644
+--- a/cart-service/src/main/java/com/library/cartservice/config/FlywayConfig.java	(revision 67e12434d99470104c3b3a73b070a1a24eea299d)
++++ /dev/null	(revision 67e12434d99470104c3b3a73b070a1a24eea299d)
+@@ -1,25 +0,0 @@
+-package com.library.cartservice.config;
+-
+-import org.flywaydb.core.Flyway;
+-import org.springframework.boot.CommandLineRunner;
+-import org.springframework.context.annotation.Bean;
+-import org.springframework.context.annotation.Configuration;
+-
+-import javax.sql.DataSource;
+-
+-@Configuration
+-public class FlywayConfig {
+-
+-    @Bean
+-    public CommandLineRunner migrateDatabase(DataSource dataSource) {
+-        return args -> {
+-            Flyway flyway = Flyway.configure()
+-                    .dataSource(dataSource)
+-                    .locations("classpath:db/migration")
+-                    .load();
+-
+-            flyway.migrate();
+-            System.out.println("Flyway ejecutado correctamente");
+-        };
+-    }
+-}
+\ No newline at end of file
+Index: inventory-service/src/main/java/com/library/inventoryservice/config/FlywayConfig.java
+===================================================================
+diff --git a/inventory-service/src/main/java/com/library/inventoryservice/config/FlywayConfig.java b/inventory-service/src/main/java/com/library/inventoryservice/config/FlywayConfig.java
+deleted file mode 100644
+--- a/inventory-service/src/main/java/com/library/inventoryservice/config/FlywayConfig.java	(revision 67e12434d99470104c3b3a73b070a1a24eea299d)
++++ /dev/null	(revision 67e12434d99470104c3b3a73b070a1a24eea299d)
+@@ -1,25 +0,0 @@
+-package com.library.inventoryservice.config;
+-
+-import org.flywaydb.core.Flyway;
+-import org.springframework.boot.CommandLineRunner;
+-import org.springframework.context.annotation.Bean;
+-import org.springframework.context.annotation.Configuration;
+-
+-import javax.sql.DataSource;
+-
+-@Configuration
+-public class FlywayConfig {
+-
+-    @Bean
+-    public CommandLineRunner migrateDatabase(DataSource dataSource) {
+-        return args -> {
+-            Flyway flyway = Flyway.configure()
+-                    .dataSource(dataSource)
+-                    .locations("classpath:db/migration")
+-                    .load();
+-
+-            flyway.migrate();
+-            System.out.println("Flyway ejecutado correctamente");
+-        };
+-    }
+-}
+Index: review-service/src/main/java/com/library/reviewservice/config/FlywayConfig.java
+===================================================================
+diff --git a/review-service/src/main/java/com/library/reviewservice/config/FlywayConfig.java b/review-service/src/main/java/com/library/reviewservice/config/FlywayConfig.java
+deleted file mode 100644
+--- a/review-service/src/main/java/com/library/reviewservice/config/FlywayConfig.java	(revision 67e12434d99470104c3b3a73b070a1a24eea299d)
++++ /dev/null	(revision 67e12434d99470104c3b3a73b070a1a24eea299d)
+@@ -1,25 +0,0 @@
+-package com.library.reviewservice.config;
+-
+-import org.flywaydb.core.Flyway;
+-import org.springframework.boot.CommandLineRunner;
+-import org.springframework.context.annotation.Bean;
+-import org.springframework.context.annotation.Configuration;
+-
+-import javax.sql.DataSource;
+-
+-@Configuration
+-public class FlywayConfig {
+-
+-    @Bean
+-    public CommandLineRunner migrateDatabase(DataSource dataSource) {
+-        return args -> {
+-            Flyway flyway = Flyway.configure()
+-                    .dataSource(dataSource)
+-                    .locations("classpath:db/migration")
+-                    .load();
+-
+-            flyway.migrate();
+-            System.out.println("Flyway ejecutado correctamente");
+-        };
+-    }
+-}
+Index: order-service/src/main/java/com/library/orderservice/config/FlywayConfig.java
+===================================================================
+diff --git a/order-service/src/main/java/com/library/orderservice/config/FlywayConfig.java b/order-service/src/main/java/com/library/orderservice/config/FlywayConfig.java
+deleted file mode 100644
+--- a/order-service/src/main/java/com/library/orderservice/config/FlywayConfig.java	(revision 67e12434d99470104c3b3a73b070a1a24eea299d)
++++ /dev/null	(revision 67e12434d99470104c3b3a73b070a1a24eea299d)
+@@ -1,27 +0,0 @@
+-package com.library.orderservice.config;
+-
+-import org.flywaydb.core.Flyway;
+-import org.springframework.boot.CommandLineRunner;
+-import org.springframework.context.annotation.Bean;
+-import org.springframework.context.annotation.Configuration;
+-
+-import javax.sql.DataSource;
+-
+-@Configuration
+-public class FlywayConfig {
+-
+-    @Bean
+-    public CommandLineRunner migrateDatabase(DataSource dataSource) {
+-        return args -> {
+-            Flyway flyway = Flyway.configure()
+-                    .dataSource(dataSource)
+-                    .locations("classpath:db/migration")
+-                    .baselineOnMigrate(true)
+-                    .load();
+-
+-            flyway.migrate();
+-            System.out.println("Flyway ejecutado correctamente");
+-        };
+-    }
+-}
+-
+Index: notification-service/src/main/resources/application.properties
+===================================================================
+diff --git a/notification-service/src/main/resources/application.properties b/notification-service/src/main/resources/application.properties
+deleted file mode 100644
+--- a/notification-service/src/main/resources/application.properties	(revision 67e12434d99470104c3b3a73b070a1a24eea299d)
++++ /dev/null	(revision 67e12434d99470104c3b3a73b070a1a24eea299d)
+@@ -1,22 +0,0 @@
+-spring.application.name=notification-service
+-
+-server.port=8090
+-
+-eureka.client.service-url.defaultZone=http://localhost:8761/eureka
+-
+-spring.datasource.url=jdbc:mysql://localhost:3306/notification_db
+-spring.datasource.username=root
+-spring.datasource.password=
+-
+-spring.flyway.enabled=false
+-spring.jpa.hibernate.ddl-auto=none
+-spring.jpa.show-sql=true
+-spring.jpa.properties.hibernate.format_sql=true
+-
+-logging.file.name=logs/notification-service.log
+-logging.level.root=INFO
+-logging.level.com.library.notificationservice=DEBUG
+-
+-springdoc.api-docs.enabled=true
+-springdoc.swagger-ui.enabled=true
+-springdoc.swagger-ui.path=/swagger-ui.html
+\ No newline at end of file
+Index: review-service/src/main/resources/db/migration/V1__init.sql
+===================================================================
+diff --git a/review-service/src/main/resources/db/migration/V1__init.sql b/review-service/src/main/resources/db/migration/V1__init.sql
+deleted file mode 100644
+--- a/review-service/src/main/resources/db/migration/V1__init.sql	(revision 67e12434d99470104c3b3a73b070a1a24eea299d)
++++ /dev/null	(revision 67e12434d99470104c3b3a73b070a1a24eea299d)
+@@ -1,8 +0,0 @@
+-CREATE TABLE reviews (
+-                         id BIGINT NOT NULL AUTO_INCREMENT,
+-                         user_id BIGINT NOT NULL,
+-                         book_id BIGINT NOT NULL,
+-                         comment VARCHAR(500) NOT NULL,
+-                         rating INT NOT NULL,
+-                         PRIMARY KEY (id)
+-);
+\ No newline at end of file
+Index: auth-service/src/main/java/com/library/authservice/config/FlywayConfig.java
+===================================================================
+diff --git a/auth-service/src/main/java/com/library/authservice/config/FlywayConfig.java b/auth-service/src/main/java/com/library/authservice/config/FlywayConfig.java
+deleted file mode 100644
+--- a/auth-service/src/main/java/com/library/authservice/config/FlywayConfig.java	(revision 67e12434d99470104c3b3a73b070a1a24eea299d)
++++ /dev/null	(revision 67e12434d99470104c3b3a73b070a1a24eea299d)
+@@ -1,25 +0,0 @@
+-package com.library.authservice.config;
+-
+-import org.flywaydb.core.Flyway;
+-import org.springframework.boot.CommandLineRunner;
+-import org.springframework.context.annotation.Bean;
+-import org.springframework.context.annotation.Configuration;
+-
+-import javax.sql.DataSource;
+-
+-@Configuration
+-public class FlywayConfig {
+-
+-    @Bean
+-    public CommandLineRunner migrateDatabase(DataSource dataSource) {
+-        return args -> {
+-            Flyway flyway = Flyway.configure()
+-                    .dataSource(dataSource)
+-                    .locations("classpath:db/migration")
+-                    .load();
+-
+-            flyway.migrate();
+-            System.out.println("Flyway ejecutado correctamente");
+-        };
+-    }
+-}
+\ No newline at end of file
+Index: user-service/src/main/java/com/library/userservice/config/FlywayConfig.java
+===================================================================
+diff --git a/user-service/src/main/java/com/library/userservice/config/FlywayConfig.java b/user-service/src/main/java/com/library/userservice/config/FlywayConfig.java
+deleted file mode 100644
+--- a/user-service/src/main/java/com/library/userservice/config/FlywayConfig.java	(revision 67e12434d99470104c3b3a73b070a1a24eea299d)
++++ /dev/null	(revision 67e12434d99470104c3b3a73b070a1a24eea299d)
+@@ -1,25 +0,0 @@
+-package com.library.userservice.config;
+-
+-import org.flywaydb.core.Flyway;
+-import org.springframework.boot.CommandLineRunner;
+-import org.springframework.context.annotation.Bean;
+-import org.springframework.context.annotation.Configuration;
+-
+-import javax.sql.DataSource;
+-
+-@Configuration
+-public class FlywayConfig {
+-
+-    @Bean
+-    public CommandLineRunner migrateDatabase(DataSource dataSource) {
+-        return args -> {
+-            Flyway flyway = Flyway.configure()
+-                    .dataSource(dataSource)
+-                    .locations("classpath:db/migration")
+-                    .load();
+-
+-            flyway.migrate();
+-            System.out.println("Flyway ejecutado correctamente");
+-        };
+-    }
+-}
+\ No newline at end of file
+Index: book-service/src/main/java/com/library/bookservice/config/FlywayConfig.java
+===================================================================
+diff --git a/book-service/src/main/java/com/library/bookservice/config/FlywayConfig.java b/book-service/src/main/java/com/library/bookservice/config/FlywayConfig.java
+deleted file mode 100644
+--- a/book-service/src/main/java/com/library/bookservice/config/FlywayConfig.java	(revision 67e12434d99470104c3b3a73b070a1a24eea299d)
++++ /dev/null	(revision 67e12434d99470104c3b3a73b070a1a24eea299d)
+@@ -1,26 +0,0 @@
+-package com.library.bookservice.config;
+-
+-import org.flywaydb.core.Flyway;
+-import org.springframework.boot.CommandLineRunner;
+-import org.springframework.context.annotation.Bean;
+-import org.springframework.context.annotation.Configuration;
+-
+-import javax.sql.DataSource;
+-
+-@Configuration
+-public class FlywayConfig {
+-
+-    @Bean
+-    public CommandLineRunner migrateDatabase(DataSource dataSource) {
+-        return args -> {
+-            Flyway flyway = Flyway.configure()
+-                    .dataSource(dataSource)
+-                    .locations("classpath:db/migration")
+-                    .baselineOnMigrate(true)
+-                    .load();
+-
+-            flyway.migrate();
+-            System.out.println("Flyway ejecutado correctamente");
+-        };
+-    }
+-}
+\ No newline at end of file
+Index: notification-service/src/main/java/com/library/notificationservice/config/FlywayConfig.java
+===================================================================
+diff --git a/notification-service/src/main/java/com/library/notificationservice/config/FlywayConfig.java b/notification-service/src/main/java/com/library/notificationservice/config/FlywayConfig.java
+deleted file mode 100644
+--- a/notification-service/src/main/java/com/library/notificationservice/config/FlywayConfig.java	(revision 67e12434d99470104c3b3a73b070a1a24eea299d)
++++ /dev/null	(revision 67e12434d99470104c3b3a73b070a1a24eea299d)
+@@ -1,25 +0,0 @@
+-package com.library.notificationservice.config;
+-
+-import org.flywaydb.core.Flyway;
+-import org.springframework.boot.CommandLineRunner;
+-import org.springframework.context.annotation.Bean;
+-import org.springframework.context.annotation.Configuration;
+-
+-import javax.sql.DataSource;
+-
+-@Configuration
+-public class FlywayConfig {
+-
+-    @Bean
+-    public CommandLineRunner migrateDatabase(DataSource dataSource) {
+-        return args -> {
+-            Flyway flyway = Flyway.configure()
+-                    .dataSource(dataSource)
+-                    .locations("classpath:db/migration")
+-                    .load();
+-
+-            flyway.migrate();
+-            System.out.println("Flyway ejecutado correctamente");
+-        };
+-    }
+-}
+\ No newline at end of file
+Index: payment-service/src/main/java/com/library/paymentservice/config/FlywayConfig.java
+===================================================================
+diff --git a/payment-service/src/main/java/com/library/paymentservice/config/FlywayConfig.java b/payment-service/src/main/java/com/library/paymentservice/config/FlywayConfig.java
+deleted file mode 100644
+--- a/payment-service/src/main/java/com/library/paymentservice/config/FlywayConfig.java	(revision 67e12434d99470104c3b3a73b070a1a24eea299d)
++++ /dev/null	(revision 67e12434d99470104c3b3a73b070a1a24eea299d)
+@@ -1,25 +0,0 @@
+-package com.library.paymentservice.config;
+-
+-import org.flywaydb.core.Flyway;
+-import org.springframework.boot.CommandLineRunner;
+-import org.springframework.context.annotation.Bean;
+-import org.springframework.context.annotation.Configuration;
+-
+-import javax.sql.DataSource;
+-
+-@Configuration
+-public class FlywayConfig {
+-
+-    @Bean
+-    public CommandLineRunner migrateDatabase(DataSource dataSource) {
+-        return args -> {
+-            Flyway flyway = Flyway.configure()
+-                    .dataSource(dataSource)
+-                    .locations("classpath:db/migration")
+-                    .load();
+-
+-            flyway.migrate();
+-            System.out.println("Flyway ejecutado correctamente");
+-        };
+-    }
+-}
+\ No newline at end of file
+Index: api-gateway/src/main/resources/application.yml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>spring:\r\n  application:\r\n    name: api-gateway\r\n\r\n  cloud:\r\n    gateway:\r\n      server:\r\n        webmvc:\r\n          routes:\r\n\r\n            - id: auth-public\r\n              uri: http://localhost:8081\r\n              predicates:\r\n                - Path=/auth/login,/auth/register\r\n\r\n            - id: book-service\r\n              uri: http://localhost:8082\r\n              predicates:\r\n                - Path=/books/**\r\n              filters:\r\n                - jwtFilter\r\n\r\n            - id: cart-service\r\n              uri: http://localhost:8083\r\n              predicates:\r\n                - Path=/cart/**\r\n              filters:\r\n                - jwtFilter\r\n\r\n            - id: order-service\r\n              uri: http://localhost:8085\r\n              predicates:\r\n                - Path=/orders/**\r\n              filters:\r\n                - jwtFilter\r\n\r\n            - id: inventory-service\r\n              uri: http://localhost:8086\r\n              predicates:\r\n                - Path=/inventory/**\r\n              filters:\r\n                - jwtFilter\r\n\r\n            - id: review-service\r\n              uri: http://localhost:8087\r\n              predicates:\r\n                - Path=/reviews/**\r\n              filters:\r\n                - jwtFilter\r\n\r\n            - id: payment-service\r\n              uri: http://localhost:8088\r\n              predicates:\r\n                - Path=/payments/**\r\n              filters:\r\n                - jwtFilter\r\n\r\n            - id: user-service\r\n              uri: http://localhost:8089\r\n              predicates:\r\n                - Path=/users/**\r\n              filters:\r\n                - jwtFilter\r\n\r\n            - id: notification-service\r\n              uri: http://localhost:8090\r\n              predicates:\r\n                - Path=/notifications/**\r\n              filters:\r\n                - jwtFilter\r\n\r\n            - id: recommendation-service\r\n              uri: http://localhost:8091\r\n              predicates:\r\n                - Path=/recommendations/**\r\n              filters:\r\n                - jwtFilter\r\n\r\nserver:\r\n  port: 8080\r\n\r\napp:\r\n  jwt:\r\n    secret: bXlzZWNyZXRrZXlteXNlY3JldGtleW15c2VjcmV0a2V5MTIzNDU2
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/api-gateway/src/main/resources/application.yml b/api-gateway/src/main/resources/application.yml
+--- a/api-gateway/src/main/resources/application.yml	(revision 67e12434d99470104c3b3a73b070a1a24eea299d)
++++ b/api-gateway/src/main/resources/application.yml	(date 1782439499511)
+@@ -1,7 +1,6 @@
+ spring:
+   application:
+     name: api-gateway
+-
+   cloud:
+     gateway:
+       server:
+@@ -76,9 +75,9 @@
+               filters:
+                 - jwtFilter
+ 
+-server:
+-  port: 8080
++  server:
++    port: 8080
+ 
+-app:
+-  jwt:
+-    secret: bXlzZWNyZXRrZXlteXNlY3JldGtleW15c2VjcmV0a2V5MTIzNDU2
+\ No newline at end of file
++  app:
++    jwt:
++      secret: bXlzZWNyZXRrZXlteXNlY3JldGtleW15c2VjcmV0a2V5MTIzNDU2
+\ No newline at end of file
+Index: inventory-service/src/test/java/com/library/inventoryservice/service/impl/InventoryServiceImplTest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.library.inventoryservice.service.impl;\r\n\r\nimport com.library.inventoryservice.dto.InventoryRequestDTO;\r\nimport com.library.inventoryservice.dto.InventoryResponseDTO;\r\nimport com.library.inventoryservice.entity.Inventory;\r\nimport com.library.inventoryservice.repository.InventoryRepository;\r\nimport org.junit.jupiter.api.DisplayName;\r\nimport org.junit.jupiter.api.Test;\r\nimport org.junit.jupiter.api.extension.ExtendWith;\r\nimport org.mockito.InjectMocks;\r\nimport org.mockito.Mock;\r\nimport org.mockito.junit.jupiter.MockitoExtension;\r\nimport org.springframework.web.client.RestTemplate;\r\n\r\nimport java.util.Optional;\r\n\r\nimport static org.junit.jupiter.api.Assertions.*;\r\nimport static org.mockito.Mockito.*;\r\n\r\n@ExtendWith(MockitoExtension.class)\r\nclass InventoryServiceImplTest {\r\n\r\n    @Mock\r\n    private InventoryRepository inventoryRepository;\r\n\r\n    @Mock\r\n    private RestTemplate restTemplate;\r\n\r\n    @InjectMocks\r\n    private InventoryServiceImpl inventoryService;\r\n\r\n    private InventoryRequestDTO buildRequestDTO() {\r\n        InventoryRequestDTO dto = new InventoryRequestDTO();\r\n        dto.setBookId(10L);\r\n        dto.setStock(25);\r\n        return dto;\r\n    }\r\n\r\n    private Inventory buildInventory(Long id, Long bookId, Integer stock) {\r\n        Inventory inventory = new Inventory();\r\n        inventory.setId(id);\r\n        inventory.setBookId(bookId);\r\n        inventory.setStock(stock);\r\n        return inventory;\r\n    }\r\n\r\n    @Test\r\n    @DisplayName(\"Debe crear inventario correctamente\")\r\n    void shouldCreateInventorySuccessfully() {\r\n        InventoryRequestDTO request = buildRequestDTO();\r\n        Inventory savedInventory = buildInventory(1L, 10L, 25);\r\n\r\n        when(restTemplate.getForObject(\"http://localhost:8082/books/10\", String.class))\r\n                .thenReturn(\"{\\\"id\\\":10,\\\"title\\\":\\\"Libro test\\\"}\");\r\n        when(inventoryRepository.existsByBookId(10L)).thenReturn(false);\r\n        when(inventoryRepository.save(any(Inventory.class))).thenReturn(savedInventory);\r\n\r\n        InventoryResponseDTO response = inventoryService.createInventory(request);\r\n\r\n        assertNotNull(response);\r\n        assertEquals(1L, response.getId());\r\n        assertEquals(10L, response.getBookId());\r\n        assertEquals(25, response.getStock());\r\n\r\n        verify(restTemplate, times(1))\r\n                .getForObject(\"http://localhost:8082/books/10\", String.class);\r\n        verify(inventoryRepository, times(1)).existsByBookId(10L);\r\n        verify(inventoryRepository, times(1)).save(any(Inventory.class));\r\n    }\r\n\r\n    @Test\r\n    @DisplayName(\"Debe lanzar excepción si ya existe inventario para el libro\")\r\n    void shouldThrowExceptionWhenInventoryAlreadyExists() {\r\n        InventoryRequestDTO request = buildRequestDTO();\r\n\r\n        when(restTemplate.getForObject(\"http://localhost:8082/books/10\", String.class))\r\n                .thenReturn(\"{\\\"id\\\":10,\\\"title\\\":\\\"Libro test\\\"}\");\r\n        when(inventoryRepository.existsByBookId(10L)).thenReturn(true);\r\n\r\n        RuntimeException exception = assertThrows(\r\n                RuntimeException.class,\r\n                () -> inventoryService.createInventory(request)\r\n        );\r\n\r\n        assertEquals(\"Ya existe inventario para ese libro\", exception.getMessage());\r\n\r\n        verify(restTemplate, times(1))\r\n                .getForObject(\"http://localhost:8082/books/10\", String.class);\r\n        verify(inventoryRepository, times(1)).existsByBookId(10L);\r\n        verify(inventoryRepository, never()).save(any(Inventory.class));\r\n    }\r\n\r\n    @Test\r\n    @DisplayName(\"Debe obtener inventario por bookId\")\r\n    void shouldReturnInventoryByBookId() {\r\n        Inventory inventory = buildInventory(1L, 10L, 25);\r\n\r\n        when(inventoryRepository.findByBookId(10L)).thenReturn(Optional.of(inventory));\r\n\r\n        InventoryResponseDTO response = inventoryService.getInventoryByBookId(10L);\r\n\r\n        assertNotNull(response);\r\n        assertEquals(1L, response.getId());\r\n        assertEquals(10L, response.getBookId());\r\n        assertEquals(25, response.getStock());\r\n\r\n        verify(inventoryRepository, times(1)).findByBookId(10L);\r\n    }\r\n\r\n    @Test\r\n    @DisplayName(\"Debe lanzar excepción cuando no existe inventario para el libro\")\r\n    void shouldThrowExceptionWhenInventoryNotFoundByBookId() {\r\n        when(inventoryRepository.findByBookId(99L)).thenReturn(Optional.empty());\r\n\r\n        RuntimeException exception = assertThrows(\r\n                RuntimeException.class,\r\n                () -> inventoryService.getInventoryByBookId(99L)\r\n        );\r\n\r\n        assertEquals(\"Inventario no encontrado para el libro con id 99\", exception.getMessage());\r\n        verify(inventoryRepository, times(1)).findByBookId(99L);\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/inventory-service/src/test/java/com/library/inventoryservice/service/impl/InventoryServiceImplTest.java b/inventory-service/src/test/java/com/library/inventoryservice/service/impl/InventoryServiceImplTest.java
+--- a/inventory-service/src/test/java/com/library/inventoryservice/service/impl/InventoryServiceImplTest.java	(revision 67e12434d99470104c3b3a73b070a1a24eea299d)
++++ b/inventory-service/src/test/java/com/library/inventoryservice/service/impl/InventoryServiceImplTest.java	(date 1782432561020)
+@@ -10,6 +10,7 @@
+ import org.mockito.InjectMocks;
+ import org.mockito.Mock;
+ import org.mockito.junit.jupiter.MockitoExtension;
++import org.springframework.test.context.ActiveProfiles;
+ import org.springframework.web.client.RestTemplate;
+ 
+ import java.util.Optional;
+@@ -18,6 +19,7 @@
+ import static org.mockito.Mockito.*;
+ 
+ @ExtendWith(MockitoExtension.class)
++@ActiveProfiles("test")
+ class InventoryServiceImplTest {
+ 
+     @Mock
+Index: cart-service/src/test/java/com/library/cartservice/service/impl/CartServiceImpl.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.library.cartservice.service.impl;\r\n\r\nimport com.library.cartservice.dto.CartRequestDTO;\r\nimport com.library.cartservice.dto.CartResponseDTO;\r\nimport com.library.cartservice.entity.Cart;\r\nimport com.library.cartservice.exceptions.CartNotFoundException;\r\nimport com.library.cartservice.repository.CartRepository;\r\nimport org.junit.jupiter.api.DisplayName;\r\nimport org.junit.jupiter.api.Test;\r\nimport org.junit.jupiter.api.extension.ExtendWith;\r\nimport org.mockito.InjectMocks;\r\nimport org.mockito.Mock;\r\nimport org.mockito.junit.jupiter.MockitoExtension;\r\nimport org.springframework.web.client.RestTemplate;\r\n\r\nimport java.util.List;\r\nimport java.util.Optional;\r\n\r\nimport static org.junit.jupiter.api.Assertions.*;\r\nimport static org.mockito.Mockito.*;\r\n\r\n@ExtendWith(MockitoExtension.class)\r\nclass CartServiceImplTest {\r\n\r\n    @Mock\r\n    private CartRepository cartRepository;\r\n\r\n    @Mock\r\n    private RestTemplate restTemplate;\r\n\r\n    @InjectMocks\r\n    private CartServiceImpl cartService;\r\n\r\n    private CartRequestDTO buildRequestDTO() {\r\n        CartRequestDTO dto = new CartRequestDTO();\r\n        dto.setUserId(1L);\r\n        dto.setBookId(10L);\r\n        dto.setQuantity(2);\r\n        return dto;\r\n    }\r\n\r\n    private Cart buildCart(Long id, Long userId, Long bookId, Integer quantity) {\r\n        Cart cart = new Cart();\r\n        cart.setId(id);\r\n        cart.setUserId(userId);\r\n        cart.setBookId(bookId);\r\n        cart.setQuantity(quantity);\r\n        return cart;\r\n    }\r\n\r\n    @Test\r\n    @DisplayName(\"Debe agregar item al carrito correctamente\")\r\n    void shouldAddItemSuccessfully() {\r\n        CartRequestDTO request = buildRequestDTO();\r\n        Cart savedCart = buildCart(1L, 1L, 10L, 2);\r\n\r\n        when(restTemplate.getForObject(\"http://localhost:8082/books/10\", String.class))\r\n                .thenReturn(\"{\\\"id\\\":10,\\\"title\\\":\\\"Libro test\\\"}\");\r\n        when(cartRepository.existsByUserIdAndBookId(1L, 10L)).thenReturn(false);\r\n        when(cartRepository.save(any(Cart.class))).thenReturn(savedCart);\r\n\r\n        CartResponseDTO response = cartService.addItem(request);\r\n\r\n        assertNotNull(response);\r\n        assertEquals(1L, response.getId());\r\n        assertEquals(1L, response.getUserId());\r\n        assertEquals(10L, response.getBookId());\r\n        assertEquals(2, response.getQuantity());\r\n\r\n        verify(restTemplate, times(1))\r\n                .getForObject(\"http://localhost:8082/books/10\", String.class);\r\n        verify(cartRepository, times(1)).existsByUserIdAndBookId(1L, 10L);\r\n        verify(cartRepository, times(1)).save(any(Cart.class));\r\n    }\r\n\r\n    @Test\r\n    @DisplayName(\"Debe lanzar excepción si el libro ya está en el carrito del usuario\")\r\n    void shouldThrowExceptionWhenBookAlreadyExistsInCart() {\r\n        CartRequestDTO request = buildRequestDTO();\r\n\r\n        when(restTemplate.getForObject(\"http://localhost:8082/books/10\", String.class))\r\n                .thenReturn(\"{\\\"id\\\":10,\\\"title\\\":\\\"Libro test\\\"}\");\r\n        when(cartRepository.existsByUserIdAndBookId(1L, 10L)).thenReturn(true);\r\n\r\n        RuntimeException exception = assertThrows(\r\n                RuntimeException.class,\r\n                () -> cartService.addItem(request)\r\n        );\r\n\r\n        assertEquals(\"El libro ya está en el carrito de este usuario\", exception.getMessage());\r\n\r\n        verify(restTemplate, times(1))\r\n                .getForObject(\"http://localhost:8082/books/10\", String.class);\r\n        verify(cartRepository, times(1)).existsByUserIdAndBookId(1L, 10L);\r\n        verify(cartRepository, never()).save(any(Cart.class));\r\n    }\r\n\r\n    @Test\r\n    @DisplayName(\"Debe listar items del carrito por usuario\")\r\n    void shouldReturnItemsByUser() {\r\n        Cart c1 = buildCart(1L, 1L, 10L, 2);\r\n        Cart c2 = buildCart(2L, 1L, 11L, 1);\r\n\r\n        when(cartRepository.findByUserId(1L)).thenReturn(List.of(c1, c2));\r\n\r\n        List<CartResponseDTO> response = cartService.getItemsByUser(1L);\r\n\r\n        assertNotNull(response);\r\n        assertEquals(2, response.size());\r\n        assertEquals(10L, response.get(0).getBookId());\r\n        assertEquals(11L, response.get(1).getBookId());\r\n\r\n        verify(cartRepository, times(1)).findByUserId(1L);\r\n    }\r\n\r\n    @Test\r\n    @DisplayName(\"Debe retornar lista vacía si el usuario no tiene items en el carrito\")\r\n    void shouldReturnEmptyListWhenUserHasNoCartItems() {\r\n        when(cartRepository.findByUserId(99L)).thenReturn(List.of());\r\n\r\n        List<CartResponseDTO> response = cartService.getItemsByUser(99L);\r\n\r\n        assertNotNull(response);\r\n        assertTrue(response.isEmpty());\r\n\r\n        verify(cartRepository, times(1)).findByUserId(99L);\r\n    }\r\n\r\n    @Test\r\n    @DisplayName(\"Debe eliminar item del carrito correctamente\")\r\n    void shouldDeleteCartSuccessfully() {\r\n        Cart cart = buildCart(1L, 1L, 10L, 2);\r\n\r\n        when(cartRepository.findById(1L)).thenReturn(Optional.of(cart));\r\n        doNothing().when(cartRepository).delete(cart);\r\n\r\n        assertDoesNotThrow(() -> cartService.deleteCart(1L));\r\n\r\n        verify(cartRepository, times(1)).findById(1L);\r\n        verify(cartRepository, times(1)).delete(cart);\r\n    }\r\n\r\n    @Test\r\n    @DisplayName(\"Debe lanzar excepción al eliminar item inexistente del carrito\")\r\n    void shouldThrowExceptionWhenDeletingNonExistingCartItem() {\r\n        when(cartRepository.findById(99L)).thenReturn(Optional.empty());\r\n\r\n        CartNotFoundException exception = assertThrows(\r\n                CartNotFoundException.class,\r\n                () -> cartService.deleteCart(99L)\r\n        );\r\n\r\n        assertEquals(\"Item de carrito no encontrado con id 99\", exception.getMessage());\r\n        verify(cartRepository, times(1)).findById(99L);\r\n        verify(cartRepository, never()).delete(any(Cart.class));\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/cart-service/src/test/java/com/library/cartservice/service/impl/CartServiceImpl.java b/cart-service/src/test/java/com/library/cartservice/service/impl/CartServiceImpl.java
+--- a/cart-service/src/test/java/com/library/cartservice/service/impl/CartServiceImpl.java	(revision 67e12434d99470104c3b3a73b070a1a24eea299d)
++++ b/cart-service/src/test/java/com/library/cartservice/service/impl/CartServiceImpl.java	(date 1782432560994)
+@@ -11,6 +11,7 @@
+ import org.mockito.InjectMocks;
+ import org.mockito.Mock;
+ import org.mockito.junit.jupiter.MockitoExtension;
++import org.springframework.test.context.ActiveProfiles;
+ import org.springframework.web.client.RestTemplate;
+ 
+ import java.util.List;
+@@ -20,6 +21,7 @@
+ import static org.mockito.Mockito.*;
+ 
+ @ExtendWith(MockitoExtension.class)
++@ActiveProfiles("test")
+ class CartServiceImplTest {
+ 
+     @Mock
+Index: recommendation-service/src/test/java/com/library/recommendationservice/service/impl/RecommendationServiceImplTest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.library.recommendationservice.service.impl;\r\n\r\nimport com.library.recommendationservice.dto.RecommendationRequestDTO;\r\nimport com.library.recommendationservice.dto.RecommendationResponseDTO;\r\nimport com.library.recommendationservice.entity.Recommendation;\r\nimport com.library.recommendationservice.exceptions.RecommendationNotFoundException;\r\nimport com.library.recommendationservice.repository.RecommendationRepository;\r\nimport org.junit.jupiter.api.DisplayName;\r\nimport org.junit.jupiter.api.Test;\r\nimport org.junit.jupiter.api.extension.ExtendWith;\r\nimport org.mockito.InjectMocks;\r\nimport org.mockito.Mock;\r\nimport org.mockito.junit.jupiter.MockitoExtension;\r\nimport org.springframework.web.client.RestTemplate;\r\n\r\nimport java.util.List;\r\nimport java.util.Optional;\r\n\r\nimport static org.junit.jupiter.api.Assertions.*;\r\nimport static org.mockito.Mockito.*;\r\n\r\n@ExtendWith(MockitoExtension.class)\r\nclass RecommendationServiceImplTest {\r\n\r\n    @Mock\r\n    private RecommendationRepository recommendationRepository;\r\n\r\n    @Mock\r\n    private RestTemplate restTemplate;\r\n\r\n    @InjectMocks\r\n    private RecommendationServiceImpl recommendationService;\r\n\r\n    private RecommendationRequestDTO buildRequestDTO() {\r\n        RecommendationRequestDTO dto = new RecommendationRequestDTO();\r\n        dto.setUserId(1L);\r\n        dto.setBookId(10L);\r\n        dto.setRecommendationText(\"Te recomiendo este libro por su narrativa\");\r\n        return dto;\r\n    }\r\n\r\n    private Recommendation buildRecommendation(Long id, Long userId, Long bookId, String text) {\r\n        Recommendation recommendation = new Recommendation();\r\n        recommendation.setId(id);\r\n        recommendation.setUserId(userId);\r\n        recommendation.setBookId(bookId);\r\n        recommendation.setRecommendationText(text);\r\n        return recommendation;\r\n    }\r\n\r\n    @Test\r\n    @DisplayName(\"Debe crear una recomendación correctamente\")\r\n    void shouldCreateRecommendationSuccessfully() {\r\n        RecommendationRequestDTO request = buildRequestDTO();\r\n        Recommendation saved = buildRecommendation(\r\n                1L, 1L, 10L, \"Te recomiendo este libro por su narrativa\"\r\n        );\r\n\r\n        when(restTemplate.getForObject(\"http://localhost:8082/books/10\", String.class))\r\n                .thenReturn(\"{\\\"id\\\":10,\\\"title\\\":\\\"Libro de prueba\\\"}\");\r\n        when(recommendationRepository.save(any(Recommendation.class))).thenReturn(saved);\r\n\r\n        RecommendationResponseDTO response = recommendationService.createRecommendation(request);\r\n\r\n        assertNotNull(response);\r\n        assertEquals(1L, response.getId());\r\n        assertEquals(1L, response.getUserId());\r\n        assertEquals(10L, response.getBookId());\r\n        assertEquals(\"Te recomiendo este libro por su narrativa\", response.getRecommendationText());\r\n\r\n        verify(restTemplate, times(1))\r\n                .getForObject(\"http://localhost:8082/books/10\", String.class);\r\n        verify(recommendationRepository, times(1)).save(any(Recommendation.class));\r\n    }\r\n\r\n    @Test\r\n    @DisplayName(\"Debe listar recomendaciones por usuario\")\r\n    void shouldReturnRecommendationsByUser() {\r\n        Recommendation r1 = buildRecommendation(1L, 1L, 10L, \"Recomendación 1\");\r\n        Recommendation r2 = buildRecommendation(2L, 1L, 11L, \"Recomendación 2\");\r\n\r\n        when(recommendationRepository.findByUserId(1L)).thenReturn(List.of(r1, r2));\r\n\r\n        List<RecommendationResponseDTO> response = recommendationService.getRecommendationsByUser(1L);\r\n\r\n        assertNotNull(response);\r\n        assertEquals(2, response.size());\r\n        assertEquals(\"Recomendación 1\", response.get(0).getRecommendationText());\r\n        assertEquals(\"Recomendación 2\", response.get(1).getRecommendationText());\r\n\r\n        verify(recommendationRepository, times(1)).findByUserId(1L);\r\n    }\r\n\r\n    @Test\r\n    @DisplayName(\"Debe retornar lista vacía si el usuario no tiene recomendaciones\")\r\n    void shouldReturnEmptyListWhenUserHasNoRecommendations() {\r\n        when(recommendationRepository.findByUserId(99L)).thenReturn(List.of());\r\n\r\n        List<RecommendationResponseDTO> response = recommendationService.getRecommendationsByUser(99L);\r\n\r\n        assertNotNull(response);\r\n        assertTrue(response.isEmpty());\r\n\r\n        verify(recommendationRepository, times(1)).findByUserId(99L);\r\n    }\r\n\r\n    @Test\r\n    @DisplayName(\"Debe obtener una recomendación por id\")\r\n    void shouldReturnRecommendationById() {\r\n        Recommendation recommendation = buildRecommendation(1L, 1L, 10L, \"Texto recomendado\");\r\n\r\n        when(recommendationRepository.findById(1L)).thenReturn(Optional.of(recommendation));\r\n\r\n        RecommendationResponseDTO response = recommendationService.getRecommendationById(1L);\r\n\r\n        assertNotNull(response);\r\n        assertEquals(1L, response.getId());\r\n        assertEquals(1L, response.getUserId());\r\n        assertEquals(10L, response.getBookId());\r\n        assertEquals(\"Texto recomendado\", response.getRecommendationText());\r\n\r\n        verify(recommendationRepository, times(1)).findById(1L);\r\n    }\r\n\r\n    @Test\r\n    @DisplayName(\"Debe lanzar excepción cuando la recomendación no existe\")\r\n    void shouldThrowExceptionWhenRecommendationNotFound() {\r\n        when(recommendationRepository.findById(99L)).thenReturn(Optional.empty());\r\n\r\n        RecommendationNotFoundException exception = assertThrows(\r\n                RecommendationNotFoundException.class,\r\n                () -> recommendationService.getRecommendationById(99L)\r\n        );\r\n\r\n        assertEquals(\"Recomendación no encontrada con id 99\", exception.getMessage());\r\n        verify(recommendationRepository, times(1)).findById(99L);\r\n    }\r\n\r\n    @Test\r\n    @DisplayName(\"Debe eliminar una recomendación correctamente\")\r\n    void shouldDeleteRecommendationSuccessfully() {\r\n        Recommendation recommendation = buildRecommendation(1L, 1L, 10L, \"Texto recomendado\");\r\n\r\n        when(recommendationRepository.findById(1L)).thenReturn(Optional.of(recommendation));\r\n        doNothing().when(recommendationRepository).delete(recommendation);\r\n\r\n        assertDoesNotThrow(() -> recommendationService.deleteRecommendation(1L));\r\n\r\n        verify(recommendationRepository, times(1)).findById(1L);\r\n        verify(recommendationRepository, times(1)).delete(recommendation);\r\n    }\r\n\r\n    @Test\r\n    @DisplayName(\"Debe lanzar excepción al eliminar una recomendación inexistente\")\r\n    void shouldThrowExceptionWhenDeletingNonExistingRecommendation() {\r\n        when(recommendationRepository.findById(99L)).thenReturn(Optional.empty());\r\n\r\n        RecommendationNotFoundException exception = assertThrows(\r\n                RecommendationNotFoundException.class,\r\n                () -> recommendationService.deleteRecommendation(99L)\r\n        );\r\n\r\n        assertEquals(\"Recomendación no encontrada con id 99\", exception.getMessage());\r\n        verify(recommendationRepository, times(1)).findById(99L);\r\n        verify(recommendationRepository, never()).delete(any(Recommendation.class));\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/recommendation-service/src/test/java/com/library/recommendationservice/service/impl/RecommendationServiceImplTest.java b/recommendation-service/src/test/java/com/library/recommendationservice/service/impl/RecommendationServiceImplTest.java
+--- a/recommendation-service/src/test/java/com/library/recommendationservice/service/impl/RecommendationServiceImplTest.java	(revision 67e12434d99470104c3b3a73b070a1a24eea299d)
++++ b/recommendation-service/src/test/java/com/library/recommendationservice/service/impl/RecommendationServiceImplTest.java	(date 1782432561064)
+@@ -11,6 +11,7 @@
+ import org.mockito.InjectMocks;
+ import org.mockito.Mock;
+ import org.mockito.junit.jupiter.MockitoExtension;
++import org.springframework.test.context.ActiveProfiles;
+ import org.springframework.web.client.RestTemplate;
+ 
+ import java.util.List;
+@@ -20,6 +21,7 @@
+ import static org.mockito.Mockito.*;
+ 
+ @ExtendWith(MockitoExtension.class)
++@ActiveProfiles("test")
+ class RecommendationServiceImplTest {
+ 
+     @Mock
+Index: user-service/src/test/java/com/library/userservice/service/impl/UserServiceImplTest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.library.userservice.service.impl;\r\n\r\nimport com.library.userservice.dto.UserRequestDTO;\r\nimport com.library.userservice.dto.UserResponseDTO;\r\nimport com.library.userservice.entity.UserProfile;\r\nimport com.library.userservice.repository.UserRepository;\r\nimport org.junit.jupiter.api.DisplayName;\r\nimport org.junit.jupiter.api.Test;\r\nimport org.junit.jupiter.api.extension.ExtendWith;\r\nimport org.mockito.InjectMocks;\r\nimport org.mockito.Mock;\r\nimport org.mockito.junit.jupiter.MockitoExtension;\r\n\r\nimport java.util.List;\r\nimport java.util.Optional;\r\n\r\nimport static org.junit.jupiter.api.Assertions.*;\r\nimport static org.mockito.Mockito.*;\r\n\r\n@ExtendWith(MockitoExtension.class)\r\nclass UserServiceImplTest {\r\n\r\n    @Mock\r\n    private UserRepository userRepository;\r\n\r\n    @InjectMocks\r\n    private UserServiceImpl userService;\r\n\r\n    private UserRequestDTO buildRequestDTO() {\r\n        UserRequestDTO dto = new UserRequestDTO();\r\n        dto.setName(\"Juan Pérez\");\r\n        dto.setEmail(\"juan@email.com\");\r\n        dto.setPhone(\"987654321\");\r\n        dto.setAddress(\"Av. Siempre Viva 123\");\r\n        return dto;\r\n    }\r\n\r\n    private UserProfile buildUser(Long id, String name, String email, String phone, String address) {\r\n        UserProfile user = new UserProfile();\r\n        user.setId(id);\r\n        user.setName(name);\r\n        user.setEmail(email);\r\n        user.setPhone(phone);\r\n        user.setAddress(address);\r\n        return user;\r\n    }\r\n\r\n    @Test\r\n    @DisplayName(\"Debe crear un usuario correctamente\")\r\n    void shouldCreateUserSuccessfully() {\r\n        UserRequestDTO request = buildRequestDTO();\r\n        UserProfile savedUser = buildUser(\r\n                1L,\r\n                \"Juan Pérez\",\r\n                \"juan@email.com\",\r\n                \"987654321\",\r\n                \"Av. Siempre Viva 123\"\r\n        );\r\n\r\n        when(userRepository.existsByEmail(\"juan@email.com\")).thenReturn(false);\r\n        when(userRepository.save(any(UserProfile.class))).thenReturn(savedUser);\r\n\r\n        UserResponseDTO response = userService.createUser(request);\r\n\r\n        assertNotNull(response);\r\n        assertEquals(1L, response.getId());\r\n        assertEquals(\"Juan Pérez\", response.getName());\r\n        assertEquals(\"juan@email.com\", response.getEmail());\r\n        assertEquals(\"987654321\", response.getPhone());\r\n        assertEquals(\"Av. Siempre Viva 123\", response.getAddress());\r\n\r\n        verify(userRepository, times(1)).existsByEmail(\"juan@email.com\");\r\n        verify(userRepository, times(1)).save(any(UserProfile.class));\r\n    }\r\n\r\n    @Test\r\n    @DisplayName(\"Debe lanzar excepción si el correo ya está registrado\")\r\n    void shouldThrowExceptionWhenEmailAlreadyExists() {\r\n        UserRequestDTO request = buildRequestDTO();\r\n\r\n        when(userRepository.existsByEmail(\"juan@email.com\")).thenReturn(true);\r\n\r\n        RuntimeException exception = assertThrows(\r\n                RuntimeException.class,\r\n                () -> userService.createUser(request)\r\n        );\r\n\r\n        assertEquals(\"El correo ya está registrado\", exception.getMessage());\r\n        verify(userRepository, times(1)).existsByEmail(\"juan@email.com\");\r\n        verify(userRepository, never()).save(any(UserProfile.class));\r\n    }\r\n\r\n    @Test\r\n    @DisplayName(\"Debe listar todos los usuarios\")\r\n    void shouldReturnAllUsers() {\r\n        UserProfile user1 = buildUser(1L, \"Juan Pérez\", \"juan@email.com\", \"987654321\", \"Dirección 1\");\r\n        UserProfile user2 = buildUser(2L, \"Ana López\", \"ana@email.com\", \"123456789\", \"Dirección 2\");\r\n\r\n        when(userRepository.findAll()).thenReturn(List.of(user1, user2));\r\n\r\n        List<UserResponseDTO> response = userService.getAllUsers();\r\n\r\n        assertNotNull(response);\r\n        assertEquals(2, response.size());\r\n        assertEquals(\"Juan Pérez\", response.get(0).getName());\r\n        assertEquals(\"Ana López\", response.get(1).getName());\r\n\r\n        verify(userRepository, times(1)).findAll();\r\n    }\r\n\r\n    @Test\r\n    @DisplayName(\"Debe obtener un usuario por id\")\r\n    void shouldReturnUserById() {\r\n        UserProfile user = buildUser(\r\n                1L,\r\n                \"Juan Pérez\",\r\n                \"juan@email.com\",\r\n                \"987654321\",\r\n                \"Av. Siempre Viva 123\"\r\n        );\r\n\r\n        when(userRepository.findById(1L)).thenReturn(Optional.of(user));\r\n\r\n        UserResponseDTO response = userService.getUserById(1L);\r\n\r\n        assertNotNull(response);\r\n        assertEquals(1L, response.getId());\r\n        assertEquals(\"Juan Pérez\", response.getName());\r\n\r\n        verify(userRepository, times(1)).findById(1L);\r\n    }\r\n\r\n    @Test\r\n    @DisplayName(\"Debe lanzar excepción cuando el usuario no existe por id\")\r\n    void shouldThrowExceptionWhenUserNotFoundById() {\r\n        when(userRepository.findById(99L)).thenReturn(Optional.empty());\r\n\r\n        RuntimeException exception = assertThrows(\r\n                RuntimeException.class,\r\n                () -> userService.getUserById(99L)\r\n        );\r\n\r\n        assertEquals(\"Usuario no encontrado\", exception.getMessage());\r\n        verify(userRepository, times(1)).findById(99L);\r\n    }\r\n\r\n    @Test\r\n    @DisplayName(\"Debe eliminar un usuario correctamente\")\r\n    void shouldDeleteUserSuccessfully() {\r\n        UserProfile user = buildUser(\r\n                1L,\r\n                \"Juan Pérez\",\r\n                \"juan@email.com\",\r\n                \"987654321\",\r\n                \"Av. Siempre Viva 123\"\r\n        );\r\n\r\n        when(userRepository.findById(1L)).thenReturn(Optional.of(user));\r\n        doNothing().when(userRepository).delete(user);\r\n\r\n        assertDoesNotThrow(() -> userService.deleteUser(1L));\r\n\r\n        verify(userRepository, times(1)).findById(1L);\r\n        verify(userRepository, times(1)).delete(user);\r\n    }\r\n\r\n    @Test\r\n    @DisplayName(\"Debe lanzar excepción al eliminar un usuario inexistente\")\r\n    void shouldThrowExceptionWhenDeletingNonExistingUser() {\r\n        when(userRepository.findById(99L)).thenReturn(Optional.empty());\r\n\r\n        RuntimeException exception = assertThrows(\r\n                RuntimeException.class,\r\n                () -> userService.deleteUser(99L)\r\n        );\r\n\r\n        assertEquals(\"Usuario no encontrado\", exception.getMessage());\r\n        verify(userRepository, times(1)).findById(99L);\r\n        verify(userRepository, never()).delete(any(UserProfile.class));\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/user-service/src/test/java/com/library/userservice/service/impl/UserServiceImplTest.java b/user-service/src/test/java/com/library/userservice/service/impl/UserServiceImplTest.java
+--- a/user-service/src/test/java/com/library/userservice/service/impl/UserServiceImplTest.java	(revision 67e12434d99470104c3b3a73b070a1a24eea299d)
++++ b/user-service/src/test/java/com/library/userservice/service/impl/UserServiceImplTest.java	(date 1782432560860)
+@@ -10,6 +10,7 @@
+ import org.mockito.InjectMocks;
+ import org.mockito.Mock;
+ import org.mockito.junit.jupiter.MockitoExtension;
++import org.springframework.test.context.ActiveProfiles;
+ 
+ import java.util.List;
+ import java.util.Optional;
+@@ -18,6 +19,7 @@
+ import static org.mockito.Mockito.*;
+ 
+ @ExtendWith(MockitoExtension.class)
++@ActiveProfiles("test")
+ class UserServiceImplTest {
+ 
+     @Mock
+Index: notification-service/src/test/java/com/library/notificationservice/service/impl/NotificationServiceImplTest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.library.notificationservice.service.impl;\r\n\r\nimport com.library.notificationservice.dto.NotificationRequestDTO;\r\nimport com.library.notificationservice.dto.NotificationResponseDTO;\r\nimport com.library.notificationservice.entity.Notification;\r\nimport com.library.notificationservice.exceptions.NotificationNotFoundException;\r\nimport com.library.notificationservice.repository.NotificationRepository;\r\nimport org.junit.jupiter.api.DisplayName;\r\nimport org.junit.jupiter.api.Test;\r\nimport org.junit.jupiter.api.extension.ExtendWith;\r\nimport org.mockito.InjectMocks;\r\nimport org.mockito.Mock;\r\nimport org.mockito.junit.jupiter.MockitoExtension;\r\n\r\nimport java.util.List;\r\nimport java.util.Optional;\r\n\r\nimport static org.junit.jupiter.api.Assertions.*;\r\nimport static org.mockito.Mockito.*;\r\n\r\n@ExtendWith(MockitoExtension.class)\r\nclass NotificationServiceImplTest {\r\n\r\n    @Mock\r\n    private NotificationRepository notificationRepository;\r\n\r\n    @InjectMocks\r\n    private NotificationServiceImpl notificationService;\r\n\r\n    private NotificationRequestDTO buildRequestDTO() {\r\n        NotificationRequestDTO dto = new NotificationRequestDTO();\r\n        dto.setUserId(1L);\r\n        dto.setMessage(\"Su pedido fue procesado\");\r\n        dto.setType(\"EMAIL\");\r\n        return dto;\r\n    }\r\n\r\n    private Notification buildNotification(Long id, Long userId, String message, String type, String status) {\r\n        Notification notification = new Notification();\r\n        notification.setId(id);\r\n        notification.setUserId(userId);\r\n        notification.setMessage(message);\r\n        notification.setType(type);\r\n        notification.setStatus(status);\r\n        return notification;\r\n    }\r\n\r\n    @Test\r\n    @DisplayName(\"Debe crear una notificación correctamente\")\r\n    void shouldCreateNotificationSuccessfully() {\r\n        NotificationRequestDTO request = buildRequestDTO();\r\n        Notification saved = buildNotification(1L, 1L, \"Su pedido fue procesado\", \"EMAIL\", \"PENDING\");\r\n\r\n        when(notificationRepository.save(any(Notification.class))).thenReturn(saved);\r\n\r\n        NotificationResponseDTO response = notificationService.createNotification(request);\r\n\r\n        assertNotNull(response);\r\n        assertEquals(1L, response.getId());\r\n        assertEquals(1L, response.getUserId());\r\n        assertEquals(\"Su pedido fue procesado\", response.getMessage());\r\n        assertEquals(\"EMAIL\", response.getType());\r\n        assertEquals(\"PENDING\", response.getStatus());\r\n\r\n        verify(notificationRepository, times(1)).save(any(Notification.class));\r\n    }\r\n\r\n    @Test\r\n    @DisplayName(\"Debe listar notificaciones por usuario\")\r\n    void shouldReturnNotificationsByUser() {\r\n        Notification n1 = buildNotification(1L, 1L, \"Mensaje 1\", \"EMAIL\", \"PENDING\");\r\n        Notification n2 = buildNotification(2L, 1L, \"Mensaje 2\", \"SMS\", \"SENT\");\r\n\r\n        when(notificationRepository.findByUserId(1L)).thenReturn(List.of(n1, n2));\r\n\r\n        List<NotificationResponseDTO> response = notificationService.getNotificationsByUser(1L);\r\n\r\n        assertNotNull(response);\r\n        assertEquals(2, response.size());\r\n        assertEquals(\"Mensaje 1\", response.get(0).getMessage());\r\n        assertEquals(\"Mensaje 2\", response.get(1).getMessage());\r\n\r\n        verify(notificationRepository, times(1)).findByUserId(1L);\r\n    }\r\n\r\n    @Test\r\n    @DisplayName(\"Debe retornar lista vacía cuando el usuario no tiene notificaciones\")\r\n    void shouldReturnEmptyListWhenUserHasNoNotifications() {\r\n        when(notificationRepository.findByUserId(99L)).thenReturn(List.of());\r\n\r\n        List<NotificationResponseDTO> response = notificationService.getNotificationsByUser(99L);\r\n\r\n        assertNotNull(response);\r\n        assertTrue(response.isEmpty());\r\n\r\n        verify(notificationRepository, times(1)).findByUserId(99L);\r\n    }\r\n\r\n    @Test\r\n    @DisplayName(\"Debe obtener una notificación por id\")\r\n    void shouldReturnNotificationById() {\r\n        Notification notification = buildNotification(1L, 1L, \"Su pedido fue procesado\", \"EMAIL\", \"PENDING\");\r\n\r\n        when(notificationRepository.findById(1L)).thenReturn(Optional.of(notification));\r\n\r\n        NotificationResponseDTO response = notificationService.getNotificationById(1L);\r\n\r\n        assertNotNull(response);\r\n        assertEquals(1L, response.getId());\r\n        assertEquals(\"Su pedido fue procesado\", response.getMessage());\r\n        assertEquals(\"EMAIL\", response.getType());\r\n\r\n        verify(notificationRepository, times(1)).findById(1L);\r\n    }\r\n\r\n    @Test\r\n    @DisplayName(\"Debe lanzar excepción cuando la notificación no existe\")\r\n    void shouldThrowExceptionWhenNotificationNotFound() {\r\n        when(notificationRepository.findById(99L)).thenReturn(Optional.empty());\r\n\r\n        NotificationNotFoundException exception = assertThrows(\r\n                NotificationNotFoundException.class,\r\n                () -> notificationService.getNotificationById(99L)\r\n        );\r\n\r\n        assertEquals(\"Notificación no encontrada con id 99\", exception.getMessage());\r\n        verify(notificationRepository, times(1)).findById(99L);\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/notification-service/src/test/java/com/library/notificationservice/service/impl/NotificationServiceImplTest.java b/notification-service/src/test/java/com/library/notificationservice/service/impl/NotificationServiceImplTest.java
+--- a/notification-service/src/test/java/com/library/notificationservice/service/impl/NotificationServiceImplTest.java	(revision 67e12434d99470104c3b3a73b070a1a24eea299d)
++++ b/notification-service/src/test/java/com/library/notificationservice/service/impl/NotificationServiceImplTest.java	(date 1782432561040)
+@@ -11,6 +11,7 @@
+ import org.mockito.InjectMocks;
+ import org.mockito.Mock;
+ import org.mockito.junit.jupiter.MockitoExtension;
++import org.springframework.test.context.ActiveProfiles;
+ 
+ import java.util.List;
+ import java.util.Optional;
+@@ -19,6 +20,7 @@
+ import static org.mockito.Mockito.*;
+ 
+ @ExtendWith(MockitoExtension.class)
++@ActiveProfiles("test")
+ class NotificationServiceImplTest {
+ 
+     @Mock
+Index: auth-service/src/test/java/com/library/authservice/service/impl/AuthServiceImplTest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.library.authservice.service.impl;\r\n\r\nimport com.library.authservice.dto.LoginRequestDTO;\r\nimport com.library.authservice.dto.LoginResponseDTO;\r\nimport com.library.authservice.dto.RegisterRequestDTO;\r\nimport com.library.authservice.dto.UserResponseDTO;\r\nimport com.library.authservice.entity.Role;\r\nimport com.library.authservice.entity.User;\r\nimport com.library.authservice.repository.UserRepository;\r\nimport com.library.authservice.security.JwtService;\r\nimport org.junit.jupiter.api.DisplayName;\r\nimport org.junit.jupiter.api.Test;\r\nimport org.junit.jupiter.api.extension.ExtendWith;\r\nimport org.mockito.ArgumentCaptor;\r\nimport org.mockito.InjectMocks;\r\nimport org.mockito.Mock;\r\nimport org.mockito.junit.jupiter.MockitoExtension;\r\nimport org.springframework.security.crypto.password.PasswordEncoder;\r\nimport org.springframework.web.client.RestTemplate;\r\n\r\nimport java.util.Map;\r\nimport java.util.Optional;\r\n\r\nimport static org.junit.jupiter.api.Assertions.*;\r\nimport static org.mockito.ArgumentMatchers.*;\r\nimport static org.mockito.Mockito.*;\r\n\r\n@ExtendWith(MockitoExtension.class)\r\nclass UserServiceImplTest {\r\n\r\n    @Mock\r\n    private UserRepository userRepository;\r\n\r\n    @Mock\r\n    private JwtService jwtService;\r\n\r\n    @Mock\r\n    private PasswordEncoder passwordEncoder;\r\n\r\n    @Mock\r\n    private RestTemplate restTemplate;\r\n\r\n    @InjectMocks\r\n    private UserServiceImpl userService;\r\n\r\n    private RegisterRequestDTO buildRegisterRequest() {\r\n        RegisterRequestDTO dto = new RegisterRequestDTO();\r\n        dto.setName(\"Juan Pérez\");\r\n        dto.setEmail(\"juan@email.com\");\r\n        dto.setPassword(\"123456\");\r\n        return dto;\r\n    }\r\n\r\n    private LoginRequestDTO buildLoginRequest() {\r\n        LoginRequestDTO dto = new LoginRequestDTO();\r\n        dto.setEmail(\"juan@email.com\");\r\n        dto.setPassword(\"123456\");\r\n        return dto;\r\n    }\r\n\r\n    private User buildUser(Long id, String name, String email, String password, Role role) {\r\n        User user = new User();\r\n        user.setId(id);\r\n        user.setName(name);\r\n        user.setEmail(email);\r\n        user.setPassword(password);\r\n        user.setRole(role);\r\n        return user;\r\n    }\r\n\r\n    @Test\r\n    @DisplayName(\"Debe registrar un usuario correctamente\")\r\n    void shouldRegisterUserSuccessfully() {\r\n        RegisterRequestDTO request = buildRegisterRequest();\r\n        User savedUser = buildUser(1L, \"Juan Pérez\", \"juan@email.com\", \"encodedPassword\", Role.CLIENT);\r\n\r\n        when(userRepository.existsByEmail(\"juan@email.com\")).thenReturn(false);\r\n        when(passwordEncoder.encode(\"123456\")).thenReturn(\"encodedPassword\");\r\n        when(userRepository.save(any(User.class))).thenReturn(savedUser);\r\n        when(restTemplate.postForObject(\r\n                eq(\"http://localhost:8089/users\"),\r\n                any(Map.class),\r\n                eq(String.class)\r\n        )).thenReturn(\"{\\\"id\\\":1}\");\r\n\r\n        UserResponseDTO response = userService.registerUser(request);\r\n\r\n        assertNotNull(response);\r\n        assertEquals(1L, response.getId());\r\n        assertEquals(\"Juan Pérez\", response.getName());\r\n        assertEquals(\"juan@email.com\", response.getEmail());\r\n\r\n        verify(userRepository, times(1)).existsByEmail(\"juan@email.com\");\r\n        verify(passwordEncoder, times(1)).encode(\"123456\");\r\n        verify(userRepository, times(1)).save(any(User.class));\r\n        verify(restTemplate, times(1))\r\n                .postForObject(eq(\"http://localhost:8089/users\"), any(Map.class), eq(String.class));\r\n    }\r\n\r\n    @Test\r\n    @DisplayName(\"Debe guardar usuario con rol CLIENT al registrarse\")\r\n    void shouldAssignClientRoleWhenRegisteringUser() {\r\n        RegisterRequestDTO request = buildRegisterRequest();\r\n        User savedUser = buildUser(1L, \"Juan Pérez\", \"juan@email.com\", \"encodedPassword\", Role.CLIENT);\r\n\r\n        when(userRepository.existsByEmail(anyString())).thenReturn(false);\r\n        when(passwordEncoder.encode(anyString())).thenReturn(\"encodedPassword\");\r\n        when(userRepository.save(any(User.class))).thenReturn(savedUser);\r\n        when(restTemplate.postForObject(anyString(), any(Map.class), eq(String.class))).thenReturn(\"{\\\"id\\\":1}\");\r\n\r\n        userService.registerUser(request);\r\n\r\n        ArgumentCaptor<User> userCaptor = ArgumentCaptor.forClass(User.class);\r\n        verify(userRepository).save(userCaptor.capture());\r\n\r\n        User capturedUser = userCaptor.getValue();\r\n        assertEquals(\"Juan Pérez\", capturedUser.getName());\r\n        assertEquals(\"juan@email.com\", capturedUser.getEmail());\r\n        assertEquals(\"encodedPassword\", capturedUser.getPassword());\r\n        assertEquals(Role.CLIENT, capturedUser.getRole());\r\n    }\r\n\r\n    @Test\r\n    @DisplayName(\"Debe construir correctamente el payload para user-service al registrar\")\r\n    void shouldBuildUserServicePayloadCorrectly() {\r\n        RegisterRequestDTO request = buildRegisterRequest();\r\n        User savedUser = buildUser(1L, \"Juan Pérez\", \"juan@email.com\", \"encodedPassword\", Role.CLIENT);\r\n\r\n        when(userRepository.existsByEmail(anyString())).thenReturn(false);\r\n        when(passwordEncoder.encode(anyString())).thenReturn(\"encodedPassword\");\r\n        when(userRepository.save(any(User.class))).thenReturn(savedUser);\r\n        when(restTemplate.postForObject(anyString(), any(Map.class), eq(String.class))).thenReturn(\"{\\\"id\\\":1}\");\r\n\r\n        userService.registerUser(request);\r\n\r\n        ArgumentCaptor<Map<String, Object>> payloadCaptor = ArgumentCaptor.forClass(Map.class);\r\n\r\n        verify(restTemplate).postForObject(\r\n                eq(\"http://localhost:8089/users\"),\r\n                payloadCaptor.capture(),\r\n                eq(String.class)\r\n        );\r\n\r\n        Map<String, Object> payload = payloadCaptor.getValue();\r\n\r\n        assertEquals(\"Juan Pérez\", payload.get(\"name\"));\r\n        assertEquals(\"juan@email.com\", payload.get(\"email\"));\r\n        assertEquals(\"000000000\", payload.get(\"phone\"));\r\n        assertEquals(\"Direccion temporal\", payload.get(\"address\"));\r\n    }\r\n\r\n    @Test\r\n    @DisplayName(\"Debe lanzar excepción si el correo ya está registrado\")\r\n    void shouldThrowExceptionWhenEmailAlreadyExists() {\r\n        RegisterRequestDTO request = buildRegisterRequest();\r\n\r\n        when(userRepository.existsByEmail(\"juan@email.com\")).thenReturn(true);\r\n\r\n        RuntimeException exception = assertThrows(\r\n                RuntimeException.class,\r\n                () -> userService.registerUser(request)\r\n        );\r\n\r\n        assertEquals(\"El correo ya está registrado\", exception.getMessage());\r\n        verify(userRepository, times(1)).existsByEmail(\"juan@email.com\");\r\n        verify(userRepository, never()).save(any(User.class));\r\n        verify(restTemplate, never()).postForObject(anyString(), any(), eq(String.class));\r\n    }\r\n\r\n    @Test\r\n    @DisplayName(\"Debe hacer login correctamente y retornar token\")\r\n    void shouldLoginSuccessfully() {\r\n        LoginRequestDTO request = buildLoginRequest();\r\n        User user = buildUser(1L, \"Juan Pérez\", \"juan@email.com\", \"encodedPassword\", Role.CLIENT);\r\n\r\n        when(userRepository.findByEmail(\"juan@email.com\")).thenReturn(Optional.of(user));\r\n        when(passwordEncoder.matches(\"123456\", \"encodedPassword\")).thenReturn(true);\r\n        when(jwtService.generateToken(\"juan@email.com\")).thenReturn(\"fake-jwt-token\");\r\n\r\n        LoginResponseDTO response = userService.login(request);\r\n\r\n        assertNotNull(response);\r\n        assertEquals(\"fake-jwt-token\", response.getToken());\r\n\r\n        verify(userRepository, times(1)).findByEmail(\"juan@email.com\");\r\n        verify(passwordEncoder, times(1)).matches(\"123456\", \"encodedPassword\");\r\n        verify(jwtService, times(1)).generateToken(\"juan@email.com\");\r\n    }\r\n\r\n    @Test\r\n    @DisplayName(\"Debe lanzar excepción si el usuario no existe al hacer login\")\r\n    void shouldThrowExceptionWhenUserNotFoundOnLogin() {\r\n        LoginRequestDTO request = buildLoginRequest();\r\n\r\n        when(userRepository.findByEmail(\"juan@email.com\")).thenReturn(Optional.empty());\r\n\r\n        RuntimeException exception = assertThrows(\r\n                RuntimeException.class,\r\n                () -> userService.login(request)\r\n        );\r\n\r\n        assertEquals(\"Usuario no encontrado\", exception.getMessage());\r\n        verify(userRepository, times(1)).findByEmail(\"juan@email.com\");\r\n        verify(passwordEncoder, never()).matches(anyString(), anyString());\r\n        verify(jwtService, never()).generateToken(anyString());\r\n    }\r\n\r\n    @Test\r\n    @DisplayName(\"Debe lanzar excepción si la contraseña es incorrecta\")\r\n    void shouldThrowExceptionWhenPasswordIsIncorrect() {\r\n        LoginRequestDTO request = buildLoginRequest();\r\n        User user = buildUser(1L, \"Juan Pérez\", \"juan@email.com\", \"encodedPassword\", Role.CLIENT);\r\n\r\n        when(userRepository.findByEmail(\"juan@email.com\")).thenReturn(Optional.of(user));\r\n        when(passwordEncoder.matches(\"123456\", \"encodedPassword\")).thenReturn(false);\r\n\r\n        RuntimeException exception = assertThrows(\r\n                RuntimeException.class,\r\n                () -> userService.login(request)\r\n        );\r\n\r\n        assertEquals(\"Password incorrecta\", exception.getMessage());\r\n        verify(userRepository, times(1)).findByEmail(\"juan@email.com\");\r\n        verify(passwordEncoder, times(1)).matches(\"123456\", \"encodedPassword\");\r\n        verify(jwtService, never()).generateToken(anyString());\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/auth-service/src/test/java/com/library/authservice/service/impl/AuthServiceImplTest.java b/auth-service/src/test/java/com/library/authservice/service/impl/AuthServiceImplTest.java
+--- a/auth-service/src/test/java/com/library/authservice/service/impl/AuthServiceImplTest.java	(revision 67e12434d99470104c3b3a73b070a1a24eea299d)
++++ b/auth-service/src/test/java/com/library/authservice/service/impl/AuthServiceImplTest.java	(date 1782432561199)
+@@ -16,6 +16,7 @@
+ import org.mockito.Mock;
+ import org.mockito.junit.jupiter.MockitoExtension;
+ import org.springframework.security.crypto.password.PasswordEncoder;
++import org.springframework.test.context.ActiveProfiles;
+ import org.springframework.web.client.RestTemplate;
+ 
+ import java.util.Map;
+@@ -26,6 +27,7 @@
+ import static org.mockito.Mockito.*;
+ 
+ @ExtendWith(MockitoExtension.class)
++@ActiveProfiles("test")
+ class UserServiceImplTest {
+ 
+     @Mock
+Index: payment-service/src/test/java/com/library/paymentservice/service/impl/PaymentServiceImplTest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.library.paymentservice.service.impl;\r\n\r\nimport com.library.paymentservice.dto.PaymentRequestDTO;\r\nimport com.library.paymentservice.dto.PaymentResponseDTO;\r\nimport com.library.paymentservice.entity.Payment;\r\nimport com.library.paymentservice.repository.PaymentRepository;\r\nimport org.junit.jupiter.api.DisplayName;\r\nimport org.junit.jupiter.api.Test;\r\nimport org.junit.jupiter.api.extension.ExtendWith;\r\nimport org.mockito.InjectMocks;\r\nimport org.mockito.Mock;\r\nimport org.mockito.junit.jupiter.MockitoExtension;\r\n\r\nimport static org.junit.jupiter.api.Assertions.*;\r\nimport static org.mockito.Mockito.*;\r\n\r\n@ExtendWith(MockitoExtension.class)\r\nclass PaymentServiceImpTest {\r\n\r\n    @Mock\r\n    private PaymentRepository paymentRepository;\r\n\r\n    @InjectMocks\r\n    private PaymentServiceImpl paymentService;\r\n\r\n    private PaymentRequestDTO buildRequestDTO() {\r\n        PaymentRequestDTO dto = new PaymentRequestDTO();\r\n        dto.setOrderId(100L);\r\n        dto.setAmount(19990.0);\r\n        dto.setPaymentMethod(\"CARD\");\r\n        dto.setStatus(\"PENDING\");\r\n        return dto;\r\n    }\r\n\r\n    private Payment buildPayment(Long id, Long orderId, Double amount, String paymentMethod, String status) {\r\n        Payment payment = new Payment();\r\n        payment.setId(id);\r\n        payment.setOrderId(orderId);\r\n        payment.setAmount(amount);\r\n        payment.setPaymentMethod(paymentMethod);\r\n        payment.setStatus(status);\r\n        return payment;\r\n    }\r\n\r\n    @Test\r\n    @DisplayName(\"Debe crear un pago correctamente\")\r\n    void shouldCreatePaymentSuccessfully() {\r\n        PaymentRequestDTO request = buildRequestDTO();\r\n        Payment savedPayment = buildPayment(1L, 100L, 19990.0, \"CARD\", \"PENDING\");\r\n\r\n        when(paymentRepository.existsByOrderId(100L)).thenReturn(false);\r\n        when(paymentRepository.save(any(Payment.class))).thenReturn(savedPayment);\r\n\r\n        PaymentResponseDTO response = paymentService.createPayment(request);\r\n\r\n        assertNotNull(response);\r\n        assertEquals(1L, response.getId());\r\n        assertEquals(100L, response.getOrderId());\r\n        assertEquals(19990.0, response.getAmount());\r\n        assertEquals(\"CARD\", response.getPaymentMethod());\r\n        assertEquals(\"PENDING\", response.getStatus());\r\n\r\n        verify(paymentRepository, times(1)).existsByOrderId(100L);\r\n        verify(paymentRepository, times(1)).save(any(Payment.class));\r\n    }\r\n\r\n    @Test\r\n    @DisplayName(\"Debe lanzar excepción si ya existe un pago para la orden\")\r\n    void shouldThrowExceptionWhenPaymentAlreadyExistsForOrder() {\r\n        PaymentRequestDTO request = buildRequestDTO();\r\n\r\n        when(paymentRepository.existsByOrderId(100L)).thenReturn(true);\r\n\r\n        RuntimeException exception = assertThrows(\r\n                RuntimeException.class,\r\n                () -> paymentService.createPayment(request)\r\n        );\r\n\r\n        assertEquals(\"Ya existe un pago para esa orden\", exception.getMessage());\r\n        verify(paymentRepository, times(1)).existsByOrderId(100L);\r\n        verify(paymentRepository, never()).save(any(Payment.class));\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/payment-service/src/test/java/com/library/paymentservice/service/impl/PaymentServiceImplTest.java b/payment-service/src/test/java/com/library/paymentservice/service/impl/PaymentServiceImplTest.java
+--- a/payment-service/src/test/java/com/library/paymentservice/service/impl/PaymentServiceImplTest.java	(revision 67e12434d99470104c3b3a73b070a1a24eea299d)
++++ b/payment-service/src/test/java/com/library/paymentservice/service/impl/PaymentServiceImplTest.java	(date 1782432561147)
+@@ -10,18 +10,20 @@
+ import org.mockito.InjectMocks;
+ import org.mockito.Mock;
+ import org.mockito.junit.jupiter.MockitoExtension;
++import org.springframework.test.context.ActiveProfiles;
+ 
+ import static org.junit.jupiter.api.Assertions.*;
+ import static org.mockito.Mockito.*;
+ 
+ @ExtendWith(MockitoExtension.class)
++@ActiveProfiles("test")
+ class PaymentServiceImpTest {
+ 
+     @Mock
+     private PaymentRepository paymentRepository;
+ 
+     @InjectMocks
+-    private PaymentServiceImpl paymentService;
++    private PaymentServiceImp paymentService;
+ 
+     private PaymentRequestDTO buildRequestDTO() {
+         PaymentRequestDTO dto = new PaymentRequestDTO();
+Index: review-service/src/test/java/com/library/reviewservice/service/impl/ReviewServiceImplTest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.library.reviewservice.service.impl;\r\n\r\nimport com.library.reviewservice.dto.ReviewRequestDTO;\r\nimport com.library.reviewservice.dto.ReviewResponseDTO;\r\nimport com.library.reviewservice.entity.Review;\r\nimport com.library.reviewservice.exceptions.ReviewNotFoundException;\r\nimport com.library.reviewservice.repository.ReviewRepository;\r\nimport org.junit.jupiter.api.DisplayName;\r\nimport org.junit.jupiter.api.Test;\r\nimport org.junit.jupiter.api.extension.ExtendWith;\r\nimport org.mockito.InjectMocks;\r\nimport org.mockito.Mock;\r\nimport org.mockito.junit.jupiter.MockitoExtension;\r\n\r\nimport java.util.List;\r\nimport java.util.Optional;\r\n\r\nimport static org.junit.jupiter.api.Assertions.*;\r\nimport static org.mockito.Mockito.*;\r\n\r\n@ExtendWith(MockitoExtension.class)\r\nclass ReviewServiceImplTest {\r\n\r\n    @Mock\r\n    private ReviewRepository reviewRepository;\r\n\r\n    @InjectMocks\r\n    private ReviewServiceImpl reviewService;\r\n\r\n    private ReviewRequestDTO buildRequestDTO() {\r\n        ReviewRequestDTO dto = new ReviewRequestDTO();\r\n        dto.setUserId(1L);\r\n        dto.setBookId(10L);\r\n        dto.setComment(\"Muy buen libro\");\r\n        dto.setRating(5);\r\n        return dto;\r\n    }\r\n\r\n    private Review buildReview(Long id, Long userId, Long bookId, String comment, Integer rating) {\r\n        Review review = new Review();\r\n        review.setId(id);\r\n        review.setUserId(userId);\r\n        review.setBookId(bookId);\r\n        review.setComment(comment);\r\n        review.setRating(rating);\r\n        return review;\r\n    }\r\n\r\n    @Test\r\n    @DisplayName(\"Debe crear una review correctamente\")\r\n    void shouldCreateReviewSuccessfully() {\r\n        ReviewRequestDTO request = buildRequestDTO();\r\n        Review saved = buildReview(1L, 1L, 10L, \"Muy buen libro\", 5);\r\n\r\n        when(reviewRepository.existsByUserIdAndBookId(1L, 10L)).thenReturn(false);\r\n        when(reviewRepository.save(any(Review.class))).thenReturn(saved);\r\n\r\n        ReviewResponseDTO response = reviewService.createReview(request);\r\n\r\n        assertNotNull(response);\r\n        assertEquals(1L, response.getId());\r\n        assertEquals(1L, response.getUserId());\r\n        assertEquals(10L, response.getBookId());\r\n        assertEquals(\"Muy buen libro\", response.getComment());\r\n        assertEquals(5, response.getRating());\r\n\r\n        verify(reviewRepository, times(1)).existsByUserIdAndBookId(1L, 10L);\r\n        verify(reviewRepository, times(1)).save(any(Review.class));\r\n    }\r\n\r\n    @Test\r\n    @DisplayName(\"Debe lanzar excepción si el usuario ya reseñó el libro\")\r\n    void shouldThrowExceptionWhenUserAlreadyReviewedBook() {\r\n        ReviewRequestDTO request = buildRequestDTO();\r\n\r\n        when(reviewRepository.existsByUserIdAndBookId(1L, 10L)).thenReturn(true);\r\n\r\n        RuntimeException exception = assertThrows(\r\n                RuntimeException.class,\r\n                () -> reviewService.createReview(request)\r\n        );\r\n\r\n        assertEquals(\"El usuario ya dejó una reseña para este libro\", exception.getMessage());\r\n        verify(reviewRepository, times(1)).existsByUserIdAndBookId(1L, 10L);\r\n        verify(reviewRepository, never()).save(any(Review.class));\r\n    }\r\n\r\n    @Test\r\n    @DisplayName(\"Debe listar reviews por libro\")\r\n    void shouldReturnReviewsByBook() {\r\n        Review r1 = buildReview(1L, 1L, 10L, \"Muy bueno\", 5);\r\n        Review r2 = buildReview(2L, 2L, 10L, \"Entretenido\", 4);\r\n\r\n        when(reviewRepository.findByBookId(10L)).thenReturn(List.of(r1, r2));\r\n\r\n        List<ReviewResponseDTO> response = reviewService.getReviewsByBook(10L);\r\n\r\n        assertNotNull(response);\r\n        assertEquals(2, response.size());\r\n        assertEquals(\"Muy bueno\", response.get(0).getComment());\r\n        assertEquals(\"Entretenido\", response.get(1).getComment());\r\n\r\n        verify(reviewRepository, times(1)).findByBookId(10L);\r\n    }\r\n\r\n    @Test\r\n    @DisplayName(\"Debe retornar lista vacía si un libro no tiene reviews\")\r\n    void shouldReturnEmptyListWhenBookHasNoReviews() {\r\n        when(reviewRepository.findByBookId(99L)).thenReturn(List.of());\r\n\r\n        List<ReviewResponseDTO> response = reviewService.getReviewsByBook(99L);\r\n\r\n        assertNotNull(response);\r\n        assertTrue(response.isEmpty());\r\n\r\n        verify(reviewRepository, times(1)).findByBookId(99L);\r\n    }\r\n\r\n    @Test\r\n    @DisplayName(\"Debe listar reviews por usuario\")\r\n    void shouldReturnReviewsByUser() {\r\n        Review r1 = buildReview(1L, 1L, 10L, \"Muy bueno\", 5);\r\n        Review r2 = buildReview(2L, 1L, 11L, \"Regular\", 3);\r\n\r\n        when(reviewRepository.findByUserId(1L)).thenReturn(List.of(r1, r2));\r\n\r\n        List<ReviewResponseDTO> response = reviewService.getReviewsByUser(1L);\r\n\r\n        assertNotNull(response);\r\n        assertEquals(2, response.size());\r\n        assertEquals(10L, response.get(0).getBookId());\r\n        assertEquals(11L, response.get(1).getBookId());\r\n\r\n        verify(reviewRepository, times(1)).findByUserId(1L);\r\n    }\r\n\r\n    @Test\r\n    @DisplayName(\"Debe eliminar una review correctamente\")\r\n    void shouldDeleteReviewSuccessfully() {\r\n        Review review = buildReview(1L, 1L, 10L, \"Muy buen libro\", 5);\r\n\r\n        when(reviewRepository.findById(1L)).thenReturn(Optional.of(review));\r\n        doNothing().when(reviewRepository).delete(review);\r\n\r\n        assertDoesNotThrow(() -> reviewService.deleteReview(1L));\r\n\r\n        verify(reviewRepository, times(1)).findById(1L);\r\n        verify(reviewRepository, times(1)).delete(review);\r\n    }\r\n\r\n    @Test\r\n    @DisplayName(\"Debe lanzar excepción al eliminar una review inexistente\")\r\n    void shouldThrowExceptionWhenDeletingNonExistingReview() {\r\n        when(reviewRepository.findById(99L)).thenReturn(Optional.empty());\r\n\r\n        ReviewNotFoundException exception = assertThrows(\r\n                ReviewNotFoundException.class,\r\n                () -> reviewService.deleteReview(99L)\r\n        );\r\n\r\n        assertEquals(\"Review no encontrada con id 99\", exception.getMessage());\r\n        verify(reviewRepository, times(1)).findById(99L);\r\n        verify(reviewRepository, never()).delete(any(Review.class));\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/review-service/src/test/java/com/library/reviewservice/service/impl/ReviewServiceImplTest.java b/review-service/src/test/java/com/library/reviewservice/service/impl/ReviewServiceImplTest.java
+--- a/review-service/src/test/java/com/library/reviewservice/service/impl/ReviewServiceImplTest.java	(revision 67e12434d99470104c3b3a73b070a1a24eea299d)
++++ b/review-service/src/test/java/com/library/reviewservice/service/impl/ReviewServiceImplTest.java	(date 1782432560846)
+@@ -11,6 +11,7 @@
+ import org.mockito.InjectMocks;
+ import org.mockito.Mock;
+ import org.mockito.junit.jupiter.MockitoExtension;
++import org.springframework.test.context.ActiveProfiles;
+ 
+ import java.util.List;
+ import java.util.Optional;
+@@ -19,6 +20,7 @@
+ import static org.mockito.Mockito.*;
+ 
+ @ExtendWith(MockitoExtension.class)
++@ActiveProfiles("test")
+ class ReviewServiceImplTest {
+ 
+     @Mock
+Index: order-service/src/test/java/com/library/orderservice/service/impl/OrderServiceImpl.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.library.orderservice.service.impl;\r\n\r\nimport com.library.orderservice.dto.OrderRequestDTO;\r\nimport com.library.orderservice.dto.OrderResponseDTO;\r\nimport com.library.orderservice.entity.OrderEntity;\r\nimport com.library.orderservice.repository.OrderRepository;\r\nimport org.junit.jupiter.api.DisplayName;\r\nimport org.junit.jupiter.api.Test;\r\nimport org.junit.jupiter.api.extension.ExtendWith;\r\nimport org.mockito.ArgumentCaptor;\r\nimport org.mockito.InjectMocks;\r\nimport org.mockito.Mock;\r\nimport org.mockito.junit.jupiter.MockitoExtension;\r\nimport org.springframework.http.HttpEntity;\r\nimport org.springframework.http.ResponseEntity;\r\nimport org.springframework.web.client.RestTemplate;\r\n\r\nimport java.util.Map;\r\n\r\nimport static org.junit.jupiter.api.Assertions.*;\r\nimport static org.mockito.ArgumentMatchers.*;\r\nimport static org.mockito.Mockito.*;\r\n\r\n@ExtendWith(MockitoExtension.class)\r\nclass OrderServiceImplTest {\r\n\r\n    @Mock\r\n    private OrderRepository orderRepository;\r\n\r\n    @Mock\r\n    private RestTemplate restTemplate;\r\n\r\n    @InjectMocks\r\n    private OrderServiceImpl orderService;\r\n\r\n    private OrderRequestDTO buildRequestDTO() {\r\n        OrderRequestDTO dto = new OrderRequestDTO();\r\n        dto.setUserId(1L);\r\n        dto.setBookId(10L);\r\n        dto.setTotal(24990.0);\r\n        dto.setStatus(\"CREATED\");\r\n        return dto;\r\n    }\r\n\r\n    private OrderEntity buildOrderEntity(Long id, Long userId, Double total, String status) {\r\n        OrderEntity order = new OrderEntity();\r\n        order.setId(id);\r\n        order.setUserId(userId);\r\n        order.setTotal(total);\r\n        order.setStatus(status);\r\n        return order;\r\n    }\r\n\r\n    @Test\r\n    @DisplayName(\"Debe crear una orden correctamente y consumir servicios externos\")\r\n    void shouldCreateOrderSuccessfully() {\r\n        OrderRequestDTO request = buildRequestDTO();\r\n        OrderEntity savedOrder = buildOrderEntity(1L, 1L, 24990.0, \"CREATED\");\r\n\r\n        when(restTemplate.getForObject(\"http://localhost:8089/users/1\", String.class))\r\n                .thenReturn(\"{\\\"id\\\":1,\\\"name\\\":\\\"Usuario Test\\\"}\");\r\n        when(restTemplate.getForObject(\"http://localhost:8082/books/10\", String.class))\r\n                .thenReturn(\"{\\\"id\\\":10,\\\"title\\\":\\\"Libro Test\\\"}\");\r\n        when(restTemplate.getForObject(\"http://localhost:8086/inventory/book/10\", String.class))\r\n                .thenReturn(\"{\\\"bookId\\\":10,\\\"stock\\\":5}\");\r\n\r\n        when(orderRepository.save(any(OrderEntity.class))).thenReturn(savedOrder);\r\n\r\n        when(restTemplate.postForObject(\r\n                eq(\"http://localhost:8088/payments\"),\r\n                any(Map.class),\r\n                eq(String.class)\r\n        )).thenReturn(\"{\\\"status\\\":\\\"PAID\\\"}\");\r\n\r\n        when(restTemplate.postForEntity(\r\n                eq(\"http://localhost:9090/notifications\"),\r\n                any(HttpEntity.class),\r\n                eq(String.class)\r\n        )).thenReturn(ResponseEntity.ok(\"{\\\"status\\\":\\\"NOTIFIED\\\"}\"));\r\n\r\n        OrderResponseDTO response = orderService.createOrder(request);\r\n\r\n        assertNotNull(response);\r\n        assertEquals(1L, response.getId());\r\n        assertEquals(1L, response.getUserId());\r\n        assertEquals(24990.0, response.getTotal());\r\n        assertEquals(\"CREATED\", response.getStatus());\r\n\r\n        verify(restTemplate, times(1))\r\n                .getForObject(\"http://localhost:8089/users/1\", String.class);\r\n        verify(restTemplate, times(1))\r\n                .getForObject(\"http://localhost:8082/books/10\", String.class);\r\n        verify(restTemplate, times(1))\r\n                .getForObject(\"http://localhost:8086/inventory/book/10\", String.class);\r\n\r\n        verify(orderRepository, times(1)).save(any(OrderEntity.class));\r\n\r\n        verify(restTemplate, times(1))\r\n                .postForObject(eq(\"http://localhost:8088/payments\"), any(Map.class), eq(String.class));\r\n\r\n        verify(restTemplate, times(1))\r\n                .postForEntity(eq(\"http://localhost:9090/notifications\"), any(HttpEntity.class), eq(String.class));\r\n    }\r\n\r\n    @Test\r\n    @DisplayName(\"Debe construir correctamente el payload del pago\")\r\n    void shouldBuildPaymentPayloadCorrectly() {\r\n        OrderRequestDTO request = buildRequestDTO();\r\n        OrderEntity savedOrder = buildOrderEntity(5L, 1L, 24990.0, \"CREATED\");\r\n\r\n        when(restTemplate.getForObject(anyString(), eq(String.class))).thenReturn(\"{}\");\r\n        when(orderRepository.save(any(OrderEntity.class))).thenReturn(savedOrder);\r\n        when(restTemplate.postForObject(\r\n                eq(\"http://localhost:8088/payments\"),\r\n                any(Map.class),\r\n                eq(String.class)\r\n        )).thenReturn(\"{\\\"status\\\":\\\"PAID\\\"}\");\r\n        when(restTemplate.postForEntity(\r\n                eq(\"http://localhost:9090/notifications\"),\r\n                any(HttpEntity.class),\r\n                eq(String.class)\r\n        )).thenReturn(ResponseEntity.ok(\"{\\\"status\\\":\\\"NOTIFIED\\\"}\"));\r\n\r\n        orderService.createOrder(request);\r\n\r\n        ArgumentCaptor<Map<String, Object>> paymentCaptor = ArgumentCaptor.forClass(Map.class);\r\n\r\n        verify(restTemplate).postForObject(\r\n                eq(\"http://localhost:8088/payments\"),\r\n                paymentCaptor.capture(),\r\n                eq(String.class)\r\n        );\r\n\r\n        Map<String, Object> paymentPayload = paymentCaptor.getValue();\r\n\r\n        assertEquals(5L, paymentPayload.get(\"orderId\"));\r\n        assertEquals(24990.0, paymentPayload.get(\"amount\"));\r\n        assertEquals(\"CARD\", paymentPayload.get(\"paymentMethod\"));\r\n        assertEquals(\"PAID\", paymentPayload.get(\"status\"));\r\n    }\r\n\r\n    @Test\r\n    @DisplayName(\"Debe construir correctamente el payload de la notificación\")\r\n    void shouldBuildNotificationPayloadCorrectly() {\r\n        OrderRequestDTO request = buildRequestDTO();\r\n        OrderEntity savedOrder = buildOrderEntity(7L, 1L, 24990.0, \"CREATED\");\r\n\r\n        when(restTemplate.getForObject(anyString(), eq(String.class))).thenReturn(\"{}\");\r\n        when(orderRepository.save(any(OrderEntity.class))).thenReturn(savedOrder);\r\n        when(restTemplate.postForObject(\r\n                eq(\"http://localhost:8088/payments\"),\r\n                any(Map.class),\r\n                eq(String.class)\r\n        )).thenReturn(\"{\\\"status\\\":\\\"PAID\\\"}\");\r\n        when(restTemplate.postForEntity(\r\n                eq(\"http://localhost:9090/notifications\"),\r\n                any(HttpEntity.class),\r\n                eq(String.class)\r\n        )).thenReturn(ResponseEntity.ok(\"{\\\"status\\\":\\\"NOTIFIED\\\"}\"));\r\n\r\n        orderService.createOrder(request);\r\n\r\n        ArgumentCaptor<HttpEntity> entityCaptor = ArgumentCaptor.forClass(HttpEntity.class);\r\n\r\n        verify(restTemplate).postForEntity(\r\n                eq(\"http://localhost:9090/notifications\"),\r\n                entityCaptor.capture(),\r\n                eq(String.class)\r\n        );\r\n\r\n        HttpEntity capturedEntity = entityCaptor.getValue();\r\n        Object body = capturedEntity.getBody();\r\n\r\n        assertNotNull(body);\r\n        assertTrue(body instanceof Map);\r\n\r\n        Map<String, Object> notificationPayload = (Map<String, Object>) body;\r\n\r\n        assertEquals(1L, notificationPayload.get(\"userId\"));\r\n        assertEquals(\"ORDER_CREATED\", notificationPayload.get(\"type\"));\r\n        assertEquals(\"Tu orden 7 fue creada y pagada correctamente\", notificationPayload.get(\"message\"));\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/order-service/src/test/java/com/library/orderservice/service/impl/OrderServiceImpl.java b/order-service/src/test/java/com/library/orderservice/service/impl/OrderServiceImpl.java
+--- a/order-service/src/test/java/com/library/orderservice/service/impl/OrderServiceImpl.java	(revision 67e12434d99470104c3b3a73b070a1a24eea299d)
++++ b/order-service/src/test/java/com/library/orderservice/service/impl/OrderServiceImpl.java	(date 1782432561121)
+@@ -13,6 +13,7 @@
+ import org.mockito.junit.jupiter.MockitoExtension;
+ import org.springframework.http.HttpEntity;
+ import org.springframework.http.ResponseEntity;
++import org.springframework.test.context.ActiveProfiles;
+ import org.springframework.web.client.RestTemplate;
+ 
+ import java.util.Map;
+@@ -22,6 +23,7 @@
+ import static org.mockito.Mockito.*;
+ 
+ @ExtendWith(MockitoExtension.class)
++@ActiveProfiles("test")
+ class OrderServiceImplTest {
+ 
+     @Mock
+Index: book-service/src/test/java/com/library/bookservice/impl/BookServiceImplTest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.library.bookservice.impl;\r\n\r\nimport com.library.bookservice.dto.BookRequestDTO;\r\nimport com.library.bookservice.dto.BookResponseDTO;\r\nimport com.library.bookservice.entity.Book;\r\nimport com.library.bookservice.exceptions.BookNotFoundException;\r\nimport com.library.bookservice.repository.BookRepository;\r\nimport com.library.bookservice.service.impl.BookServiceImpl;\r\nimport org.junit.jupiter.api.DisplayName;\r\nimport org.junit.jupiter.api.Test;\r\nimport org.junit.jupiter.api.extension.ExtendWith;\r\nimport org.mockito.InjectMocks;\r\nimport org.mockito.Mock;\r\nimport org.mockito.junit.jupiter.MockitoExtension;\r\n\r\nimport java.util.List;\r\nimport java.util.Optional;\r\n\r\nimport static org.junit.jupiter.api.Assertions.*;\r\nimport static org.mockito.Mockito.*;\r\n\r\n@ExtendWith(MockitoExtension.class)\r\nclass BookServiceImplTest {\r\n\r\n    @Mock\r\n    private BookRepository bookRepository;\r\n\r\n    @InjectMocks\r\n    private BookServiceImpl bookService;\r\n\r\n    private BookRequestDTO buildRequestDTO() {\r\n        BookRequestDTO dto = new BookRequestDTO();\r\n        dto.setTitle(\"Clean Code\");\r\n        dto.setAuthor(\"Robert Martin\");\r\n        dto.setPrice(29.99);\r\n        dto.setStock(10);\r\n        return dto;\r\n    }\r\n\r\n    private Book buildBook(Long id, String title, String author, Double price, Integer stock) {\r\n        Book book = new Book();\r\n        book.setId(id);\r\n        book.setTitle(title);\r\n        book.setAuthor(author);\r\n        book.setPrice(price);\r\n        book.setStock(stock);\r\n        return book;\r\n    }\r\n\r\n    @Test\r\n    @DisplayName(\"Debe crear un libro correctamente\")\r\n    void shouldCreateBookSuccessfully() {\r\n        BookRequestDTO request = buildRequestDTO();\r\n        Book savedBook = buildBook(1L, \"Clean Code\", \"Robert Martin\", 29.99, 10);\r\n\r\n        when(bookRepository.save(any(Book.class))).thenReturn(savedBook);\r\n\r\n        BookResponseDTO response = bookService.createBook(request);\r\n\r\n        assertNotNull(response);\r\n        assertEquals(1L, response.getId());\r\n        assertEquals(\"Clean Code\", response.getTitle());\r\n        assertEquals(\"Robert Martin\", response.getAuthor());\r\n        assertEquals(29.99, response.getPrice());\r\n        assertEquals(10, response.getStock());\r\n\r\n        verify(bookRepository, times(1)).save(any(Book.class));\r\n    }\r\n\r\n    @Test\r\n    @DisplayName(\"Debe listar todos los libros\")\r\n    void shouldReturnAllBooks() {\r\n        Book book1 = buildBook(1L, \"Clean Code\", \"Robert Martin\", 29.99, 10);\r\n        Book book2 = buildBook(2L, \"Effective Java\", \"Joshua Bloch\", 39.99, 5);\r\n\r\n        when(bookRepository.findAll()).thenReturn(List.of(book1, book2));\r\n\r\n        List<BookResponseDTO> response = bookService.getAllBooks();\r\n\r\n        assertNotNull(response);\r\n        assertEquals(2, response.size());\r\n        assertEquals(\"Clean Code\", response.get(0).getTitle());\r\n        assertEquals(\"Effective Java\", response.get(1).getTitle());\r\n\r\n        verify(bookRepository, times(1)).findAll();\r\n    }\r\n\r\n    @Test\r\n    @DisplayName(\"Debe obtener un libro por id\")\r\n    void shouldReturnBookById() {\r\n        Book book = buildBook(1L, \"Clean Code\", \"Robert Martin\", 29.99, 10);\r\n\r\n        when(bookRepository.findById(1L)).thenReturn(Optional.of(book));\r\n\r\n        BookResponseDTO response = bookService.getBookById(1L);\r\n\r\n        assertNotNull(response);\r\n        assertEquals(1L, response.getId());\r\n        assertEquals(\"Clean Code\", response.getTitle());\r\n\r\n        verify(bookRepository, times(1)).findById(1L);\r\n    }\r\n\r\n    @Test\r\n    @DisplayName(\"Debe lanzar excepción al buscar un libro inexistente\")\r\n    void shouldThrowExceptionWhenBookNotFoundById() {\r\n        when(bookRepository.findById(99L)).thenReturn(Optional.empty());\r\n\r\n        BookNotFoundException exception = assertThrows(\r\n                BookNotFoundException.class,\r\n                () -> bookService.getBookById(99L)\r\n        );\r\n\r\n        assertEquals(\"Libro no encontrado con id 99\", exception.getMessage());\r\n        verify(bookRepository, times(1)).findById(99L);\r\n    }\r\n\r\n    @Test\r\n    @DisplayName(\"Debe actualizar un libro correctamente\")\r\n    void shouldUpdateBookSuccessfully() {\r\n        BookRequestDTO request = buildRequestDTO();\r\n        request.setTitle(\"Clean Code 2\");\r\n        request.setPrice(34.99);\r\n        request.setStock(5);\r\n\r\n        Book existingBook = buildBook(1L, \"Clean Code\", \"Robert Martin\", 29.99, 10);\r\n        Book updatedBook = buildBook(1L, \"Clean Code 2\", \"Robert Martin\", 34.99, 5);\r\n\r\n        when(bookRepository.findById(1L)).thenReturn(Optional.of(existingBook));\r\n        when(bookRepository.save(any(Book.class))).thenReturn(updatedBook);\r\n\r\n        BookResponseDTO response = bookService.updateBook(1L, request);\r\n\r\n        assertNotNull(response);\r\n        assertEquals(\"Clean Code 2\", response.getTitle());\r\n        assertEquals(34.99, response.getPrice());\r\n        assertEquals(5, response.getStock());\r\n\r\n        verify(bookRepository, times(1)).findById(1L);\r\n        verify(bookRepository, times(1)).save(any(Book.class));\r\n    }\r\n\r\n    @Test\r\n    @DisplayName(\"Debe lanzar excepción al actualizar un libro inexistente\")\r\n    void shouldThrowExceptionWhenUpdatingNonExistingBook() {\r\n        BookRequestDTO request = buildRequestDTO();\r\n\r\n        when(bookRepository.findById(99L)).thenReturn(Optional.empty());\r\n\r\n        BookNotFoundException exception = assertThrows(\r\n                BookNotFoundException.class,\r\n                () -> bookService.updateBook(99L, request)\r\n        );\r\n\r\n        assertEquals(\"Libro no encontrado con id 99\", exception.getMessage());\r\n        verify(bookRepository, times(1)).findById(99L);\r\n        verify(bookRepository, never()).save(any(Book.class));\r\n    }\r\n\r\n    @Test\r\n    @DisplayName(\"Debe eliminar un libro correctamente\")\r\n    void shouldDeleteBookSuccessfully() {\r\n        Book existingBook = buildBook(1L, \"Clean Code\", \"Robert Martin\", 29.99, 10);\r\n\r\n        when(bookRepository.findById(1L)).thenReturn(Optional.of(existingBook));\r\n        doNothing().when(bookRepository).delete(existingBook);\r\n\r\n        assertDoesNotThrow(() -> bookService.deleteBook(1L));\r\n\r\n        verify(bookRepository, times(1)).findById(1L);\r\n        verify(bookRepository, times(1)).delete(existingBook);\r\n    }\r\n\r\n    @Test\r\n    @DisplayName(\"Debe lanzar excepción al eliminar un libro inexistente\")\r\n    void shouldThrowExceptionWhenDeletingNonExistingBook() {\r\n        when(bookRepository.findById(99L)).thenReturn(Optional.empty());\r\n\r\n        BookNotFoundException exception = assertThrows(\r\n                BookNotFoundException.class,\r\n                () -> bookService.deleteBook(99L)\r\n        );\r\n\r\n        assertEquals(\"Libro no encontrado con id 99\", exception.getMessage());\r\n        verify(bookRepository, times(1)).findById(99L);\r\n        verify(bookRepository, never()).delete(any(Book.class));\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/book-service/src/test/java/com/library/bookservice/impl/BookServiceImplTest.java b/book-service/src/test/java/com/library/bookservice/impl/BookServiceImplTest.java
+--- a/book-service/src/test/java/com/library/bookservice/impl/BookServiceImplTest.java	(revision 67e12434d99470104c3b3a73b070a1a24eea299d)
++++ b/book-service/src/test/java/com/library/bookservice/impl/BookServiceImplTest.java	(date 1782432561102)
+@@ -12,6 +12,7 @@
+ import org.mockito.InjectMocks;
+ import org.mockito.Mock;
+ import org.mockito.junit.jupiter.MockitoExtension;
++import org.springframework.test.context.ActiveProfiles;
+ 
+ import java.util.List;
+ import java.util.Optional;
+@@ -20,6 +21,7 @@
+ import static org.mockito.Mockito.*;
+ 
+ @ExtendWith(MockitoExtension.class)
++@ActiveProfiles("test")
+ class BookServiceImplTest {
+ 
+     @Mock
