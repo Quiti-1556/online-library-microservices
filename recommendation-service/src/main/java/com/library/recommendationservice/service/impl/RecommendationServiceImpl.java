@@ -39,7 +39,7 @@ public class RecommendationServiceImpl implements RecommendationService {
         logger.info("Creando recomendación para userId {} sobre bookId {}", request.getUserId(), request.getBookId());
 
         String responseBook = restTemplate.getForObject(
-                "http://localhost:8082/books/" + request.getBookId(),
+                "http://book-service:8080/books/" + request.getBookId(),
                 String.class
         );
 

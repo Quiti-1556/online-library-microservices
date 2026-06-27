@@ -35,7 +35,7 @@ public class InventoryServiceImpl implements InventoryService {
         logger.info("Creando inventario para bookId {}", request.getBookId());
 
         String responseBook = restTemplate.getForObject(
-                "http://localhost:8082/books/" + request.getBookId(),
+                "http://book-service:8080/books/" + request.getBookId(),
                 String.class
         );
 

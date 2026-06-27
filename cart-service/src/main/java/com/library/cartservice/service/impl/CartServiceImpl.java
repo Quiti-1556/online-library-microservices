@@ -38,7 +38,7 @@ public class CartServiceImpl implements CartService {
         logger.info("Agregando item al carrito para userId {}", request.getUserId());
 
         String responseBook = restTemplate.getForObject(
-                "http://localhost:8082/books/" + request.getBookId(),
+                "http://book-service:8080/books/" + request.getBookId(),
                 String.class
         );
 

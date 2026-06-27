@@ -35,19 +35,19 @@ public class OrderServiceImpl implements OrderService {
         logger.info("Creando orden para userId {}", request.getUserId());
 
         String responseUser = restTemplate.getForObject(
-                "http://localhost:8089/users/" + request.getUserId(),
+                "http://user-service:8080/users/" + request.getUserId(),
                 String.class
         );
         logger.info("Respuesta desde user-service: {}", responseUser);
 
         String responseBook = restTemplate.getForObject(
-                "http://localhost:8082/books/" + request.getBookId(),
+                "http://book-service:8080/books/" + request.getBookId(),
                 String.class
         );
         logger.info("Respuesta desde book-service: {}", responseBook);
 
         String responseInventory = restTemplate.getForObject(
-                "http://localhost:8086/inventory/book/" + request.getBookId(),
+                "http://inventory-service:8080/inventory/book/" + request.getBookId(),
                 String.class
         );
         logger.info("Respuesta desde inventory-service: {}", responseInventory);
@@ -67,7 +67,7 @@ public class OrderServiceImpl implements OrderService {
         paymentRequest.put("status", "PAID");
 
         String responsePayment = restTemplate.postForObject(
-                "http://localhost:8088/payments",
+                "http://payment-service:8080/payments",
                 paymentRequest,
                 String.class
         );
@@ -85,7 +85,7 @@ public class OrderServiceImpl implements OrderService {
                 new org.springframework.http.HttpEntity<>(notificationRequest, headers);
 
         org.springframework.http.ResponseEntity<String> responseNotification = restTemplate.postForEntity(
-                "http://localhost:9090/notifications",
+                "http://notification-service:8080/notifications",
                 entity,
                 String.class
         );

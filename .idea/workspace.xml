@@ -4,11 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="56f7eaf9-566a-43ae-ae8d-8d153bd1b817" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+    <list default="true" id="56f7eaf9-566a-43ae-ae8d-8d153bd1b817" name="Changes" comment="cambios docker para funcionamiento optimo.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-gateway/target/classes/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/api-gateway/target/classes/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -201,10 +198,23 @@
       <option name="presentableId" value="Default" />
       <updated>1782346352355</updated>
     </task>
+    <task id="LOCAL-00001" summary="cambios docker para funcionamiento optimo.">
+      <option name="closed" value="true" />
+      <created>1782526680060</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1782526680060</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="cambios docker para funcionamiento optimo." />
+    <option name="LAST_COMMIT_MESSAGE" value="cambios docker para funcionamiento optimo." />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/online_library_microservices$All_in_book_service.ic" NAME="All in book-service Coverage Results" MODIFIED="1782428996265" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
