@@ -53,7 +53,7 @@ public class UserServiceImpl implements UserService {
         userRequest.put("address", "Direccion temporal");
 
         String responseUserService = restTemplate.postForObject(
-                "http://localhost:8089/users",
+                "http://user-service:8080/users",
                 userRequest,
                 String.class
         );
