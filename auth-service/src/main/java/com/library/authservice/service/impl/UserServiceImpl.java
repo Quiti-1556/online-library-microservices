@@ -71,6 +71,35 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void deleteUser(Long id) {
+        logger.info("Eliminando usuario con id {}", id);
+
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> {
+                    logger.warn("Usuario no encontrado con id {}", id);
+                    return new RuntimeException("Usuario no encontrado");
+                });
+
+        if ("admin@library.cl".equalsIgnoreCase(user.getEmail())) {
+            logger.warn("Intento de eliminar la cuenta administradora principal");
+            throw new RuntimeException("No se puede eliminar la cuenta administradora principal");
+        }
+
+        String email = user.getEmail();
+
+        userRepository.delete(user);
+
+        try {
+            restTemplate.delete("http://user-service:8080/users/email/" + email);
+            logger.info("Perfil eliminado en user-service para email {}", email);
+        } catch (Exception e) {
+            logger.warn("No se pudo eliminar el perfil en user-service para email {}", email);
+        }
+
+        logger.info("Usuario eliminado correctamente desde auth-service con id {}", id);
+    }
+
+    @Override
     public LoginResponseDTO login(LoginRequestDTO request) {
         logger.info("Intentando login para email {}", request.getEmail());
 
@@ -85,10 +114,15 @@ public class UserServiceImpl implements UserService {
             throw new RuntimeException("Password incorrecta");
         }
 
-        String token = jwtService.generateToken(user.getEmail());
+        String token = jwtService.generateToken(user);
 
         logger.info("Login exitoso para email {}", request.getEmail());
 
-        return new LoginResponseDTO(token);
+        return new LoginResponseDTO(
+                "Inicio de sesión exitoso",
+                user.getEmail(),
+                user.getRole().name(),
+                token
+        );
     }
 }

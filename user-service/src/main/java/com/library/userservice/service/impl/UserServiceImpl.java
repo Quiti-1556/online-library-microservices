@@ -7,6 +7,7 @@ import com.library.userservice.repository.UserRepository;
 import com.library.userservice.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -89,5 +90,20 @@ public class UserServiceImpl implements UserService {
 
         userRepository.delete(user);
         logger.info("Usuario con id {} eliminado correctamente", id);
+    }
+
+    @Override
+    @Transactional
+    public void deleteUserByEmail(String email) {
+        logger.info("Eliminando usuario con email {}", email);
+
+        if (!userRepository.existsByEmail(email)) {
+            logger.warn("Usuario no encontrado con email {}", email);
+            throw new RuntimeException("Usuario no encontrado");
+        }
+
+        userRepository.deleteByEmail(email);
+
+        logger.info("Usuario eliminado correctamente con email {}", email);
     }
 }

@@ -38,6 +38,13 @@ public class RecommendationServiceImpl implements RecommendationService {
     public RecommendationResponseDTO createRecommendation(RecommendationRequestDTO request) {
         logger.info("Creando recomendación para userId {} sobre bookId {}", request.getUserId(), request.getBookId());
 
+        String responseUser = restTemplate.getForObject(
+                "http://user-service:8080/users/" + request.getUserId(),
+                String.class
+        );
+
+        logger.info("Respuesta desde user-service: {}", responseUser);
+
         String responseBook = restTemplate.getForObject(
                 "http://book-service:8080/books/" + request.getBookId(),
                 String.class

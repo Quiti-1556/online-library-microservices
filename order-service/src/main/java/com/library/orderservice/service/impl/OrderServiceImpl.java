@@ -52,17 +52,20 @@ public class OrderServiceImpl implements OrderService {
         );
         logger.info("Respuesta desde inventory-service: {}", responseInventory);
 
+        Double total = request.getTotal() != null ? request.getTotal() : 0.0;
+        String status = request.getStatus() != null ? request.getStatus() : "PENDING";
+
         OrderEntity order = new OrderEntity();
         order.setUserId(request.getUserId());
-        order.setTotal(request.getTotal());
-        order.setStatus(request.getStatus());
+        order.setTotal(total);
+        order.setStatus(status);
 
         OrderEntity savedOrder = orderRepository.save(order);
         logger.info("Orden creada correctamente con id {}", savedOrder.getId());
 
         java.util.Map<String, Object> paymentRequest = new java.util.HashMap<>();
         paymentRequest.put("orderId", savedOrder.getId());
-        paymentRequest.put("amount", request.getTotal());
+        paymentRequest.put("amount", total);
         paymentRequest.put("paymentMethod", "CARD");
         paymentRequest.put("status", "PAID");
 

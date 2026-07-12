@@ -71,4 +71,17 @@ public class AuthController {
         log.info("Registrando nuevo usuario con email {}", request.getEmail());
         return ResponseEntity.status(HttpStatus.CREATED).body(userService.registerUser(request));
     }
+
+    @DeleteMapping("/users/{id}")
+    @Operation(summary = "Eliminar usuario", description = "Elimina un usuario desde Auth Service y su perfil asociado")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "Usuario eliminado correctamente"),
+            @ApiResponse(responseCode = "404", description = "Usuario no encontrado"),
+            @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+    })
+    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
+        log.info("Eliminando usuario desde auth-service con id {}", id);
+        userService.deleteUser(id);
+        return ResponseEntity.noContent().build();
+    }
 }

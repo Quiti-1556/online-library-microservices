@@ -5,6 +5,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.function.HandlerFilterFunction;
@@ -21,35 +22,24 @@ public class JwtWebMvcFilter implements HandlerFilterFunction<ServerResponse, Se
     private String secretKey;
 
     @Override
-    public ServerResponse filter(ServerRequest request,
-                                 HandlerFunction<ServerResponse> next) throws Exception {
-
-
-        System.out.println("PATH: " + request.path());
+    public ServerResponse filter(ServerRequest request, HandlerFunction<ServerResponse> next) throws Exception {
 
         String path = request.path();
-        System.out.println("PATH DETECTADO: " + path);
 
-        if (path.equals("/auth/login") || path.equals("/auth/register")) {
-
-            System.out.println("RUTA PUBLICA");
-
+        if (path.startsWith("/auth/login") || path.startsWith("/auth/register")) {
             return next.handle(request);
         }
 
         String authHeader = request.headers().firstHeader("Authorization");
 
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-
             return ServerResponse.status(HttpStatus.UNAUTHORIZED).build();
         }
 
         String token = authHeader.substring(7);
 
         try {
-
             byte[] keyBytes = Decoders.BASE64.decode(secretKey);
-
             SecretKey key = Keys.hmacShaKeyFor(keyBytes);
 
             Claims claims = Jwts.parser()
@@ -57,16 +47,25 @@ public class JwtWebMvcFilter implements HandlerFilterFunction<ServerResponse, Se
                     .parseClaimsJws(token)
                     .getBody();
 
-            String username = claims.getSubject();
+            String role = claims.get("role", String.class);
 
-            ServerRequest modifiedRequest = ServerRequest.from(request)
-                    .header("X-User-Name", username)
-                    .build();
+            if (path.startsWith("/books")
+                    && (request.method() == HttpMethod.POST
+                    || request.method() == HttpMethod.PUT
+                    || request.method() == HttpMethod.DELETE)
+                    && !"ADMIN".equals(role)) {
+                return ServerResponse.status(HttpStatus.FORBIDDEN).build();
+            }
 
-            return next.handle(modifiedRequest);
+            if (path.startsWith("/auth/users")
+                    && request.method() == HttpMethod.DELETE
+                    && !"ADMIN".equals(role)) {
+                return ServerResponse.status(HttpStatus.FORBIDDEN).build();
+            }
+
+            return next.handle(request);
 
         } catch (Exception e) {
-
             return ServerResponse.status(HttpStatus.UNAUTHORIZED).build();
         }
     }

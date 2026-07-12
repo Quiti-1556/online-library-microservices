@@ -97,4 +97,10 @@ public class UserController {
         userService.deleteUser(id);
         return ResponseEntity.noContent().build();
     }
+    @DeleteMapping("/email/{email}")
+    public ResponseEntity<Void> deleteUserByEmail(@PathVariable String email) {
+        log.info("Eliminando usuario con email {}", email);
+        userService.deleteUserByEmail(email);
+        return ResponseEntity.noContent().build();
+    }
 }

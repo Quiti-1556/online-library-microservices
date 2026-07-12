@@ -10,4 +10,6 @@ public interface UserService {
     UserResponseDTO registerUser(RegisterRequestDTO request);
 
     LoginResponseDTO login(LoginRequestDTO request);
+
+    void deleteUser(Long id);
 }

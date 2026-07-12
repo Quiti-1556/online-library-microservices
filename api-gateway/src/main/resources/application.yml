@@ -1,83 +1,90 @@
 spring:
   application:
     name: api-gateway
+
   cloud:
     gateway:
       server:
         webmvc:
           routes:
-
             - id: auth-public
-              uri: http://mysql:8081
+              uri: http://auth-service:8080
               predicates:
                 - Path=/auth/login,/auth/register
 
+            - id: auth-protected
+              uri: http://auth-service:8080
+              predicates:
+                - Path=/auth/users/**
+              filters:
+                - jwtFilter
+
             - id: book-service
-              uri: http://mysql:8082
+              uri: http://book-service:8080
               predicates:
                 - Path=/books/**
               filters:
                 - jwtFilter
 
             - id: cart-service
-              uri: http://mysql:8083
+              uri: http://cart-service:8080
               predicates:
                 - Path=/cart/**
               filters:
                 - jwtFilter
 
             - id: order-service
-              uri: http://mysql:8085
+              uri: http://order-service:8080
               predicates:
                 - Path=/orders/**
               filters:
                 - jwtFilter
 
             - id: inventory-service
-              uri: http://mysql:8086
+              uri: http://inventory-service:8080
               predicates:
                 - Path=/inventory/**
               filters:
                 - jwtFilter
 
             - id: review-service
-              uri: http://mysql:8087
+              uri: http://review-service:8080
               predicates:
                 - Path=/reviews/**
               filters:
                 - jwtFilter
 
             - id: payment-service
-              uri: http://mysql:8088
+              uri: http://payment-service:8080
               predicates:
                 - Path=/payments/**
               filters:
                 - jwtFilter
 
             - id: user-service
-              uri: http://mysql:8089
+              uri: http://user-service:8080
               predicates:
                 - Path=/users/**
               filters:
                 - jwtFilter
 
             - id: notification-service
-              uri: http://mysql:8090
+              uri: http://notification-service:8080
               predicates:
                 - Path=/notifications/**
               filters:
                 - jwtFilter
 
             - id: recommendation-service
-              uri: http://mysql:8091
+              uri: http://recommendation-service:8080
               predicates:
                 - Path=/recommendations/**
               filters:
                 - jwtFilter
 
-  server:
-    port: 8080
+server:
+  port: 8080
 
-  app:
-    jwt:
-      secret: bXlzZWNyZXRrZXlteXNlY3JldGtleW15c2VjcmV0a2V5MTIzNDU2
+app:
+  jwt:
+    secret: bXlzZWNyZXRrZXlteXNlY3JldGtleW15c2VjcmV0a2V5MTIzNDU2

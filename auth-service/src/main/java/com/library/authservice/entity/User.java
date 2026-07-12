@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "users")
+@Table(name = "auth_users")
 public class User {
 
     @Id
@@ -29,4 +29,3 @@ public class User {
     @Column(nullable = false, length = 20)
     private Role role;
 }
-

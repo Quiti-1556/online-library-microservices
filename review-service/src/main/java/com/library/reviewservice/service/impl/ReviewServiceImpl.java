@@ -8,6 +8,7 @@ import com.library.reviewservice.repository.ReviewRepository;
 import com.library.reviewservice.service.ReviewService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,6 +23,7 @@ public class ReviewServiceImpl implements ReviewService {
             LoggerFactory.getLogger(ReviewServiceImpl.class);
 
     private final ReviewRepository reviewRepository;
+    private final RestTemplate restTemplate;
 
     private ReviewResponseDTO mapToResponse(Review review) {
         ReviewResponseDTO response = new ReviewResponseDTO();
@@ -36,6 +38,18 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     public ReviewResponseDTO createReview(ReviewRequestDTO request) {
         logger.info("Creando review del userId {} para bookId {}", request.getUserId(), request.getBookId());
+
+        String responseUser = restTemplate.getForObject(
+                "http://user-service:8080/users/" + request.getUserId(),
+                String.class
+        );
+        logger.info("Respuesta desde user-service: {}", responseUser);
+
+        String responseBook = restTemplate.getForObject(
+                "http://book-service:8080/books/" + request.getBookId(),
+                String.class
+        );
+        logger.info("Respuesta desde book-service: {}", responseBook);
 
         if (reviewRepository.existsByUserIdAndBookId(request.getUserId(), request.getBookId())) {
             throw new RuntimeException("El usuario ya dejó una reseña para este libro");
