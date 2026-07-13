@@ -5,13 +5,11 @@ import com.library.cartservice.dto.CartResponseDTO;
 import com.library.cartservice.entity.Cart;
 import com.library.cartservice.exceptions.CartNotFoundException;
 import com.library.cartservice.repository.CartRepository;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
@@ -21,7 +19,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-@ActiveProfiles("test")
 class CartServiceImplTest {
 
     @Mock
@@ -33,127 +30,133 @@ class CartServiceImplTest {
     @InjectMocks
     private CartServiceImpl cartService;
 
-    private CartRequestDTO buildRequestDTO() {
-        CartRequestDTO dto = new CartRequestDTO();
-        dto.setUserId(1L);
-        dto.setBookId(10L);
-        dto.setQuantity(2);
-        return dto;
-    }
-
-    private Cart buildCart(Long id, Long userId, Long bookId, Integer quantity) {
-        Cart cart = new Cart();
-        cart.setId(id);
-        cart.setUserId(userId);
-        cart.setBookId(bookId);
-        cart.setQuantity(quantity);
-        return cart;
-    }
-
     @Test
-    @DisplayName("Debe agregar item al carrito correctamente")
-    void shouldAddItemSuccessfully() {
-        CartRequestDTO request = buildRequestDTO();
-        Cart savedCart = buildCart(1L, 1L, 10L, 2);
+    void addItemShouldSaveAndReturnResponseWhenBookExistsAndItemDoesNotExist() {
+        CartRequestDTO request = new CartRequestDTO();
+        request.setUserId(1L);
+        request.setBookId(2L);
+        request.setQuantity(3);
 
-        when(restTemplate.getForObject("http://localhost:8082/books/10", String.class))
-                .thenReturn("{\"id\":10,\"title\":\"Libro test\"}");
-        when(cartRepository.existsByUserIdAndBookId(1L, 10L)).thenReturn(false);
-        when(cartRepository.save(any(Cart.class))).thenReturn(savedCart);
+        when(restTemplate.getForObject("http://book-service:8080/books/2", String.class))
+                .thenReturn("{\"id\":2,\"title\":\"Libro Test\"}");
+
+        when(cartRepository.existsByUserIdAndBookId(1L, 2L))
+                .thenReturn(false);
+
+        when(cartRepository.save(any(Cart.class)))
+                .thenAnswer(invocation -> {
+                    Cart cart = invocation.getArgument(0);
+                    cart.setId(10L);
+                    return cart;
+                });
 
         CartResponseDTO response = cartService.addItem(request);
 
-        assertNotNull(response);
-        assertEquals(1L, response.getId());
+        assertEquals(10L, response.getId());
         assertEquals(1L, response.getUserId());
-        assertEquals(10L, response.getBookId());
-        assertEquals(2, response.getQuantity());
+        assertEquals(2L, response.getBookId());
+        assertEquals(3, response.getQuantity());
 
-        verify(restTemplate, times(1))
-                .getForObject("http://localhost:8082/books/10", String.class);
-        verify(cartRepository, times(1)).existsByUserIdAndBookId(1L, 10L);
-        verify(cartRepository, times(1)).save(any(Cart.class));
+        verify(restTemplate).getForObject("http://book-service:8080/books/2", String.class);
+        verify(cartRepository).existsByUserIdAndBookId(1L, 2L);
+        verify(cartRepository).save(any(Cart.class));
     }
 
     @Test
-    @DisplayName("Debe lanzar excepción si el libro ya está en el carrito del usuario")
-    void shouldThrowExceptionWhenBookAlreadyExistsInCart() {
-        CartRequestDTO request = buildRequestDTO();
+    void addItemShouldThrowExceptionWhenBookIsAlreadyInCart() {
+        CartRequestDTO request = new CartRequestDTO();
+        request.setUserId(1L);
+        request.setBookId(2L);
+        request.setQuantity(1);
 
-        when(restTemplate.getForObject("http://localhost:8082/books/10", String.class))
-                .thenReturn("{\"id\":10,\"title\":\"Libro test\"}");
-        when(cartRepository.existsByUserIdAndBookId(1L, 10L)).thenReturn(true);
+        when(restTemplate.getForObject("http://book-service:8080/books/2", String.class))
+                .thenReturn("{\"id\":2}");
 
-        RuntimeException exception = assertThrows(
-                RuntimeException.class,
-                () -> cartService.addItem(request)
-        );
+        when(cartRepository.existsByUserIdAndBookId(1L, 2L))
+                .thenReturn(true);
+
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> cartService.addItem(request));
 
         assertEquals("El libro ya está en el carrito de este usuario", exception.getMessage());
 
-        verify(restTemplate, times(1))
-                .getForObject("http://localhost:8082/books/10", String.class);
-        verify(cartRepository, times(1)).existsByUserIdAndBookId(1L, 10L);
         verify(cartRepository, never()).save(any(Cart.class));
     }
 
     @Test
-    @DisplayName("Debe listar items del carrito por usuario")
-    void shouldReturnItemsByUser() {
-        Cart c1 = buildCart(1L, 1L, 10L, 2);
-        Cart c2 = buildCart(2L, 1L, 11L, 1);
+    void addItemShouldThrowExceptionWhenBookServiceFails() {
+        CartRequestDTO request = new CartRequestDTO();
+        request.setUserId(1L);
+        request.setBookId(999L);
+        request.setQuantity(1);
 
-        when(cartRepository.findByUserId(1L)).thenReturn(List.of(c1, c2));
+        when(restTemplate.getForObject("http://book-service:8080/books/999", String.class))
+                .thenThrow(new RuntimeException("Libro no encontrado"));
+
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> cartService.addItem(request));
+
+        assertEquals("Libro no encontrado", exception.getMessage());
+
+        verify(cartRepository, never()).existsByUserIdAndBookId(anyLong(), anyLong());
+        verify(cartRepository, never()).save(any(Cart.class));
+    }
+
+    @Test
+    void getItemsByUserShouldReturnCartItems() {
+        Cart cartOne = new Cart();
+        cartOne.setId(1L);
+        cartOne.setUserId(1L);
+        cartOne.setBookId(10L);
+        cartOne.setQuantity(2);
+
+        Cart cartTwo = new Cart();
+        cartTwo.setId(2L);
+        cartTwo.setUserId(1L);
+        cartTwo.setBookId(11L);
+        cartTwo.setQuantity(1);
+
+        when(cartRepository.findByUserId(1L))
+                .thenReturn(List.of(cartOne, cartTwo));
 
         List<CartResponseDTO> response = cartService.getItemsByUser(1L);
 
-        assertNotNull(response);
         assertEquals(2, response.size());
+        assertEquals(1L, response.get(0).getId());
         assertEquals(10L, response.get(0).getBookId());
+        assertEquals(2, response.get(0).getQuantity());
+        assertEquals(2L, response.get(1).getId());
         assertEquals(11L, response.get(1).getBookId());
+        assertEquals(1, response.get(1).getQuantity());
 
-        verify(cartRepository, times(1)).findByUserId(1L);
+        verify(cartRepository).findByUserId(1L);
     }
 
     @Test
-    @DisplayName("Debe retornar lista vacía si el usuario no tiene items en el carrito")
-    void shouldReturnEmptyListWhenUserHasNoCartItems() {
-        when(cartRepository.findByUserId(99L)).thenReturn(List.of());
+    void deleteCartShouldDeleteWhenCartExists() {
+        Cart cart = new Cart();
+        cart.setId(1L);
+        cart.setUserId(1L);
+        cart.setBookId(2L);
+        cart.setQuantity(1);
 
-        List<CartResponseDTO> response = cartService.getItemsByUser(99L);
+        when(cartRepository.findById(1L))
+                .thenReturn(Optional.of(cart));
 
-        assertNotNull(response);
-        assertTrue(response.isEmpty());
+        cartService.deleteCart(1L);
 
-        verify(cartRepository, times(1)).findByUserId(99L);
+        verify(cartRepository).findById(1L);
+        verify(cartRepository).delete(cart);
     }
 
     @Test
-    @DisplayName("Debe eliminar item del carrito correctamente")
-    void shouldDeleteCartSuccessfully() {
-        Cart cart = buildCart(1L, 1L, 10L, 2);
+    void deleteCartShouldThrowExceptionWhenCartDoesNotExist() {
+        when(cartRepository.findById(999L))
+                .thenReturn(Optional.empty());
 
-        when(cartRepository.findById(1L)).thenReturn(Optional.of(cart));
-        doNothing().when(cartRepository).delete(cart);
+        CartNotFoundException exception = assertThrows(CartNotFoundException.class, () -> cartService.deleteCart(999L));
 
-        assertDoesNotThrow(() -> cartService.deleteCart(1L));
+        assertEquals("Item de carrito no encontrado con id 999", exception.getMessage());
 
-        verify(cartRepository, times(1)).findById(1L);
-        verify(cartRepository, times(1)).delete(cart);
-    }
-
-    @Test
-    @DisplayName("Debe lanzar excepción al eliminar item inexistente del carrito")
-    void shouldThrowExceptionWhenDeletingNonExistingCartItem() {
-        when(cartRepository.findById(99L)).thenReturn(Optional.empty());
-
-        CartNotFoundException exception = assertThrows(
-                CartNotFoundException.class,
-                () -> cartService.deleteCart(99L)
-        );
-
-        assertEquals("Item de carrito no encontrado con id 99", exception.getMessage());
-        verify(cartRepository, times(1)).findById(99L);
+        verify(cartRepository).findById(999L);
         verify(cartRepository, never()).delete(any(Cart.class));
     }
 }

@@ -6,12 +6,16 @@
   <component name="ChangeListManager">
     <list default="true" id="56f7eaf9-566a-43ae-ae8d-8d153bd1b817" name="Changes" comment="cambios docker para funcionamiento optimo y pruebas correctas en postman.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-gateway/src/main/java/com/library/apigateway/ApiGatewayApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/api-gateway/src/main/java/com/library/apigateway/ApiGatewayApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cart-service/src/test/java/com/library/cartservice/service/impl/CartServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/cart-service/src/test/java/com/library/cartservice/service/impl/CartServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/order-service/src/test/java/com/library/orderservice/service/impl/OrderServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/order-service/src/test/java/com/library/orderservice/service/impl/OrderServiceImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CoverageOptionsProvider">
+    <option name="myAddOrReplace" value="0" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -74,6 +78,8 @@
     "JUnit.All in auth-service.executor": "Coverage",
     "JUnit.All in book-service (1).executor": "Coverage",
     "JUnit.All in book-service.executor": "Coverage",
+    "JUnit.All in cart-service (1).executor": "Coverage",
+    "JUnit.All in cart-service (2).executor": "Coverage",
     "JUnit.All in cart-service.executor": "Coverage",
     "JUnit.All in inventory-service.executor": "Coverage",
     "JUnit.All in notification-service.executor": "Coverage",
@@ -112,7 +118,8 @@
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.0",
-    "run.code.analysis.last.selected.profile": "pProject Default"
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -126,6 +133,9 @@
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\braya\Documents\Proyectos\online-library-microservices\docker" />
     </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.library.cartservice.service.impl" />
+    </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.library.userservice.config" />
       <recent name="com.library.reviewservice.config" />
@@ -134,9 +144,33 @@
       <recent name="com.library.inventoryservice.config" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.All in payment-service (1)">
+  <component name="RunManager" selected="JUnit.All in order-service">
+    <configuration name="All in cart-service (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="cart-service" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="All in cart-service (2)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="cart-service" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="All in cart-service" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="cart-service" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="All in order-service" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="order-service" />
       <option name="PACKAGE_NAME" value="" />
       <option name="TEST_OBJECT" value="package" />
       <method v="2">
@@ -151,37 +185,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="All in recommendation-service" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="recommendation-service" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="TEST_OBJECT" value="package" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="All in review-service" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="review-service" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="TEST_OBJECT" value="package" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="All in user-service" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="user-service" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="TEST_OBJECT" value="package" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.All in payment-service (1)" />
+        <item itemvalue="JUnit.All in order-service" />
+        <item itemvalue="JUnit.All in cart-service (2)" />
         <item itemvalue="JUnit.All in cart-service" />
-        <item itemvalue="JUnit.All in user-service" />
-        <item itemvalue="JUnit.All in review-service" />
-        <item itemvalue="JUnit.All in recommendation-service" />
+        <item itemvalue="JUnit.All in cart-service (1)" />
+        <item itemvalue="JUnit.All in payment-service (1)" />
       </list>
     </recent_temporary>
   </component>
@@ -217,7 +227,15 @@
       <option name="project" value="LOCAL" />
       <updated>1783848944669</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="cambios docker para funcionamiento optimo y pruebas correctas en postman.">
+      <option name="closed" value="true" />
+      <created>1783886161087</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1783886161087</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -233,13 +251,15 @@
     <SUITE FILE_PATH="coverage/online_library_microservices$All_in_book_service.ic" NAME="All in book-service Coverage Results" MODIFIED="1782428996265" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
     <SUITE FILE_PATH="coverage/online_library_microservices$All_in_user_service.ic" NAME="All in user-service Coverage Results" MODIFIED="1782433708096" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
     <SUITE FILE_PATH="coverage/online_library_microservices$All_in_auth_service.ic" NAME="All in auth-service Coverage Results" MODIFIED="1782433069363" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
+    <SUITE FILE_PATH="coverage/online_library_microservices$All_in_cart_service__1_.ic" NAME="All in cart-service (1) Coverage Results" MODIFIED="1783903881186" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
     <SUITE FILE_PATH="coverage/online_library_microservices$All_in_recommendation_service.ic" NAME="All in recommendation-service Coverage Results" MODIFIED="1782433616033" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
     <SUITE FILE_PATH="coverage/online_library_microservices$All_in_payment_service.ic" NAME="All in payment-service Coverage Results" MODIFIED="1782433566975" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
-    <SUITE FILE_PATH="coverage/online_library_microservices$All_in_cart_service.ic" NAME="All in cart-service Coverage Results" MODIFIED="1782438365719" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
     <SUITE FILE_PATH="coverage/online_library_microservices$All_in_review_service.ic" NAME="All in review-service Coverage Results" MODIFIED="1782433660999" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
+    <SUITE FILE_PATH="coverage/online_library_microservices$All_in_cart_service.ic" NAME="All in cart-service Coverage Results" MODIFIED="1783904829347" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
     <SUITE FILE_PATH="coverage/online_library_microservices$All_in_book_service__1_.ic" NAME="All in book-service (1) Coverage Results" MODIFIED="1782433308645" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
     <SUITE FILE_PATH="coverage/online_library_microservices$All_in_payment_service__1_.ic" NAME="All in payment-service (1) Coverage Results" MODIFIED="1783884006488" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
+    <SUITE FILE_PATH="coverage/online_library_microservices$All_in_cart_service__2_.ic" NAME="All in cart-service (2) Coverage Results" MODIFIED="1783905101956" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
     <SUITE FILE_PATH="coverage/online_library_microservices$All_in_notification_service.ic" NAME="All in notification-service Coverage Results" MODIFIED="1782433466422" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
-    <SUITE FILE_PATH="coverage/online_library_microservices$All_in_order_service.ic" NAME="All in order-service Coverage Results" MODIFIED="1782433515292" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
+    <SUITE FILE_PATH="coverage/online_library_microservices$All_in_order_service.ic" NAME="All in order-service Coverage Results" MODIFIED="1783908837451" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
   </component>
 </project>
