@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="56f7eaf9-566a-43ae-ae8d-8d153bd1b817" name="Changes" comment="cambios docker para funcionamiento optimo y pruebas correctas en postman.">
+    <list default="true" id="56f7eaf9-566a-43ae-ae8d-8d153bd1b817" name="Changes" comment="Testeos en microservicios segun evaluacion, order service y cart service, con mas de 80% de coverage.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cart-service/src/test/java/com/library/cartservice/service/impl/CartServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/cart-service/src/test/java/com/library/cartservice/service/impl/CartServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/order-service/src/test/java/com/library/orderservice/service/impl/OrderServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/order-service/src/test/java/com/library/orderservice/service/impl/OrderServiceImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -235,7 +233,23 @@
       <option name="project" value="LOCAL" />
       <updated>1783886161087</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Testeos en microservicios segun evaluacion, order service y cart service, con mas de 80% de coverage.">
+      <option name="closed" value="true" />
+      <created>1783909450739</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1783909450741</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Testeos en microservicios segun evaluacion, order service y cart service, con mas de 80% de coverage.">
+      <option name="closed" value="true" />
+      <created>1783909458638</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1783909458638</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -244,7 +258,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="cambios docker para funcionamiento optimo." />
     <MESSAGE value="cambios docker para funcionamiento optimo y pruebas correctas en postman." />
-    <option name="LAST_COMMIT_MESSAGE" value="cambios docker para funcionamiento optimo y pruebas correctas en postman." />
+    <MESSAGE value="Testeos en microservicios segun evaluacion, order service y cart service, con mas de 80% de coverage." />
+    <option name="LAST_COMMIT_MESSAGE" value="Testeos en microservicios segun evaluacion, order service y cart service, con mas de 80% de coverage." />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/online_library_microservices$All_in_inventory_service.ic" NAME="All in inventory-service Coverage Results" MODIFIED="1782433420034" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
