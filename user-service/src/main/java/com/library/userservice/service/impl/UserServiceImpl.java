@@ -97,13 +97,25 @@ public class UserServiceImpl implements UserService {
     public void deleteUserByEmail(String email) {
         logger.info("Eliminando usuario con email {}", email);
 
-        if (!userRepository.existsByEmail(email)) {
-            logger.warn("Usuario no encontrado con email {}", email);
-            throw new RuntimeException("Usuario no encontrado");
-        }
-
+        // Idempotente: reintentar una eliminación parcial no debe fallar por perfil ausente.
         userRepository.deleteByEmail(email);
 
         logger.info("Usuario eliminado correctamente con email {}", email);
+    }
+    // La relación entre Auth y perfil es el correo, no el ID autoincremental.
+    @Override
+    @Transactional
+    public UserResponseDTO updateIdentity(String email, com.library.userservice.dto.IdentityUpdateDTO request) {
+        UserProfile profile = userRepository.findByEmail(email).orElseGet(() -> {
+            UserProfile created = new UserProfile();
+            created.setPhone("000000000");
+            created.setAddress("Direccion temporal");
+            return created;
+        });
+        if (!email.equalsIgnoreCase(request.email()) && userRepository.existsByEmail(request.email()))
+            throw new IllegalArgumentException("El correo ya está registrado");
+        profile.setName(request.name());
+        profile.setEmail(request.email());
+        return mapToResponse(userRepository.save(profile));
     }
 }

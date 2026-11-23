@@ -32,16 +32,36 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
     }
 
+    // Conserva estados 404/409 y no revela detalles de fallos entre servicios.
+    @ExceptionHandler(org.springframework.http.converter.HttpMessageNotReadableException.class)
+    public ResponseEntity<Map<String, Object>> handleUnreadable(org.springframework.http.converter.HttpMessageNotReadableException ex) {
+        return ResponseEntity.badRequest().body(Map.of("message", "Revisa el formato de los datos y el rol seleccionado"));
+    }
+
+    @ExceptionHandler(org.springframework.dao.DataIntegrityViolationException.class)
+    public ResponseEntity<Map<String, Object>> handleConflict(org.springframework.dao.DataIntegrityViolationException ex) {
+        return ResponseEntity.status(409).body(Map.of("message", "El correo ya está registrado o los datos están en conflicto"));
+    }
+
+    @ExceptionHandler(org.springframework.web.server.ResponseStatusException.class)
+    public ResponseEntity<Map<String, Object>> handleStatus(org.springframework.web.server.ResponseStatusException ex) {
+        return ResponseEntity.status(ex.getStatusCode()).body(Map.of("message", ex.getReason() == null ? "Solicitud rechazada" : ex.getReason()));
+    }
+
+    @ExceptionHandler(org.springframework.web.client.RestClientException.class)
+    public ResponseEntity<Map<String, Object>> handleDependency(org.springframework.web.client.RestClientException ex) {
+        return ResponseEntity.status(502).body(Map.of("message", "No se pudo sincronizar el perfil; la operación no se confirmó"));
+    }
+
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<Map<String, Object>> handleRuntimeException(RuntimeException ex) {
-        log.warn("Error de negocio: {}", ex.getMessage());
+        log.error("Error interno no previsto", ex);
 
         Map<String, Object> response = new HashMap<>();
-        response.put("status", HttpStatus.BAD_REQUEST.value());
-        response.put("message", "Error en la solicitud");
-        response.put("details", ex.getMessage());
+        response.put("status", HttpStatus.INTERNAL_SERVER_ERROR.value());
+        response.put("message", "Error interno del servidor");
 
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
     }
 
     @ExceptionHandler(Exception.class)
@@ -51,8 +71,6 @@ public class GlobalExceptionHandler {
         Map<String, Object> response = new HashMap<>();
         response.put("status", HttpStatus.INTERNAL_SERVER_ERROR.value());
         response.put("message", "Error interno del servidor");
-        response.put("details", ex.getMessage());
-
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
     }
     @ExceptionHandler(org.springframework.web.servlet.resource.NoResourceFoundException.class)

@@ -103,4 +103,10 @@ public class UserController {
         userService.deleteUserByEmail(email);
         return ResponseEntity.noContent().build();
     }
+    @PutMapping("/email/{email}")
+    @Operation(summary = "Sincronizar identidad del perfil desde Auth")
+    public ResponseEntity<UserResponseDTO> updateIdentity(@PathVariable String email,
+            @Valid @RequestBody com.library.userservice.dto.IdentityUpdateDTO request) {
+        return ResponseEntity.ok(userService.updateIdentity(email, request));
+    }
 }

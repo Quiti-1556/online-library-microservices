@@ -15,5 +15,7 @@ public interface UserService {
 
     void deleteUser(Long id);
 
+    UserResponseDTO updateIdentity(String email, com.library.userservice.dto.IdentityUpdateDTO request);
+
     void deleteUserByEmail(String email);
 }

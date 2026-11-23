@@ -36,7 +36,8 @@ public class AuthController {
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = LoginResponseDTO.class),
                             examples = @ExampleObject(value = "{\"token\": \"eyJhbGciOiJIUzI1NiJ9...\"}"))),
-            @ApiResponse(responseCode = "400", description = "Credenciales inválidas"),
+            @ApiResponse(responseCode = "400", description = "Formato inválido"),
+            @ApiResponse(responseCode = "401", description = "Credenciales inválidas"),
             @ApiResponse(responseCode = "500", description = "Error interno del servidor")
     })
     public ResponseEntity<LoginResponseDTO> login(
@@ -58,7 +59,8 @@ public class AuthController {
                             schema = @Schema(implementation = UserResponseDTO.class),
                             examples = @ExampleObject(
                                     value = "{\"id\": 1, \"name\": \"Juan Pérez\", \"email\": \"juan@email.com\"}"))),
-            @ApiResponse(responseCode = "400", description = "Datos inválidos o correo ya registrado"),
+            @ApiResponse(responseCode = "400", description = "Datos inválidos"),
+            @ApiResponse(responseCode = "409", description = "Correo ya registrado"),
             @ApiResponse(responseCode = "500", description = "Error interno del servidor")
     })
     public ResponseEntity<UserResponseDTO> registerUser(
@@ -72,16 +74,4 @@ public class AuthController {
         return ResponseEntity.status(HttpStatus.CREATED).body(userService.registerUser(request));
     }
 
-    @DeleteMapping("/users/{id}")
-    @Operation(summary = "Eliminar usuario", description = "Elimina un usuario desde Auth Service y su perfil asociado")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "204", description = "Usuario eliminado correctamente"),
-            @ApiResponse(responseCode = "404", description = "Usuario no encontrado"),
-            @ApiResponse(responseCode = "500", description = "Error interno del servidor")
-    })
-    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
-        log.info("Eliminando usuario desde auth-service con id {}", id);
-        userService.deleteUser(id);
-        return ResponseEntity.noContent().build();
-    }
 }

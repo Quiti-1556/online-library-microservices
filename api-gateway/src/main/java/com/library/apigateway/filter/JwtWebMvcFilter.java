@@ -1,6 +1,7 @@
 package com.library.apigateway.filter;
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
@@ -17,6 +18,9 @@ import javax.crypto.SecretKey;
 
 @Component
 public class JwtWebMvcFilter implements HandlerFilterFunction<ServerResponse, ServerResponse> {
+    private final AuthStateVerifier accounts;
+
+    public JwtWebMvcFilter(AuthStateVerifier accounts) { this.accounts = accounts; }
 
     @Value("${app.jwt.secret}")
     private String secretKey;
@@ -26,7 +30,9 @@ public class JwtWebMvcFilter implements HandlerFilterFunction<ServerResponse, Se
 
         String path = request.path();
 
-        if (path.startsWith("/auth/login") || path.startsWith("/auth/register")) {
+        // Solo estas rutas exactas son públicas; un prefijo parecido no autoriza acceso.
+        if (request.method() == HttpMethod.POST
+                && (path.equals("/auth/login") || path.equals("/auth/register"))) {
             return next.handle(request);
         }
 
@@ -38,35 +44,55 @@ public class JwtWebMvcFilter implements HandlerFilterFunction<ServerResponse, Se
 
         String token = authHeader.substring(7);
 
+        Claims claims;
         try {
             byte[] keyBytes = Decoders.BASE64.decode(secretKey);
             SecretKey key = Keys.hmacShaKeyFor(keyBytes);
 
-            Claims claims = Jwts.parser()
+            // El parser comprueba la firma y el vencimiento antes de confiar en el rol.
+            claims = Jwts.parser()
                     .setSigningKey(key)
                     .parseClaimsJws(token)
                     .getBody();
 
-            String role = claims.get("role", String.class);
-
-            if (path.startsWith("/books")
-                    && (request.method() == HttpMethod.POST
-                    || request.method() == HttpMethod.PUT
-                    || request.method() == HttpMethod.DELETE)
-                    && !"ADMIN".equals(role)) {
-                return ServerResponse.status(HttpStatus.FORBIDDEN).build();
-            }
-
-            if (path.startsWith("/auth/users")
-                    && request.method() == HttpMethod.DELETE
-                    && !"ADMIN".equals(role)) {
-                return ServerResponse.status(HttpStatus.FORBIDDEN).build();
-            }
-
-            return next.handle(request);
-
-        } catch (Exception e) {
+        } catch (JwtException | IllegalArgumentException e) {
             return ServerResponse.status(HttpStatus.UNAUTHORIZED).build();
         }
+
+        Object role = claims.get("role");
+        if (claims.getSubject() == null || claims.getSubject().isBlank()
+                || claims.getExpiration() == null
+                || !("ADMIN".equals(role) || "CLIENT".equals(role))) {
+            return ServerResponse.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
+        boolean lectura = request.method() == HttpMethod.GET || request.method() == HttpMethod.HEAD;
+        try {
+            // Además de la firma, confirma que la cuenta exista y conserve sus permisos.
+            var identity = accounts.verify(token);
+            if (identity == null || !claims.getSubject().equals(identity.email())
+                    || !("ADMIN".equals(identity.role()) || "CLIENT".equals(identity.role()))) {
+                return ServerResponse.status(HttpStatus.UNAUTHORIZED).build();
+            }
+            role = identity.role();
+        } catch (org.springframework.web.client.HttpClientErrorException ex) {
+            return ServerResponse.status(HttpStatus.UNAUTHORIZED).build();
+        } catch (org.springframework.web.client.RestClientException ex) {
+            // Ante caída de Auth no concedemos permisos con información antigua.
+            return ServerResponse.status(HttpStatus.SERVICE_UNAVAILABLE).build();
+        }
+        // Los perfiles contienen datos personales: también su lectura exige administrador.
+        boolean requiereAdmin = pertenece(path, "/users") || pertenece(path, "/auth/users")
+                || (!lectura && (pertenece(path, "/books") || pertenece(path, "/inventory")));
+        if (requiereAdmin && !"ADMIN".equals(role)) {
+            return ServerResponse.status(HttpStatus.FORBIDDEN).build();
+        }
+
+        // Los errores del microservicio conservan su causa; no se convierten en un falso 401.
+        return next.handle(request);
+    }
+
+    private boolean pertenece(String path, String recurso) {
+        return path.equals(recurso) || path.startsWith(recurso + "/");
     }
 }

@@ -87,4 +87,4 @@ server:
 
 app:
   jwt:
-    secret: bXlzZWNyZXRrZXlteXNlY3JldGtleW15c2VjcmV0a2V5MTIzNDU2
+    secret: ${JWT_SECRET}

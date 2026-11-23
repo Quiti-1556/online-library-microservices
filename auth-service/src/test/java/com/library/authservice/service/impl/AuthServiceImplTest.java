@@ -79,11 +79,6 @@ class UserServiceImplTest {
         when(userRepository.existsByEmail("juan@email.com")).thenReturn(false);
         when(passwordEncoder.encode("123456")).thenReturn("encodedPassword");
         when(userRepository.save(any(User.class))).thenReturn(savedUser);
-        when(restTemplate.postForObject(
-                eq("http://localhost:8089/users"),
-                any(Map.class),
-                eq(String.class)
-        )).thenReturn("{\"id\":1}");
 
         UserResponseDTO response = userService.registerUser(request);
 
@@ -96,7 +91,7 @@ class UserServiceImplTest {
         verify(passwordEncoder, times(1)).encode("123456");
         verify(userRepository, times(1)).save(any(User.class));
         verify(restTemplate, times(1))
-                .postForObject(eq("http://localhost:8089/users"), any(Map.class), eq(String.class));
+                .put(eq("http://user-service:8080/users/email/{email}"), any(Map.class), eq("juan@email.com"));
     }
 
     @Test
@@ -108,7 +103,6 @@ class UserServiceImplTest {
         when(userRepository.existsByEmail(anyString())).thenReturn(false);
         when(passwordEncoder.encode(anyString())).thenReturn("encodedPassword");
         when(userRepository.save(any(User.class))).thenReturn(savedUser);
-        when(restTemplate.postForObject(anyString(), any(Map.class), eq(String.class))).thenReturn("{\"id\":1}");
 
         userService.registerUser(request);
 
@@ -131,24 +125,23 @@ class UserServiceImplTest {
         when(userRepository.existsByEmail(anyString())).thenReturn(false);
         when(passwordEncoder.encode(anyString())).thenReturn("encodedPassword");
         when(userRepository.save(any(User.class))).thenReturn(savedUser);
-        when(restTemplate.postForObject(anyString(), any(Map.class), eq(String.class))).thenReturn("{\"id\":1}");
 
         userService.registerUser(request);
 
         ArgumentCaptor<Map<String, Object>> payloadCaptor = ArgumentCaptor.forClass(Map.class);
 
-        verify(restTemplate).postForObject(
-                eq("http://localhost:8089/users"),
+        verify(restTemplate).put(
+                eq("http://user-service:8080/users/email/{email}"),
                 payloadCaptor.capture(),
-                eq(String.class)
+                eq("juan@email.com")
         );
 
         Map<String, Object> payload = payloadCaptor.getValue();
 
         assertEquals("Juan Pérez", payload.get("name"));
         assertEquals("juan@email.com", payload.get("email"));
-        assertEquals("000000000", payload.get("phone"));
-        assertEquals("Direccion temporal", payload.get("address"));
+        assertFalse(payload.containsKey("phone"));
+        assertFalse(payload.containsKey("address"));
     }
 
     @Test
@@ -163,10 +156,10 @@ class UserServiceImplTest {
                 () -> userService.registerUser(request)
         );
 
-        assertEquals("El correo ya está registrado", exception.getMessage());
+        assertEquals("El correo ya está registrado", ((org.springframework.web.server.ResponseStatusException) exception).getReason());
         verify(userRepository, times(1)).existsByEmail("juan@email.com");
         verify(userRepository, never()).save(any(User.class));
-        verify(restTemplate, never()).postForObject(anyString(), any(), eq(String.class));
+        verifyNoInteractions(restTemplate);
     }
 
     @Test
@@ -177,7 +170,7 @@ class UserServiceImplTest {
 
         when(userRepository.findByEmail("juan@email.com")).thenReturn(Optional.of(user));
         when(passwordEncoder.matches("123456", "encodedPassword")).thenReturn(true);
-        when(jwtService.generateToken("juan@email.com")).thenReturn("fake-jwt-token");
+        when(jwtService.generateToken(user)).thenReturn("fake-jwt-token");
 
         LoginResponseDTO response = userService.login(request);
 
@@ -186,7 +179,7 @@ class UserServiceImplTest {
 
         verify(userRepository, times(1)).findByEmail("juan@email.com");
         verify(passwordEncoder, times(1)).matches("123456", "encodedPassword");
-        verify(jwtService, times(1)).generateToken("juan@email.com");
+        verify(jwtService, times(1)).generateToken(user);
     }
 
     @Test
@@ -201,10 +194,11 @@ class UserServiceImplTest {
                 () -> userService.login(request)
         );
 
-        assertEquals("Usuario no encontrado", exception.getMessage());
+        assertEquals(401, ((org.springframework.web.server.ResponseStatusException) exception).getStatusCode().value());
+        assertEquals("Correo o contraseña incorrectos", ((org.springframework.web.server.ResponseStatusException) exception).getReason());
         verify(userRepository, times(1)).findByEmail("juan@email.com");
         verify(passwordEncoder, never()).matches(anyString(), anyString());
-        verify(jwtService, never()).generateToken(anyString());
+        verify(jwtService, never()).generateToken(any(User.class));
     }
 
     @Test
@@ -221,9 +215,10 @@ class UserServiceImplTest {
                 () -> userService.login(request)
         );
 
-        assertEquals("Password incorrecta", exception.getMessage());
+        assertEquals(401, ((org.springframework.web.server.ResponseStatusException) exception).getStatusCode().value());
+        assertEquals("Correo o contraseña incorrectos", ((org.springframework.web.server.ResponseStatusException) exception).getReason());
         verify(userRepository, times(1)).findByEmail("juan@email.com");
         verify(passwordEncoder, times(1)).matches("123456", "encodedPassword");
-        verify(jwtService, never()).generateToken(anyString());
+        verify(jwtService, never()).generateToken(any(User.class));
     }
 }

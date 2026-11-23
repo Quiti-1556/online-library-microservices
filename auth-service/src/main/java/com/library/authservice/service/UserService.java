@@ -11,5 +11,4 @@ public interface UserService {
 
     LoginResponseDTO login(LoginRequestDTO request);
 
-    void deleteUser(Long id);
 }

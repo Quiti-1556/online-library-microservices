@@ -9,6 +9,10 @@ public class RestTemplateConfig {
 
     @Bean
     public RestTemplate restTemplate() {
-        return new RestTemplate();
+        // Un perfil caído no debe mantener una transacción abierta indefinidamente.
+        var factory = new org.springframework.http.client.SimpleClientHttpRequestFactory();
+        factory.setConnectTimeout(3000);
+        factory.setReadTimeout(5000);
+        return new RestTemplate(factory);
     }
 }

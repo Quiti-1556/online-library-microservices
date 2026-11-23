@@ -30,12 +30,15 @@ public class UserServiceImpl implements UserService {
     private final RestTemplate restTemplate;
 
     @Override
+    @org.springframework.transaction.annotation.Transactional
     public UserResponseDTO registerUser(RegisterRequestDTO request) {
+        com.library.authservice.security.PasswordRules.validate(request.getPassword());
         logger.info("Creando nuevo usuario con email {}", request.getEmail());
 
         if (userRepository.existsByEmail(request.getEmail())) {
             logger.warn("Intento de registro con correo duplicado: {}", request.getEmail());
-            throw new RuntimeException("El correo ya está registrado");
+            throw new org.springframework.web.server.ResponseStatusException(
+                    org.springframework.http.HttpStatus.CONFLICT, "El correo ya está registrado");
         }
 
         User user = new User();
@@ -49,16 +52,9 @@ public class UserServiceImpl implements UserService {
         java.util.Map<String, Object> userRequest = new java.util.HashMap<>();
         userRequest.put("name", request.getName());
         userRequest.put("email", request.getEmail());
-        userRequest.put("phone", "000000000");
-        userRequest.put("address", "Direccion temporal");
-
-        String responseUserService = restTemplate.postForObject(
-                "http://user-service:8080/users",
-                userRequest,
-                String.class
-        );
-
-        logger.info("Respuesta desde user-service: {}", responseUserService);
+        // PUT permite reintentar después de un timeout que haya dejado solo el perfil.
+        // Si ya existe, conserva teléfono/dirección; si falta, perfiles lo crea.
+        restTemplate.put("http://user-service:8080/users/email/{email}", userRequest, request.getEmail());
 
         UserResponseDTO response = new UserResponseDTO();
         response.setId(savedUser.getId());
@@ -71,47 +67,20 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteUser(Long id) {
-        logger.info("Eliminando usuario con id {}", id);
-
-        User user = userRepository.findById(id)
-                .orElseThrow(() -> {
-                    logger.warn("Usuario no encontrado con id {}", id);
-                    return new RuntimeException("Usuario no encontrado");
-                });
-
-        if ("admin@library.cl".equalsIgnoreCase(user.getEmail())) {
-            logger.warn("Intento de eliminar la cuenta administradora principal");
-            throw new RuntimeException("No se puede eliminar la cuenta administradora principal");
-        }
-
-        String email = user.getEmail();
-
-        userRepository.delete(user);
-
-        try {
-            restTemplate.delete("http://user-service:8080/users/email/" + email);
-            logger.info("Perfil eliminado en user-service para email {}", email);
-        } catch (Exception e) {
-            logger.warn("No se pudo eliminar el perfil en user-service para email {}", email);
-        }
-
-        logger.info("Usuario eliminado correctamente desde auth-service con id {}", id);
-    }
-
-    @Override
     public LoginResponseDTO login(LoginRequestDTO request) {
         logger.info("Intentando login para email {}", request.getEmail());
 
         User user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow(() -> {
                     logger.warn("Usuario no encontrado para email {}", request.getEmail());
-                    return new RuntimeException("Usuario no encontrado");
+                    return new org.springframework.web.server.ResponseStatusException(
+                            org.springframework.http.HttpStatus.UNAUTHORIZED, "Correo o contraseña incorrectos");
                 });
 
         if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
             logger.warn("Contraseña incorrecta para email {}", request.getEmail());
-            throw new RuntimeException("Password incorrecta");
+            throw new org.springframework.web.server.ResponseStatusException(
+                    org.springframework.http.HttpStatus.UNAUTHORIZED, "Correo o contraseña incorrectos");
         }
 
         String token = jwtService.generateToken(user);
